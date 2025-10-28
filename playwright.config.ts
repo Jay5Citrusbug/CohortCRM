@@ -1,4 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
+import path from 'path';
+
 
 /**
  * Read environment variables from file.
@@ -13,6 +15,8 @@ import { defineConfig, devices } from '@playwright/test';
  */
 export default defineConfig({
   testDir: './tests',
+  globalSetup: require.resolve('./Config/global-setup'),
+
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -22,16 +26,28 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: [
+      ['html', { outputFolder: 'playwright-report', open: 'never', title: 'Cohort CRM - Automation Report' }]
+
+  ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+  
+
   use: {
-    /* Base URL to use in actions like `await page.goto('')`. */
-    // baseURL: 'http://localhost:3000',
+    // ✅ Base URL for your app
+    baseURL: 'https://crm-admin-staging.web.app/',
 
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+    // ✅ Reuse login session
+  storageState: path.resolve(__dirname, './storageState.json'),
+
+    // ✅ Record video only when test fails
+    video: 'retain-on-failure',
+
+    // ✅ Take screenshot automatically when test fails
+    screenshot: 'only-on-failure',
+
   },
-
+  
   /* Configure projects for major browsers */
   projects: [
     {
@@ -76,4 +92,5 @@ export default defineConfig({
   //   url: 'http://localhost:3000',
   //   reuseExistingServer: !process.env.CI,
   // },
+
 });

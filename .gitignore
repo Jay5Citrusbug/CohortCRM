@@ -6,3 +6,7 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+/storageState.json
+/Config/global-setup.ts
+/Utility/credentials.ts
+
