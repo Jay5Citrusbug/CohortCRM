@@ -32,7 +32,7 @@ jobs:
       - name: Run Playwright tests
         run: npx playwright test || true
 
-        - name: Generate standalone HTML report
+      - name: Generate standalone HTML report
         run: cp playwright-report/index.html playwright-report/report.html || true
 
       - name: Extract test summary
