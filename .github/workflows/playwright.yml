@@ -71,7 +71,7 @@ jobs:
 
       - name: Send Email Report via SMTP
         if: always()
-        run: node .github/scripts/sendreport.js
+        run: node .github/workflows/sendreport.js
         env:
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
