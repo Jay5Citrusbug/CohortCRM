@@ -1,6 +1,6 @@
-import nodemailer from "nodemailer";
 
-import fs from "fs";
+const nodemailer = require("nodemailer");
+const fs = require("fs");
 async function sendMail() {
 
 const transporter = nodemailer.createTransport({
@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-const htmlReport = fs.readFileSync("playwright-report/index.html", "utf-8");
+fs.readFileSync("playwright-report/index.html", "utf-8");
 
 const mailOptions = {
   from: process.env.SMTP_USER,
