@@ -9,19 +9,15 @@ const transporter = nodemailer.createTransport({
   secure: false, // true for 465
 
   auth: {
-    user: process.env.SMTP_USER,
+    user: 'jay5.citrusbug@gmail.com',
     pass: process.env.SMTP_PASS,
   },
 });
 
-
-
-fs.readFileSync("playwright-report/index.html", "utf-8");
-
 const mailOptions = {
-  from: process.env.SMTP_USER,
+  from: 'jay5.citrusbug@gmail.com',
   subject: "Playwright Test Report",
-  to: process.env.TO_EMAIL?.split(',').map(email => email.trim()) || ['qa.citrusbug@gmail.com'],
+  to: 'qa.citrusbug@gmail.com',
   text: `Hello Bluedrop Academy,
 
 The automated Playwright test suite has completed.
