@@ -1,5 +1,7 @@
 import nodemailer from "nodemailer";
+
 import fs from "fs";
+async function sendMail() {
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -25,3 +27,7 @@ transporter.sendMail(mailOptions, (error, info) => {
     console.log("Email sent:", info.response);
   }
 });
+
+}
+
+sendMail();
