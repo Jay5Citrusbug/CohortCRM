@@ -1,52 +1,56 @@
 import nodemailer from 'nodemailer';
 import fs from 'fs';
 
-async function sendMail() {
+const smtpUser = process.env.SMTP_USER;
+const smtpPass = process.env.SMTP_PASS;
+const toEmails = process.env.TO_EMAIL?.split(',').map(e => e.trim()) || ['qa.citrusbug@gmail.com'];
 
+// ✅ Read the HTML report file
+const reportPath = 'playwright-report/index.html';
+const htmlReport = fs.readFileSync(reportPath, 'utf-8');
+
+// ✅ Create the email transporter
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  service: 'gmail',
   host: 'smtp.gmail.com',
   port: 587,
-  secure: false, // true for 465
-
+  secure: false,
   auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
+    user: smtpUser,
+    pass: smtpPass,
   },
 });
 
-
-
-
-
-fs.readFileSync("playwright-report/index.html", "utf-8");
-
+// ✅ Compose the email
 const mailOptions = {
-  from: process.env.SMTP_USER,
-  to: "qa.citrusbug@gmail.com",
-  subject: "Playwright Test Report",
-    to: process.env.TO_EMAIL?.split(',').map(email => email.trim()) || ['noam@bluedropacademy.com'],
-  cc: process.env.CC_EMAIL?.split(',').map(email => email.trim()) || ['jay5.citrusbug@gmail.com', 'jayshree@citrusbug.com'],
-  subject: "Playwright Test Report",
+  from: smtpUser,
+  to: toEmails,
+  subject: 'Playwright Test Report',
   text: `Hello Bluedrop Academy,
 
 The automated Playwright test suite has completed.
 
-Please find the detailed report attached.
+You can view the full report as an attachment, or inline below (if supported).
 
 Best regards,
 Your Automation Team
 `,
-}
-// Send the email
+  html: htmlReport,
+  attachments: [
+    {
+      filename: 'Playwright_Report.html',
+      path: reportPath,
+      contentType: 'text/html',
+    },
+  ],
+};
+
+// ✅ Send the email
 transporter.sendMail(mailOptions, (error, info) => {
   if (error) {
-    console.error('❌ Error sending email:', error.toString());
+    console.error('❌ Error sending email:', error);
     process.exit(1);
   } else {
     console.log('📧 Email sent successfully:', info.response);
   }
 });
-}
-
-
