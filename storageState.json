@@ -1,0 +1,25 @@
+{
+  "cookies": [
+    {
+      "name": "__session",
+      "value": "U2FsdGVkX1/76+w2wOOMIkuFt4osex1O8rOqO9vQfHmrIUmoM3brf6OMZQgxtMXXfd6W71pE3HOoX2l1iF1XFXcWaNsJzQ7cZyrAAktEtJkWE/7oDs+Ynyj7cS1k2gAbfZlj1O8STgZl2JtYzRsDMvXd7BBuPrA5+L7utNAutvayVIL1FhpLSltxQ6jIO6Xl6gJbrkL2QTkI6uiepKrlrWedbL+kjqLvACXjZoyxGS4glkWJ6f/4z69BBJG/PXk9BLoHYcuId6uTip1UiHFBpnvwS7l/E7JzIszkFvrge2sdO+KzQZMGTJ7jbmrcnOgGG1tn5dyMv5GQa090ssuvWticXJB66lJ1+MGecakjoRYSvWzB9Mkz9vZP7c2Dt8sguSP4a/YtAWVr6ySUwH0Nt8oeAEdQMyj89IN8il72ENtn8ZMrbDQnbfdFu5VfIrqqdFxL7LQ/tBLhCHFoWQ5rBeoCGItXastWmGHEo65ctF4g4k8RTx8MUB96ZAb7zsm5qL1yJ6lYgmARStooQXPAtu3d5jbVulqZvwfLggXvliN5KOVmWTBD1XPR0Ovy/D4pDMdWSrzE+8XSkwtyp15eAjcNqrh2ETHhmPvhJDFiOOo3nDSkW0Ax4BNB8CQwud0JpPrHIyPlictg2ce/+Mx+0JSUufI+w2n+ymBKo1Svda4DfynJRwAk0ZIusxcIzM1/Y/sdBff9LC2WQzJgwxr6EOESfMr1v7er7doAkRgEEkwDVVUfVv4LjMGtTaL0k6TlfgahEo94iGDvH1om238u92k/KBWZSzhJTOdy5QDNSnj2zUYEZZlrEl3Ys18O1IqjP9o5sZBSOIz487JXdiLIglvTEJ7XW1neo4DZIUbb85PeonCgrIPUiYm7Q+6CIA8qY8xWvwi6rdopnV6pCsG0jIk9YmHLucgbGLY06RC49YyqOMK19Fu0M1alDcB2c6/E4Oq9v2CRlOnyivhIeXCmmquYpeKO0fVbWq/AaaNyn5BJLp09ZLaJq+ofS6jB55M/AVT6MltynBo0QKxbab4TSrP3+7U7mFsmdqgFS5UPZT7ous5a0HS/1ed+0siJ7eLkfeO6a55ADYLASMTRA24Pj2gEX/Gi5zlRpMSmlOj/EaOKuLQZGBFTfThT0bZNomrdYBAa5nlqQ8zlp3qHmSCH/PCXx+aLS7UI50vQBlm7N5lGDp9PyXP0DdRqP2blupzsF8B5CxdOYyw+Wrq+t2j4wbU46e5NIj/deAXUSMwoMAyPdvB8DXFBoNrZIuSL3frvxco1/DzQrpRoer7y4SM0FwIclQLHhyo/K0g6fWm2bhJJyYuUNTRNaqsvYOUjqF39qyIam/RJN7jcIJSifklWMtojms+YnPsq/1qPdkl7DexM5aPA2AiyxR3Extx+St4KYFuSs1x9oAmK10EdnUg/xKN8FWTK+HXcF/Sh0nXIxrV5erfx2ThFR4mds/BgZ8Czx/xaLYIJ+apJPvsVNjJ7VE3vxhuTbtukcQkexEjxbAaKfQ3PqRrtuOkThDN504VLM2TyVty2d/YZzH7SzLHvPLk88s9TIagkL2q1U9ZpKQ2XjUzvDvawcwcXibxD7/ft",
+      "domain": "crm-admin-staging.web.app",
+      "path": "/",
+      "expires": 1761735389,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "__switchData",
+      "value": "U2FsdGVkX1/Nf08Os2AU09YGLT/UM+pziQsG3y+4Ak8=",
+      "domain": "crm-admin-staging.web.app",
+      "path": "/",
+      "expires": 1761735391,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    }
+  ],
+  "origins": []
+}

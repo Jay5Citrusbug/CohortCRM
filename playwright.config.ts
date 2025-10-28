@@ -15,7 +15,7 @@ import path from 'path';
  */
 export default defineConfig({
   testDir: './tests',
-  globalSetup: './Config/global-setup',
+
 
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -30,6 +30,7 @@ export default defineConfig({
       ['html', { outputFolder: 'playwright-report', open: 'never', title: 'Cohort CRM - Automation Report' }],
       ['list'],
       ['json', { outputFile: 'playwright-report/report.json' }]
+
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   
