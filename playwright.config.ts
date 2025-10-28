@@ -15,7 +15,7 @@ import path from 'path';
  */
 export default defineConfig({
   testDir: './tests',
-  globalSetup: require.resolve('./Config/global-setup'),
+  globalSetup: './Config/global-setup',
 
   /* Run tests in files in parallel */
   fullyParallel: true,
