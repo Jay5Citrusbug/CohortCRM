@@ -3,16 +3,26 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+     "test": "playwright test",
+    "test:login": "set SKIP_GLOBAL_SETUP=true&& playwright test tests/Auth/login.spec.ts --workers=1",
+    "test:auth": "playwright test --grep-invert \"login\"",
+    "test:all": "playwright test"
+  
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "devDependencies": {
+    "@faker-js/faker": "^10.1.0",
     "@playwright/test": "^1.56.1",
-    "@types/node": "^24.9.1"
+    "@types/node": "^24.9.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
+    "faker": "^5.5.3",
     "nodemailer": "^7.0.10"
   }
 }

@@ -18,14 +18,14 @@ const mailOptions = {
   from: 'jay5.citrusbug@gmail.com',
   subject: "Playwright Test Report",
   to: 'qa.citrusbug@gmail.com',
-  text: `Hello Bluedrop Academy,
+  text: `Hello,
 
 The automated Playwright test suite has completed.
 
 Please find the detailed report attached.
 
 Best regards,
-Your Automation Team
+QA Team
 `,
 }
 // Send the email
