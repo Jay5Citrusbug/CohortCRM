@@ -106,7 +106,7 @@ import { chromium, FullConfig } from '@playwright/test';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { credentials } from '../Utility/credentials';
+ import { credentials } from 'D:/Automation/Playwright/Cohort CRM/Utility/credentials.ts';
 
 // ✅ Fix for "__dirname" not defined in ESM
 const __filename = fileURLToPath(import.meta.url);
