@@ -106,11 +106,13 @@ import { chromium, FullConfig } from '@playwright/test';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
- import { credentials } from 'D:/Automation/Playwright/Cohort CRM/Utility/credentials.ts';
+import { credentials } from '../Utility/credentials';
 
 // ✅ Fix for "__dirname" not defined in ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const credentialsPath = path.join(__dirname, '../Utility/credentials.json');
+
 
 const BASE_URL = 'https://crm-admin-staging.web.app/';
 const LOGIN_URL = `${BASE_URL}login`;
