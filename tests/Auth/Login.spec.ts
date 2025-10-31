@@ -3,7 +3,7 @@ import { Page, test } from '@playwright/test';
 import { LoginPage } from '../../Pages/login.page';
 import { Messages } from '../../messages/message';
 
-test.describe.serial('🔐 Login Page Automation', () => {
+test.describe('🔐 Login Page Automation', () => {
   let loginPage: LoginPage;
   let page: Page;
 
@@ -30,7 +30,6 @@ loginPage = new LoginPage(page);
 
   test('❌ TC_03 - Invalid login with wrong credentials', async () => {
     console.log('➡️ Test Start: Invalid login with wrong credentials');
-    await loginPage.login(Messages.Credentials.invalidEmail, Messages.Credentials.invalidPassword);
     await loginPage.validateInvalidCredentialsMessage();
     console.log('✅ Test Completed: Invalid login validation successful.');
   });

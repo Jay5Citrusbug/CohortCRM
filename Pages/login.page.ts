@@ -1,7 +1,7 @@
 import { Page, expect } from '@playwright/test';
 import { LoginLocator } from '../locators/login.locator';
 import { Messages } from '../messages/message';
-import { time } from 'console';
+import { faker } from '@faker-js/faker';
 
 /**
  * LoginPage class encapsulates all actions related to the Login page.
@@ -69,10 +69,24 @@ export class LoginPage {
     console.log('✅ Login button clicked.');
   }
 
-  /**
-   * Validates error message for invalid credentials.
-   */
   async validateInvalidCredentialsMessage() {
+
+    const emailInput = this.page.getByTestId(LoginLocator.emailInput.testId);
+    const passwordInput = this.page.getByTestId(LoginLocator.passwordInput.testId);
+    const loginButton = this.page.getByRole(LoginLocator.loginButton.role, { name: LoginLocator.loginButton.name });
+
+    // ✅ Verify elements visible before interacting
+    await expect(emailInput).toBeVisible();
+    await expect(passwordInput).toBeVisible();
+    await expect(loginButton).toBeVisible();
+
+    await emailInput.fill(faker.internet.email());
+    await passwordInput.fill(faker.internet.password());
+
+    // ✅ Assert fields contain expected values
+  
+    await loginButton.click();
+
     console.log('🔹 Validating invalid login error message...');
     const errorMsg = this.page.locator(LoginLocator.invalidCredentialsText);
 
@@ -111,9 +125,7 @@ export class LoginPage {
     await expect(this.page.getByRole(LoginLocator.logoImage.role, { name: LoginLocator.logoImage.name })).toBeVisible();
     console.log('✅ Valid login successful and dashboard visible.');
 
-    await this.page
-  .getByRole(LoginLocator.pipelineLink.role, { name: LoginLocator.pipelineLink.name })
-  .isVisible();
+    await this.page.getByRole(LoginLocator.pipelineLink.role, { name: LoginLocator.pipelineLink.name }).isVisible();
   //await this.page.getByRole('link', { name: 'Pipeline' }).isVisible();
 
   }
@@ -141,19 +153,19 @@ await expect(this.page).toHaveURL(/crm-admin-staging\.web\.app/);
     async verifyMainUIComponents() {
     console.log('👀 Checking main UI components...');
 
-    await this.page.getByRole(LoginLocator.logoImage.role, { name: LoginLocator.logoImage.name }).first().isVisible();
-    await this.page.getByRole(LoginLocator.pipelineLink.role, { name: LoginLocator.pipelineLink.name }) .isVisible();
-  console.log('🔹 PipeLine tab visible after login...');
+    await expect(this.page.getByRole(LoginLocator.logoImage.role, { name: LoginLocator.logoImage.name }).first()).toBeVisible();
+    await this.page.getByRole(LoginLocator.pipelineLink.role, { name: LoginLocator.pipelineLink.name }).isVisible();
+    console.log('🔹 PipeLine tab visible after login...');
 
-  await this.page.getByRole(LoginLocator.profileNavigation.role).isVisible();  
-   console.log('👀 All UI components verified successfully.');
+    await this.page.getByRole(LoginLocator.profileNavigation.role).isVisible();
+    console.log('👀 All UI components verified successfully.');
 
   }
 
   /**
    * Perform logout from Pipeline page and verify redirection.
    */
-   async logoutAndVerifyRedirection() {
+  async logoutAndVerifyRedirection() {
     console.log('🧹 Initiating logout flow...');
     // Open profile menu
   await this.page.getByRole(LoginLocator.profileNavigation.role).isVisible();

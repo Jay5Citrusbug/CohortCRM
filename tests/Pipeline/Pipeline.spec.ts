@@ -14,12 +14,12 @@ test.describe('Pipeline Tests', () => {
    // await pipeLinePage.DashboardPage();
   });
 
-  test('🔍 Verify Search Bar Visibility and Functionality', async () => {
+  test('🔍 TC-08 Verify Search Bar Visibility and Functionality', async () => {
     console.log('➡️ Test Start: Verify Search Bar Visibility and Functionality');
     await pipeLinePage.Search_Valid_NewLoans();
   });
 
-  test('❌ Verify Search with Invalid/Non-Existing Keyword', async () => {
+  test('❌ TC-09 Verify Search with Invalid/Non-Existing Keyword', async () => {
     console.log('➡️ Test Start: Verify Search with Invalid/Non-Existing Keyword');
     await pipeLinePage.Search_Invalid_NewLoans();
   });

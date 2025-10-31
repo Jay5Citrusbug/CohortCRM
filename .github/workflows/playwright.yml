@@ -31,7 +31,9 @@ jobs:
 
       # Step 5: Run tests (continue even if some fail)
       - name: Run Playwright tests
-        run: npx playwright test --workers=1 || true
+        id: run-tests
+        continue-on-error: true
+        run: npx playwright test --workers=1
 
       - name: Debug Playwright Report folder
         run: ls -la playwright-report

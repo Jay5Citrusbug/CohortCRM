@@ -8,7 +8,7 @@ const __dirname = path.dirname(__filename);
 const STORAGE_STATE = path.resolve(__dirname, './storageState.json');
 
 export default defineConfig({
-  timeout: 120000,
+  timeout: 60000,
   testDir: './tests',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
