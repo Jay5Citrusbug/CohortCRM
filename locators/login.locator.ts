@@ -23,5 +23,22 @@ export const LoginLocator = {
 
   // --- Navigation Elements ---
   logoImage: { role: 'img', name: 'logo' }, // App logo
-  pipelineLink: { role: 'link', name: 'Pipeline' }, // Pipeline navigation link
+ pipelineLink: { role: 'link', name: 'Pipeline' }, // Pipeline navigation link
+
+
+  profileButton: { role: 'navigation', name: 'TT' },
+
+  // Logout options visible under user profile dropdown
+  logoutOptionDiv: "div:has-text('Logout')", // first logout in dropdown
+  logoutButton: { role: 'button', name: 'Logout' },
+
+
+
+  // Example UI components for validation
+  filterSection: 'data-testid=filter-section',
+  // --- Profile Section ---
+  profileNavigation: { role: 'navigation' }, // Navigation container for user profile
+  profileName: { text: 'TT', exact: true }, // Profile initials/name displayed in header
+
+  // --- Logout Elements ---
 } as const;

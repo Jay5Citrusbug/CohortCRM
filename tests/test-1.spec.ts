@@ -1,20 +1,10 @@
-import { test, expect } from '@playwright/test';
-import { LoginPage } from '../Pages/login.page';
+// import { test, expect } from '@playwright/test';
 
- test.beforeAll(async ({ browser }) => {
-        let loginPage: LoginPage;
+// test('test', async ({ page }) => {
+//   // Recording...
+//   await page.getByRole('textbox', { name: 'Search New Loans' }).click();
+//   await page.getByRole('textbox', { name: 'Search New Loans' }).fill('Will\'s test loan 2');
+//   await page.locator('div').filter({ hasText: 'Name of loan#StatusLoan' }).nth(3).click();
+//   await page.getByRole('cell', { name: 'Will\'s test loan' }).click();
 
-        const context = await browser.newContext();
-        const page = await context.newPage();
-        loginPage = new LoginPage(page);
-    
-        console.log('🌐 Opening login page before all tests...');
-        await loginPage.gotoLoginPage();
-      });
-
-test('test', async ({ page }) => {
-  
-        
-      await page.getByRole('link', { name: 'Pipeline' }).isVisible();
-
-});
+//   });
