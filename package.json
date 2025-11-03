@@ -4,11 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-     "test": "playwright test",
+    "test": "playwright test",
     "test:login": "set SKIP_GLOBAL_SETUP=true&& playwright test tests/Auth/login.spec.ts --workers=1",
     "test:auth": "playwright test --grep-invert \"login\"",
     "test:all": "playwright test"
-  
   },
   "keywords": [],
   "author": "",
@@ -22,6 +21,7 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
+    "dotenv": "^17.2.3",
     "faker": "^5.5.3",
     "nodemailer": "^7.0.10"
   }

@@ -1,6 +1,9 @@
 import { Page, expect } from '@playwright/test';
 import { LoginLocator } from '../locators/login.locator';
 import { Messages } from '../messages/message';
+import { credentials } from '../Utility/credentials';
+
+
 import { faker } from '@faker-js/faker';
 
 /**
@@ -121,7 +124,7 @@ export class LoginPage {
    */
   async validLogin() {
     console.log('🔹 Performing valid login...');
-    await this.login(Messages.Credentials.validEmail, Messages.Credentials.validPassword);
+    await this.login(credentials.email, credentials.password);
     await expect(this.page.getByRole(LoginLocator.logoImage.role, { name: LoginLocator.logoImage.name })).toBeVisible();
     console.log('✅ Valid login successful and dashboard visible.');
 
