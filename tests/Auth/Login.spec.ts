@@ -3,7 +3,7 @@ import { Page, test } from '@playwright/test';
 import { LoginPage } from '../../Pages/login.page';
 import { Messages } from '../../messages/message';
 
-test.describe('🔐 Login Page Automation', () => {
+test.describe('🔐 Login and Logout tests', () => {
   let loginPage: LoginPage;
   let page: Page;
 
@@ -11,7 +11,7 @@ test.describe('🔐 Login Page Automation', () => {
     console.log('🌐 Opening login page before all tests...');
     const context = await browser.newContext();
     page = await context.newPage();
-loginPage = new LoginPage(page);
+    loginPage = new LoginPage(page);
   await loginPage.gotoLoginPage();
   });
 

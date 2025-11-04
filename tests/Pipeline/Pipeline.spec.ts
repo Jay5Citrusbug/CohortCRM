@@ -3,7 +3,7 @@ import { PipeLinePage } from '../../Pages/Pipelinepage';
 import { faker } from '@faker-js/faker';
 
 
-test.describe('Pipeline Tests', () => {
+test.describe('Pipeline screen Tests', () => {
   let pipeLinePage: PipeLinePage;
   let createdLoanName: string | undefined;
 
@@ -14,10 +14,7 @@ test.describe('Pipeline Tests', () => {
     pipeLinePage = new PipeLinePage(page);
     console.log('🌐 Opening dashboard page before all tests...');
     await page.goto('https://crm-admin-staging.web.app/');
-   // await pipeLinePage.DashboardPage();
   });
-
-
 
   test('⛔ TC-10 Validate loan creation blocked when mandatory fields are empty', async () => {
     console.log('➡️ Test Start: Validate loan creation blocked when mandatory fields are empty');
