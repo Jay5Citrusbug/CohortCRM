@@ -88,7 +88,7 @@ Citrusbug QA Team`,
 //       cid: 'logo_cid' // same as in <img src="cid:logo_cid">
 //     }
 //   ]
-// };
+ };
 
 // Send the email
 transporter.sendMail(mailOptions, (error, info) => {
