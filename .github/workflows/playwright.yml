@@ -1,88 +1,88 @@
-# name: Playwright Tests
+name: Playwright Tests
 
-# on:
-#   push:
-#    # branches: [ main ]
-#   # pull_request:
-#   #   branches: [ main ]
+on:
+  push:
+   # branches: [ main ]
+  # pull_request:
+  #   branches: [ main ]
 
-# jobs:
-#   Staging Tests:
-#     timeout-minutes: 60
-#     runs-on: ubuntu-latest
+jobs:
+  Staging Tests:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
 
-#     steps:
-#       # Step 1: Checkout code
-#       - uses: actions/checkout@v4
+    steps:
+      # Step 1: Checkout code
+      - uses: actions/checkout@v4
 
-#       # Step 2: Setup Node.js
-#       - uses: actions/setup-node@v4
-#         with:
-#           node-version: lts/*
+      # Step 2: Setup Node.js
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
 
-#       # Step 3: Install dependencies
-#       - name: Install dependencies
-#         run: npm ci
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm ci
 
-#       # Step 4: Install Playwright browsers
-#       - name: Install Playwright Browsers
-#         run: npx playwright install --with-deps
+      # Step 4: Install Playwright browsers
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
 
 
-#       # Step 5: Run tests (continue even if some fail)
-#       - name: Run Playwright tests
-#         id: run-tests
-#         continue-on-error: true
-#         run: npx playwright test --workers=1
+      # Step 5: Run tests (continue even if some fail)
+      - name: Run Playwright tests
+        id: run-tests
+        continue-on-error: true
+        run: npx playwright test --workers=1
 
-#       - name: Debug Playwright Report folder
-#         run: ls -la playwright-report
+      - name: Debug Playwright Report folder
+        run: ls -la playwright-report
 
-#       - name: Generate standalone HTML report
-#         run: cp playwright-report/index.html playwright-report/report.html || true
+      - name: Generate standalone HTML report
+        run: cp playwright-report/index.html playwright-report/report.html || true
 
-#       - name: Extract test summary
-#         id: summary
-#         continue-on-error: true
-#         run: |
-#           if [ ! -f "playwright-report/report.json" ]; then
-#             echo "Report file not found!"
-#             echo "total=0" >> $GITHUB_OUTPUT
-#             echo "passed=0" >> $GITHUB_OUTPUT
-#             echo "failed=0" >> $GITHUB_OUTPUT
-#             echo "skipped=0" >> $GITHUB_OUTPUT
-#             exit 0
-#           fi
-#           PASSED=$(jq '.stats.expected // 0' playwright-report/report.json)
-#           FAILED=$(jq '.stats.unexpected // 0' playwright-report/report.json)
-#           SKIPPED=$(jq '.stats.skipped // 0' playwright-report/report.json)
-#           TOTAL=$(( PASSED + FAILED + SKIPPED ))
-#           echo "passed=${PASSED}" >> $GITHUB_OUTPUT
-#           echo "failed=${FAILED}" >> $GITHUB_OUTPUT
-#           echo "skipped=${SKIPPED}" >> $GITHUB_OUTPUT
-#           echo "total=${TOTAL}" >> $GITHUB_OUTPUT
-#       - name: Prepare Report Timestamp
-#         run: echo "REPORT_TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")" >> $GITHUB_ENV
+      - name: Extract test summary
+        id: summary
+        continue-on-error: true
+        run: |
+          if [ ! -f "playwright-report/report.json" ]; then
+            echo "Report file not found!"
+            echo "total=0" >> $GITHUB_OUTPUT
+            echo "passed=0" >> $GITHUB_OUTPUT
+            echo "failed=0" >> $GITHUB_OUTPUT
+            echo "skipped=0" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          PASSED=$(jq '.stats.expected // 0' playwright-report/report.json)
+          FAILED=$(jq '.stats.unexpected // 0' playwright-report/report.json)
+          SKIPPED=$(jq '.stats.skipped // 0' playwright-report/report.json)
+          TOTAL=$(( PASSED + FAILED + SKIPPED ))
+          echo "passed=${PASSED}" >> $GITHUB_OUTPUT
+          echo "failed=${FAILED}" >> $GITHUB_OUTPUT
+          echo "skipped=${SKIPPED}" >> $GITHUB_OUTPUT
+          echo "total=${TOTAL}" >> $GITHUB_OUTPUT
+      - name: Prepare Report Timestamp
+        run: echo "REPORT_TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")" >> $GITHUB_ENV
 
-#       - name: Upload Playwright Report
-#         uses: actions/upload-artifact@v4
-#         if: ${{ always() }}
-#         with:
-#           name: playwright-report
-#           path: playwright-report/
-#           retention-days: 30
+      - name: Upload Playwright Report
+        uses: actions/upload-artifact@v4
+        if: ${{ always() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
 
-#       - name: Send Email Report via SMTP
-#         if: always()
-#         run: node .github/workflows/sendreport.js
-#         env:
-#           SMTP_USER: ${{ secrets.SMTP_USER }}
-#           SMTP_PASS: ${{ secrets.SMTP_PASS }}
-#           REPORT_TIMESTAMP: ${{ env.REPORT_TIMESTAMP }}
-#           GITHUB_REF_NAME: ${{ github.ref_name }}
-#           TOTAL: ${{ steps.summary.outputs.total }}
-#           PASSED: ${{ steps.summary.outputs.passed }}
-#           FAILED: ${{ steps.summary.outputs.failed }}
-#           SKIPPED: ${{ steps.summary.outputs.skipped }}
-#           GITHUB_RUN_ID: ${{ github.run_id }}
-#           GITHUB_REPOSITORY: ${{ github.repository }}
+      - name: Send Email Report via SMTP
+        if: always()
+        run: node .github/workflows/sendreport.js
+        env:
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          REPORT_TIMESTAMP: ${{ env.REPORT_TIMESTAMP }}
+          GITHUB_REF_NAME: ${{ github.ref_name }}
+          TOTAL: ${{ steps.summary.outputs.total }}
+          PASSED: ${{ steps.summary.outputs.passed }}
+          FAILED: ${{ steps.summary.outputs.failed }}
+          SKIPPED: ${{ steps.summary.outputs.skipped }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
