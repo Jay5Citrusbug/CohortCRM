@@ -7,7 +7,7 @@ on:
   #   branches: [ main ]
 
 jobs:
-  Staging Tests:
+  Staging-Tests:
     timeout-minutes: 60
     runs-on: ubuntu-latest
 
