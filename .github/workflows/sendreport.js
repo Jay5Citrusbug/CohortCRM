@@ -25,8 +25,8 @@ const repoOwner = process.env.REPO_OWNER || 'your-org';
 const repoName = process.env.REPO_NAME || 'your-repo';
 const reportUrl = process.env.REPORT_URL || `https://${repoOwner}.github.io/${repoName}/report.html`;
 
-// 🖼️ Local SVG logo path
-const logoPath = path.resolve('../../assets/logo.svg'); // relative to .github/workflows/
+// // 🖼️ Local SVG logo path
+// const logoPath = path.resolve('../../assets/logo.svg'); // relative to .github/workflows/
 
 // HTML summary
 const summaryTable = `
@@ -69,10 +69,7 @@ Best regards,
 Citrusbug QA Team`,
 
   html: `
-    <div style="font-family: Arial, sans-serif; max-width: 650px; margin: auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 10px;">
-      <div style="text-align: left; margin-bottom: 20px;">
-        <img src="cid:logo_cid" alt="App Logo" width="150" style="display: block; margin: auto;" />
-      </div>
+ 
       <p>Hello <strong>Bluedrop Academy</strong>,</p>
       <p>The automated <strong>Playwright test suite</strong> for the <strong>${repoName}</strong> has completed.</p>
       ${summaryTable}
@@ -84,14 +81,14 @@ Citrusbug QA Team`,
   `,
 
   // Attachments (embed logo)
-  attachments: [
-    {
-      filename: 'logo.svg',
-      path: logoPath, // Path to your local image
-      cid: 'logo_cid' // same as in <img src="cid:logo_cid">
-    }
-  ]
-};
+//   attachments: [
+//     {
+//       filename: 'logo.svg',
+//       path: logoPath, // Path to your local image
+//       cid: 'logo_cid' // same as in <img src="cid:logo_cid">
+//     }
+//   ]
+// };
 
 // Send the email
 transporter.sendMail(mailOptions, (error, info) => {
