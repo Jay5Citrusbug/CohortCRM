@@ -14,6 +14,8 @@ export const Messages = {
 
   // Alerts, validations, and info
   logoutSuccess: 'You have successfully logged out.',
+  validationMessageLoan: 'Please enter your deal name!',
+
 
   },
 };

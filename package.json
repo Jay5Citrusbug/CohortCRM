@@ -23,6 +23,7 @@
   "dependencies": {
     "dotenv": "^17.2.3",
     "faker": "^5.5.3",
-    "nodemailer": "^7.0.10"
+    "nodemailer": "^7.0.10",
+    "playwright": "^1.56.1"
   }
 }

@@ -1,17 +1,63 @@
-//   await page.getByRole('textbox', { name: 'Search New Loans' }).click();
-//   await page.getByRole('textbox', { name: 'Search New Loans' }).fill('Test by QA Team');
-//   await page.getByText('No data').nth(1).click();
-
-
   export const PipelineLocator = {
   
     Searchbar: {
-      role: 'textbox',
-      name: 'Search New Loans',
+      role: 'textbox',name: 'Search New Loans',
     },
 
     NoDataText: {
       locator: 'text=No data',
     },
+    AddLoanButton: {
+      role: 'button',name: 'add icon',
+    },
 
+    AddLoanText: {
+      locator: 'text=Add New Loan',
+    },
+    SaveChangesButton: {
+      role: 'button',name: 'Save Changes',
+    },
+    DealName: {
+      name: 'dealName',
+    },
+    PostalcodeID: {
+      name: 'postCode',
+    },
+    ValuePounds: {
+      name: '#invite-admin_valuePounds',
+    },
+    Property: {
+      name: '#invite-admin_property',
+    },
+    GrossLoanPounds: {
+      name: '#invite-admin_grossLoanPounds',
+    },
+    Security: {
+      name: 'SecurityPlease select a',
+    },
+    PricingPercentPerMonth: {
+      name: '#invite-admin_pricingPercentPerMonth',
+    },
+    Sponsor: {
+      name: '#invite-admin_sponsor',
+    },
+    Contact: {
+      name: '#invite-admin_contact',
+    },
+    Company: {
+      name: '#invite-admin_company',
+    },
+
+    AssetType: {
+      name: '#invite-admin_assetType',
+    },
+
+    NewEnquiry: {
+      name: 'New Enquiry',
+    },
+
+    NameLoanColumn: {
+      name: 'Name of loan',
+    },
+  
 } as const;
