@@ -2,7 +2,7 @@ name: Playwright Tests
 
 on:
   push:
-   # branches: [ main ]
+    branches: [ main ]
   # pull_request:
   #   branches: [ main ]
 
@@ -27,6 +27,12 @@ jobs:
       # Step 4: Install Playwright browsers
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
+      
+      # Step 5: Clean previous test results
+      - name: Clean previous test results
+        run: |
+          echo "Cleaning previous Playwright report..."
+          rm -rf playwright-report/ report.html test-log.txt all-reports/staging || true
 
 
       # Step 5: Run tests (continue even if some fail)
@@ -40,6 +46,10 @@ jobs:
 
       - name: Generate standalone HTML report
         run: cp playwright-report/index.html playwright-report/report.html || true
+
+      - name: Get current date with random suffix
+        id: date
+        run: echo "date=$(date '+%Y-%m-%d')-$(shuf -i 100-999 -n 1)" >> $GITHUB_OUTPUT
 
       - name: Extract test summary
         id: summary
