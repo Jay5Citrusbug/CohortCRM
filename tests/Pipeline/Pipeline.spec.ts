@@ -41,6 +41,9 @@ test.describe('Pipeline screen Tests', () => {
     await pipeLinePage.Search_Invalid_NewLoans();
   });
   
-
+  test('🔄 TC-10 Verify cohort invest toggle updates state and refreshes screen with new tabs', async () => {
+    console.log('➡️ Test Start: Verify cohort invest toggle updates state and refreshes screen with new tabs');
+    await pipeLinePage.Verify_Cohort_Invest_Toggle();
+  });
 
 });

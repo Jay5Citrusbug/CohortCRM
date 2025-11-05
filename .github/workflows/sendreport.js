@@ -71,7 +71,7 @@ Citrusbug QA Team`,
 
   html: `
   <div style="text-align: left; margin-bottom: 20px;">
-<img src="cid:logo_cid" alt="App Logo" width="160" height="auto" style="display:inline-block; margin-bottom: 10px;" />
+<img src="cid:logo_cid" alt="App Logo" width="160" height="auto" style="display:inline-block; margin-bottom: 8px;" />
   </div>
  
   <p>Hello <strong>William</strong>,</p>

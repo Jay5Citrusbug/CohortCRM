@@ -131,4 +131,19 @@ await this.page.keyboard.press('Enter');
     // Expect validation message for deal name
     await expect(this.page.getByText(Messages.Alerts.validationMessageLoan).first()).toBeVisible();  }
     
+  async Verify_Cohort_Invest_Toggle()
+  {
+    console.log('🔹 Verifying cohort invest toggle functionality...');
+        const toggle = this.page.getByRole(PipelineLocator.CohortInvestToggle.name);
+  await expect(toggle).toBeVisible();
+
+  // Click to show Investor tab
+  await toggle.click();
+  await expect(this.page.getByText(PipelineLocator.InvvestorTab.name)).toBeVisible();
+
+  // Click again to return to Pipeline tab
+  await toggle.click();
+  await expect(this.page.getByText(PipelineLocator.PipelineTab.name)).toBeVisible();
+
   }
+}

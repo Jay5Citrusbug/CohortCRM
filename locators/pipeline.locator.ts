@@ -59,5 +59,15 @@
     NameLoanColumn: {
       name: 'Name of loan',
     },
-  
+
+    CohortInvestToggle: {
+      name: 'switch',
+    },
+    InvvestorTab: {
+      name: 'InvestorContact UsProperties',
+    },
+    PipelineTab: {
+      name: 'PipelineUnderwritingLive',
+    },
+
 } as const;
