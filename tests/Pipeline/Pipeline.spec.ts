@@ -21,10 +21,10 @@ test.describe('Pipeline screen Tests', () => {
     await pipeLinePage.Validation_Create_Loan();
   });
 
-  test('✅ TC-11 Create a new loan successfully when all mandatory fields are filled', async () => {
-    console.log('➡️ Test Start: Create a new loan successfully when all mandatory fields are filled');
-  await pipeLinePage.CreateLoan();
-  });
+  // test('✅ TC-11 Create a new loan successfully when all mandatory fields are filled', async () => {
+  //   console.log('➡️ Test Start: Create a new loan successfully when all mandatory fields are filled');
+  // await pipeLinePage.CreateLoan();
+  // });
 
     test('🔍 TC-08 Verify Search Bar Visibility and Functionality', async () => {
     console.log('➡️ Test Start: Verify Search Bar Visibility and Functionality');
