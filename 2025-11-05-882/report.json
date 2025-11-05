@@ -1,0 +1,905 @@
+{
+  "config": {
+    "configFile": "/home/runner/work/CohortCRM/CohortCRM/playwright.config.ts",
+    "rootDir": "/home/runner/work/CohortCRM/CohortCRM/tests",
+    "forbidOnly": true,
+    "fullyParallel": true,
+    "globalSetup": "/home/runner/work/CohortCRM/CohortCRM/Config/global-setup.ts",
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "ci": {
+        "commitHref": "https://github.com/Jay5Citrusbug/CohortCRM/commit/177ead898b07313036b8dcc16fb4d213d24fbfbc",
+        "commitHash": "177ead898b07313036b8dcc16fb4d213d24fbfbc",
+        "buildHref": "https://github.com/Jay5Citrusbug/CohortCRM/actions/runs/19096008119"
+      },
+      "gitCommit": {
+        "shortHash": "177ead8",
+        "hash": "177ead898b07313036b8dcc16fb4d213d24fbfbc",
+        "subject": "Toggle test case",
+        "body": "Toggle test case\n",
+        "author": {
+          "name": "unknown",
+          "email": "jay5.citrusbug@gmail.com",
+          "time": 1762331684000
+        },
+        "committer": {
+          "name": "unknown",
+          "email": "jay5.citrusbug@gmail.com",
+          "time": 1762331684000
+        },
+        "branch": "main"
+      },
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "html",
+        {
+          "outputFolder": "playwright-report",
+          "open": "never",
+          "title": "Cohort CRM - Automation Report"
+        }
+      ],
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "playwright-report/report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/CohortCRM/CohortCRM/test-results",
+        "repeatEach": 1,
+        "retries": 2,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/Jay5Citrusbug/CohortCRM/commit/177ead898b07313036b8dcc16fb4d213d24fbfbc",
+            "commitHash": "177ead898b07313036b8dcc16fb4d213d24fbfbc",
+            "buildHref": "https://github.com/Jay5Citrusbug/CohortCRM/actions/runs/19096008119"
+          },
+          "gitCommit": {
+            "shortHash": "177ead8",
+            "hash": "177ead898b07313036b8dcc16fb4d213d24fbfbc",
+            "subject": "Toggle test case",
+            "body": "Toggle test case\n",
+            "author": {
+              "name": "unknown",
+              "email": "jay5.citrusbug@gmail.com",
+              "time": 1762331684000
+            },
+            "committer": {
+              "name": "unknown",
+              "email": "jay5.citrusbug@gmail.com",
+              "time": 1762331684000
+            },
+            "branch": "main"
+          },
+          "actualWorkers": 1
+        },
+        "id": "Login Test",
+        "name": "Login Test",
+        "testDir": "/home/runner/work/CohortCRM/CohortCRM/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*Login\\.spec\\.ts/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/home/runner/work/CohortCRM/CohortCRM/test-results",
+        "repeatEach": 1,
+        "retries": 2,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/Jay5Citrusbug/CohortCRM/commit/177ead898b07313036b8dcc16fb4d213d24fbfbc",
+            "commitHash": "177ead898b07313036b8dcc16fb4d213d24fbfbc",
+            "buildHref": "https://github.com/Jay5Citrusbug/CohortCRM/actions/runs/19096008119"
+          },
+          "gitCommit": {
+            "shortHash": "177ead8",
+            "hash": "177ead898b07313036b8dcc16fb4d213d24fbfbc",
+            "subject": "Toggle test case",
+            "body": "Toggle test case\n",
+            "author": {
+              "name": "unknown",
+              "email": "jay5.citrusbug@gmail.com",
+              "time": 1762331684000
+            },
+            "committer": {
+              "name": "unknown",
+              "email": "jay5.citrusbug@gmail.com",
+              "time": 1762331684000
+            },
+            "branch": "main"
+          },
+          "actualWorkers": 1
+        },
+        "id": "Authenticated Tests",
+        "name": "Authenticated Tests",
+        "testDir": "/home/runner/work/CohortCRM/CohortCRM/tests",
+        "testIgnore": [
+          "/.*Login\\.spec\\.ts/"
+        ],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "Auth/Login.spec.ts",
+      "file": "Auth/Login.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "🔐 Login and Logout tests",
+          "file": "Auth/Login.spec.ts",
+          "line": 6,
+          "column": 6,
+          "specs": [
+            {
+              "title": "🔗 TC_01 - Verify Forgot Password redirection",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Login Test",
+                  "projectName": "Login Test",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 155,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "🌐 Opening login page before all tests...\n"
+                        },
+                        {
+                          "text": "🔹 Navigating to login page...\n"
+                        },
+                        {
+                          "text": "✅ Navigated to login page successfully.\n"
+                        },
+                        {
+                          "text": "➡️ Test Start: Verify Forgot Password link redirects correctly\n"
+                        },
+                        {
+                          "text": "🔹 Clicking on Forgot Password link...\n"
+                        },
+                        {
+                          "text": "✅ Redirected to Forgot Password page successfully.\n"
+                        },
+                        {
+                          "text": "✅ Test Completed: Forgot Password redirect verified and navigated back.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-05T08:37:49.586Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "51cd509ceca538d7bd56-0bea5ac620a7df66b54e",
+              "file": "Auth/Login.spec.ts",
+              "line": 18,
+              "column": 3
+            },
+            {
+              "title": "⚠️ TC_02 - Empty email or password field validation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Login Test",
+                  "projectName": "Login Test",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 186,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "➡️ Test Start: Empty email or password field validation\n"
+                        },
+                        {
+                          "text": "🔹 Validating empty field error messages...\n"
+                        },
+                        {
+                          "text": "✅ Empty field validation messages displayed correctly.\n"
+                        },
+                        {
+                          "text": "✅ Test Completed: Empty field validation successful.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-05T08:37:50.357Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "51cd509ceca538d7bd56-9c8ff4f0060ff57db1e9",
+              "file": "Auth/Login.spec.ts",
+              "line": 25,
+              "column": 3
+            },
+            {
+              "title": "❌ TC_03 - Invalid login with wrong credentials",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Login Test",
+                  "projectName": "Login Test",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 440,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "➡️ Test Start: Invalid login with wrong credentials\n"
+                        },
+                        {
+                          "text": "🔹 Validating invalid login error message...\n"
+                        },
+                        {
+                          "text": "✅ Invalid credentials message displayed correctly.\n"
+                        },
+                        {
+                          "text": "✅ Test Completed: Invalid login validation successful.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-05T08:37:50.557Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "51cd509ceca538d7bd56-fb20e1a2ad9cae30ea75",
+              "file": "Auth/Login.spec.ts",
+              "line": 31,
+              "column": 3
+            },
+            {
+              "title": "✅ TC_04 - Valid login with correct credentials",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Login Test",
+                  "projectName": "Login Test",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 95,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "➡️ Test Start: Valid login with correct credentials\n"
+                        },
+                        {
+                          "text": "🔹 Performing valid login...\n"
+                        },
+                        {
+                          "text": "🔹 Attempting login with email: test16@mailinator.com\n"
+                        },
+                        {
+                          "text": "✅ Login button clicked.\n"
+                        },
+                        {
+                          "text": "✅ Valid login successful and dashboard visible.\n"
+                        },
+                        {
+                          "text": "✅ Test Completed: Valid login successful.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-05T08:37:51.013Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "51cd509ceca538d7bd56-2f7a11230e5d671029ca",
+              "file": "Auth/Login.spec.ts",
+              "line": 37,
+              "column": 3
+            },
+            {
+              "title": "🧭 TC_05 - Verify page title and URL after login",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Login Test",
+                  "projectName": "Login Test",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Starting test: Verify page title and URL...\n"
+                        },
+                        {
+                          "text": "✅ Verifying page title and URL...\n"
+                        },
+                        {
+                          "text": "✅ Page title and URL verified successfully.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-05T08:37:51.117Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "51cd509ceca538d7bd56-622c53acbbd71f9f08ed",
+              "file": "Auth/Login.spec.ts",
+              "line": 43,
+              "column": 3
+            },
+            {
+              "title": "👀 TC_06 - Verify main UI components load correctly",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Login Test",
+                  "projectName": "Login Test",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Starting test: Verify UI components...\n"
+                        },
+                        {
+                          "text": "👀 Checking main UI components...\n"
+                        },
+                        {
+                          "text": "🔹 PipeLine tab visible after login...\n"
+                        },
+                        {
+                          "text": "👀 All UI components verified successfully.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-05T08:37:51.128Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "51cd509ceca538d7bd56-ca1d81980c92cbdae215",
+              "file": "Auth/Login.spec.ts",
+              "line": 48,
+              "column": 3
+            },
+            {
+              "title": "🧹 TC_07 - Validate logout redirects back to login screen",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Login Test",
+                  "projectName": "Login Test",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3427,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Starting test: Verify logout flow...\n"
+                        },
+                        {
+                          "text": "🧹 Initiating logout flow...\n"
+                        },
+                        {
+                          "text": "🧹 Logout successful, redirected to login page.\n"
+                        },
+                        {
+                          "text": "✅ Navigated to login page successfully.\n"
+                        },
+                        {
+                          "text": "🧽 Closing browser context...\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-05T08:37:51.142Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "51cd509ceca538d7bd56-85e583eeda8da1b90258",
+              "file": "Auth/Login.spec.ts",
+              "line": 53,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Pipeline/Pipeline.spec.ts",
+      "file": "Pipeline/Pipeline.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Pipeline screen Tests",
+          "file": "Pipeline/Pipeline.spec.ts",
+          "line": 6,
+          "column": 6,
+          "specs": [
+            {
+              "title": "⛔ TC-10 Validate loan creation blocked when mandatory fields are empty",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Authenticated Tests",
+                  "projectName": "Authenticated Tests",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2423,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "🌐 Opening dashboard page before all tests...\n"
+                        },
+                        {
+                          "text": "➡️ Test Start: Validate loan creation blocked when mandatory fields are empty\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-05T08:37:55.413Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "022f6b5d8e42b307f0c0-83aa39d085c1556b0fa8",
+              "file": "Pipeline/Pipeline.spec.ts",
+              "line": 19,
+              "column": 3
+            },
+            {
+              "title": "🔍 TC-08 Verify Search Bar Visibility and Functionality",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Authenticated Tests",
+                  "projectName": "Authenticated Tests",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 5048,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('cell', { name: 'Automation Loan PYtaLd' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('cell', { name: 'Automation Loan PYtaLd' })\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('cell', { name: 'Automation Loan PYtaLd' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('cell', { name: 'Automation Loan PYtaLd' })\u001b[22m\n\n    at PipeLinePage.Search_Valid_NewLoans (/home/runner/work/CohortCRM/CohortCRM/Pages/Pipelinepage.ts:39:65)\n    at /home/runner/work/CohortCRM/CohortCRM/tests/Pipeline/Pipeline.spec.ts:31:24",
+                        "location": {
+                          "file": "/home/runner/work/CohortCRM/CohortCRM/Pages/Pipelinepage.ts",
+                          "column": 65,
+                          "line": 39
+                        },
+                        "snippet": "   at ../Pages/Pipelinepage.ts:39\n\n\u001b[0m \u001b[90m 37 |\u001b[39m     console\u001b[33m.\u001b[39mlog(\u001b[32m'🔹 Navigating to Search New Loans...'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 38 |\u001b[39m     console\u001b[33m.\u001b[39mlog(\u001b[32m`Created loan: ${loanName}`\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 39 |\u001b[39m   \u001b[36mawait\u001b[39m expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mgetByRole(\u001b[32m'cell'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m loanName }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                 \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 40 |\u001b[39m\n \u001b[90m 41 |\u001b[39m   \u001b[90m// Log for debugging/reference\u001b[39m\n \u001b[90m 42 |\u001b[39m   console\u001b[33m.\u001b[39mlog(\u001b[32m`✅ Verified created loan name: ${loanName}`\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/CohortCRM/CohortCRM/Pages/Pipelinepage.ts",
+                            "column": 65,
+                            "line": 39
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('cell', { name: 'Automation Loan PYtaLd' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('cell', { name: 'Automation Loan PYtaLd' })\u001b[22m\n\n\n   at ../Pages/Pipelinepage.ts:39\n\n  37 |     console.log('🔹 Navigating to Search New Loans...');\n  38 |     console.log(`Created loan: ${loanName}`);\n> 39 |   await expect(this.page.getByRole('cell', { name: loanName })).toBeVisible();\n     |                                                                 ^\n  40 |\n  41 |   // Log for debugging/reference\n  42 |   console.log(`✅ Verified created loan name: ${loanName}`);\n    at PipeLinePage.Search_Valid_NewLoans (/home/runner/work/CohortCRM/CohortCRM/Pages/Pipelinepage.ts:39:65)\n    at /home/runner/work/CohortCRM/CohortCRM/tests/Pipeline/Pipeline.spec.ts:31:24"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "➡️ Test Start: Verify Search Bar Visibility and Functionality\n"
+                        },
+                        {
+                          "text": "🔹 Navigating to Search New Loans...\n"
+                        },
+                        {
+                          "text": "Created loan: Automation Loan PYtaLd\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-05T08:37:58.373Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/CohortCRM/CohortCRM/test-results/Pipeline-Pipeline-Pipeline-0e2de-isibility-and-Functionality-Authenticated-Tests/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/runner/work/CohortCRM/CohortCRM/test-results/Pipeline-Pipeline-Pipeline-0e2de-isibility-and-Functionality-Authenticated-Tests/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/CohortCRM/CohortCRM/Pages/Pipelinepage.ts",
+                        "column": 65,
+                        "line": 39
+                      }
+                    },
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 5060,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('cell', { name: 'Automation Loan IspHV8' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('cell', { name: 'Automation Loan IspHV8' })\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('cell', { name: 'Automation Loan IspHV8' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('cell', { name: 'Automation Loan IspHV8' })\u001b[22m\n\n    at PipeLinePage.Search_Valid_NewLoans (/home/runner/work/CohortCRM/CohortCRM/Pages/Pipelinepage.ts:39:65)\n    at /home/runner/work/CohortCRM/CohortCRM/tests/Pipeline/Pipeline.spec.ts:31:24",
+                        "location": {
+                          "file": "/home/runner/work/CohortCRM/CohortCRM/Pages/Pipelinepage.ts",
+                          "column": 65,
+                          "line": 39
+                        },
+                        "snippet": "   at ../Pages/Pipelinepage.ts:39\n\n\u001b[0m \u001b[90m 37 |\u001b[39m     console\u001b[33m.\u001b[39mlog(\u001b[32m'🔹 Navigating to Search New Loans...'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 38 |\u001b[39m     console\u001b[33m.\u001b[39mlog(\u001b[32m`Created loan: ${loanName}`\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 39 |\u001b[39m   \u001b[36mawait\u001b[39m expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mgetByRole(\u001b[32m'cell'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m loanName }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                 \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 40 |\u001b[39m\n \u001b[90m 41 |\u001b[39m   \u001b[90m// Log for debugging/reference\u001b[39m\n \u001b[90m 42 |\u001b[39m   console\u001b[33m.\u001b[39mlog(\u001b[32m`✅ Verified created loan name: ${loanName}`\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/CohortCRM/CohortCRM/Pages/Pipelinepage.ts",
+                            "column": 65,
+                            "line": 39
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('cell', { name: 'Automation Loan IspHV8' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('cell', { name: 'Automation Loan IspHV8' })\u001b[22m\n\n\n   at ../Pages/Pipelinepage.ts:39\n\n  37 |     console.log('🔹 Navigating to Search New Loans...');\n  38 |     console.log(`Created loan: ${loanName}`);\n> 39 |   await expect(this.page.getByRole('cell', { name: loanName })).toBeVisible();\n     |                                                                 ^\n  40 |\n  41 |   // Log for debugging/reference\n  42 |   console.log(`✅ Verified created loan name: ${loanName}`);\n    at PipeLinePage.Search_Valid_NewLoans (/home/runner/work/CohortCRM/CohortCRM/Pages/Pipelinepage.ts:39:65)\n    at /home/runner/work/CohortCRM/CohortCRM/tests/Pipeline/Pipeline.spec.ts:31:24"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "🌐 Opening dashboard page before all tests...\n"
+                        },
+                        {
+                          "text": "➡️ Test Start: Verify Search Bar Visibility and Functionality\n"
+                        },
+                        {
+                          "text": "🔹 Navigating to Search New Loans...\n"
+                        },
+                        {
+                          "text": "Created loan: Automation Loan IspHV8\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2025-11-05T08:38:04.590Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/CohortCRM/CohortCRM/test-results/Pipeline-Pipeline-Pipeline-0e2de-isibility-and-Functionality-Authenticated-Tests-retry1/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/runner/work/CohortCRM/CohortCRM/test-results/Pipeline-Pipeline-Pipeline-0e2de-isibility-and-Functionality-Authenticated-Tests-retry1/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/CohortCRM/CohortCRM/Pages/Pipelinepage.ts",
+                        "column": 65,
+                        "line": 39
+                      }
+                    },
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 5065,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('cell', { name: 'Automation Loan RiHvR4' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('cell', { name: 'Automation Loan RiHvR4' })\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('cell', { name: 'Automation Loan RiHvR4' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('cell', { name: 'Automation Loan RiHvR4' })\u001b[22m\n\n    at PipeLinePage.Search_Valid_NewLoans (/home/runner/work/CohortCRM/CohortCRM/Pages/Pipelinepage.ts:39:65)\n    at /home/runner/work/CohortCRM/CohortCRM/tests/Pipeline/Pipeline.spec.ts:31:24",
+                        "location": {
+                          "file": "/home/runner/work/CohortCRM/CohortCRM/Pages/Pipelinepage.ts",
+                          "column": 65,
+                          "line": 39
+                        },
+                        "snippet": "   at ../Pages/Pipelinepage.ts:39\n\n\u001b[0m \u001b[90m 37 |\u001b[39m     console\u001b[33m.\u001b[39mlog(\u001b[32m'🔹 Navigating to Search New Loans...'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 38 |\u001b[39m     console\u001b[33m.\u001b[39mlog(\u001b[32m`Created loan: ${loanName}`\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 39 |\u001b[39m   \u001b[36mawait\u001b[39m expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mgetByRole(\u001b[32m'cell'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m loanName }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                 \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 40 |\u001b[39m\n \u001b[90m 41 |\u001b[39m   \u001b[90m// Log for debugging/reference\u001b[39m\n \u001b[90m 42 |\u001b[39m   console\u001b[33m.\u001b[39mlog(\u001b[32m`✅ Verified created loan name: ${loanName}`\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/CohortCRM/CohortCRM/Pages/Pipelinepage.ts",
+                            "column": 65,
+                            "line": 39
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('cell', { name: 'Automation Loan RiHvR4' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('cell', { name: 'Automation Loan RiHvR4' })\u001b[22m\n\n\n   at ../Pages/Pipelinepage.ts:39\n\n  37 |     console.log('🔹 Navigating to Search New Loans...');\n  38 |     console.log(`Created loan: ${loanName}`);\n> 39 |   await expect(this.page.getByRole('cell', { name: loanName })).toBeVisible();\n     |                                                                 ^\n  40 |\n  41 |   // Log for debugging/reference\n  42 |   console.log(`✅ Verified created loan name: ${loanName}`);\n    at PipeLinePage.Search_Valid_NewLoans (/home/runner/work/CohortCRM/CohortCRM/Pages/Pipelinepage.ts:39:65)\n    at /home/runner/work/CohortCRM/CohortCRM/tests/Pipeline/Pipeline.spec.ts:31:24"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "🌐 Opening dashboard page before all tests...\n"
+                        },
+                        {
+                          "text": "➡️ Test Start: Verify Search Bar Visibility and Functionality\n"
+                        },
+                        {
+                          "text": "🔹 Navigating to Search New Loans...\n"
+                        },
+                        {
+                          "text": "Created loan: Automation Loan RiHvR4\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 2,
+                      "startTime": "2025-11-05T08:38:11.190Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/CohortCRM/CohortCRM/test-results/Pipeline-Pipeline-Pipeline-0e2de-isibility-and-Functionality-Authenticated-Tests-retry2/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/runner/work/CohortCRM/CohortCRM/test-results/Pipeline-Pipeline-Pipeline-0e2de-isibility-and-Functionality-Authenticated-Tests-retry2/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/CohortCRM/CohortCRM/Pages/Pipelinepage.ts",
+                        "column": 65,
+                        "line": 39
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "022f6b5d8e42b307f0c0-387bc1c6c075cc468bb2",
+              "file": "Pipeline/Pipeline.spec.ts",
+              "line": 29,
+              "column": 5
+            },
+            {
+              "title": "✅ Verify newly created loan appears in the loan listing",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Authenticated Tests",
+                  "projectName": "Authenticated Tests",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 84,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "🌐 Opening dashboard page before all tests...\n"
+                        },
+                        {
+                          "text": "➡️ Test Start: Verify loan status\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-05T08:38:17.687Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "022f6b5d8e42b307f0c0-8dd9e51ad9e92eb94b3b",
+              "file": "Pipeline/Pipeline.spec.ts",
+              "line": 34,
+              "column": 5
+            },
+            {
+              "title": "❌ TC-09 Verify Search with Invalid/Non-Existing Keyword",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Authenticated Tests",
+                  "projectName": "Authenticated Tests",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 170,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "➡️ Test Start: Verify Search with Invalid/Non-Existing Keyword\n"
+                        },
+                        {
+                          "text": "🔹 Navigating to Search New Loans...\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-05T08:38:18.317Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "022f6b5d8e42b307f0c0-f8807f6ac2d9a3bc51b1",
+              "file": "Pipeline/Pipeline.spec.ts",
+              "line": 39,
+              "column": 3
+            },
+            {
+              "title": "🔄 TC-10 Verify cohort invest toggle updates state and refreshes screen with new tabs",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Authenticated Tests",
+                  "projectName": "Authenticated Tests",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 131,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "➡️ Test Start: Verify cohort invest toggle updates state and refreshes screen with new tabs\n"
+                        },
+                        {
+                          "text": "🔹 Verifying cohort invest toggle functionality...\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-05T08:38:18.500Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "022f6b5d8e42b307f0c0-61605049a4dd4e094f2b",
+              "file": "Pipeline/Pipeline.spec.ts",
+              "line": 44,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2025-11-05T08:37:46.042Z",
+    "duration": 32647.741,
+    "expected": 11,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}
