@@ -37,7 +37,6 @@ jobs:
 
       - name: Generate HTML report
         run: |
-          npx playwright show-report --reporter=html
           cp playwright-report/index.html playwright-report/report.html
 
       - name: Get current date with random suffix
