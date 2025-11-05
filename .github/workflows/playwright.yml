@@ -84,30 +84,19 @@ jobs:
           mkdir -p all-reports/${{ steps.date.outputs.date }}
           cp -r playwright-report/* all-reports/${{ steps.date.outputs.date }}/
       
-      - name: Upload Playwright Report
+      - name: Prepare Report Timestamp
+        run: echo "REPORT_TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")" >> $GITHUB_ENV
+
+      - name: Move report to environment/date directory
+        run: |
+              mkdir -p all-reports/${{ env.ENVIRONMENT }}/${{ steps.date.outputs.date }}
+              cp -r playwright-report/* all-reports/${{ env.ENVIRONMENT }}/${{ steps.date.outputs.date }}/
+      
+      - name: Upload Environment Report as Artifact
         uses: actions/upload-artifact@v4
-        if: ${{ always() }}
         with:
-          name: playwright-report-${{ steps.date.outputs.date }}
-          path: all-reports/${{ steps.date.outputs.date }}/
-          retention-days: 30
-    
-      - name: Debug report paths
-        run: |
-          echo "Listing all-reports directory:"
-          ls -R all-reports
-
-      - name: Deploy Playwright report to GitHub Pages
-        run: |
-            mkdir -p all-reports/${{ steps.date.outputs.date }}
-            cp -r playwright-report/* all-reports/${{ steps.date.outputs.date }}/
-            touch all-reports/${{ steps.date.outputs.date }}/.nojekyll
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./all-reports
+              name: report-${{ env.ENVIRONMENT }}
+              path: all-reports/${{ env.ENVIRONMENT }}
 
       - name: Send Email Report via SMTP
         if: always()
