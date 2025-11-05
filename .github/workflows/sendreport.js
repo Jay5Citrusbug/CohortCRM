@@ -26,8 +26,8 @@ const repoName = process.env.REPO_NAME || 'your-repo';
 const reportUrl = process.env.REPORT_URL || 
   `https://${repoOwner}.github.io/${repoName}/all-reports/${process.env.REPORT_DATE || ''}/report.html`;
 
-// 🖼️ Local SVG logo path
-const logoPath = path.resolve('.github/workflows/logo.svg'); // adjust if logo in assets/
+// 🖼️ Local PNG logo path
+const logoPath = path.resolve('.github/workflows/logo.png'); // adjust if logo in assets/
 
 // HTML summary
 const summaryTable = `
@@ -86,7 +86,7 @@ Citrusbug QA Team`,
 
   attachments: [
     {
-      filename: 'logo.svg',
+      filename: 'logo.png',
       path: logoPath,
       cid: 'logo_cid',
     },
