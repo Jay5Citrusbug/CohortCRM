@@ -71,11 +71,11 @@ Citrusbug QA Team`,
 
   html: `
   <div style="text-align: left; margin-bottom: 20px;">
-    <img src="cid:logo_cid" alt="App Logo" width="120" style="display: inline-block; margin-bottom:10px;" />
+<img src="cid:logo_cid" alt="App Logo" width="160" height="auto" style="display:inline-block; margin-bottom: 10px;" />
   </div>
  
   <p>Hello <strong>William</strong>,</p>
-  <p>The automated <strong>Playwright test suite</strong> for branch <strong>${process.env.GITHUB_REF_NAME}</strong> has completed.</p>
+  <p>The automated <strong>Playwright test suite</strong>has completed.</p>
   <p><strong>Date:</strong> ${reportDate}</p>
   ${summaryTable}
   <div style="margin: 20px 0;">
