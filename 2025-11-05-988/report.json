@@ -12,24 +12,24 @@
     "maxFailures": 0,
     "metadata": {
       "ci": {
-        "commitHref": "https://github.com/Jay5Citrusbug/CohortCRM/commit/6ab35dd137627767aa4b31c15ca0557109127ff8",
-        "commitHash": "6ab35dd137627767aa4b31c15ca0557109127ff8",
-        "buildHref": "https://github.com/Jay5Citrusbug/CohortCRM/actions/runs/19097100144"
+        "commitHref": "https://github.com/Jay5Citrusbug/CohortCRM/commit/0cf75ee91bce251c95153454b974d0d0909f3352",
+        "commitHash": "0cf75ee91bce251c95153454b974d0d0909f3352",
+        "buildHref": "https://github.com/Jay5Citrusbug/CohortCRM/actions/runs/19097677116"
       },
       "gitCommit": {
-        "shortHash": "6ab35dd",
-        "hash": "6ab35dd137627767aa4b31c15ca0557109127ff8",
+        "shortHash": "0cf75ee",
+        "hash": "0cf75ee91bce251c95153454b974d0d0909f3352",
         "subject": "yml file",
         "body": "yml file\n",
         "author": {
           "name": "unknown",
           "email": "jay5.citrusbug@gmail.com",
-          "time": 1762334290000
+          "time": 1762335594000
         },
         "committer": {
           "name": "unknown",
           "email": "jay5.citrusbug@gmail.com",
-          "time": 1762334290000
+          "time": 1762335594000
         },
         "branch": "main"
       },
@@ -68,24 +68,24 @@
         "retries": 2,
         "metadata": {
           "ci": {
-            "commitHref": "https://github.com/Jay5Citrusbug/CohortCRM/commit/6ab35dd137627767aa4b31c15ca0557109127ff8",
-            "commitHash": "6ab35dd137627767aa4b31c15ca0557109127ff8",
-            "buildHref": "https://github.com/Jay5Citrusbug/CohortCRM/actions/runs/19097100144"
+            "commitHref": "https://github.com/Jay5Citrusbug/CohortCRM/commit/0cf75ee91bce251c95153454b974d0d0909f3352",
+            "commitHash": "0cf75ee91bce251c95153454b974d0d0909f3352",
+            "buildHref": "https://github.com/Jay5Citrusbug/CohortCRM/actions/runs/19097677116"
           },
           "gitCommit": {
-            "shortHash": "6ab35dd",
-            "hash": "6ab35dd137627767aa4b31c15ca0557109127ff8",
+            "shortHash": "0cf75ee",
+            "hash": "0cf75ee91bce251c95153454b974d0d0909f3352",
             "subject": "yml file",
             "body": "yml file\n",
             "author": {
               "name": "unknown",
               "email": "jay5.citrusbug@gmail.com",
-              "time": 1762334290000
+              "time": 1762335594000
             },
             "committer": {
               "name": "unknown",
               "email": "jay5.citrusbug@gmail.com",
-              "time": 1762334290000
+              "time": 1762335594000
             },
             "branch": "main"
           },
@@ -106,24 +106,24 @@
         "retries": 2,
         "metadata": {
           "ci": {
-            "commitHref": "https://github.com/Jay5Citrusbug/CohortCRM/commit/6ab35dd137627767aa4b31c15ca0557109127ff8",
-            "commitHash": "6ab35dd137627767aa4b31c15ca0557109127ff8",
-            "buildHref": "https://github.com/Jay5Citrusbug/CohortCRM/actions/runs/19097100144"
+            "commitHref": "https://github.com/Jay5Citrusbug/CohortCRM/commit/0cf75ee91bce251c95153454b974d0d0909f3352",
+            "commitHash": "0cf75ee91bce251c95153454b974d0d0909f3352",
+            "buildHref": "https://github.com/Jay5Citrusbug/CohortCRM/actions/runs/19097677116"
           },
           "gitCommit": {
-            "shortHash": "6ab35dd",
-            "hash": "6ab35dd137627767aa4b31c15ca0557109127ff8",
+            "shortHash": "0cf75ee",
+            "hash": "0cf75ee91bce251c95153454b974d0d0909f3352",
             "subject": "yml file",
             "body": "yml file\n",
             "author": {
               "name": "unknown",
               "email": "jay5.citrusbug@gmail.com",
-              "time": 1762334290000
+              "time": 1762335594000
             },
             "committer": {
               "name": "unknown",
               "email": "jay5.citrusbug@gmail.com",
-              "time": 1762334290000
+              "time": 1762335594000
             },
             "branch": "main"
           },
@@ -178,7 +178,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 173,
+                      "duration": 218,
                       "errors": [],
                       "stdout": [
                         {
@@ -205,7 +205,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-11-05T09:19:18.690Z",
+                      "startTime": "2025-11-05T09:41:27.242Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -234,7 +234,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 193,
+                      "duration": 179,
                       "errors": [],
                       "stdout": [
                         {
@@ -252,7 +252,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-11-05T09:19:19.495Z",
+                      "startTime": "2025-11-05T09:41:28.258Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -281,7 +281,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 454,
+                      "duration": 434,
                       "errors": [],
                       "stdout": [
                         {
@@ -299,7 +299,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-11-05T09:19:19.702Z",
+                      "startTime": "2025-11-05T09:41:28.450Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -328,7 +328,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 107,
+                      "duration": 97,
                       "errors": [],
                       "stdout": [
                         {
@@ -352,7 +352,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-11-05T09:19:20.172Z",
+                      "startTime": "2025-11-05T09:41:28.899Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -381,7 +381,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 4,
+                      "duration": 3,
                       "errors": [],
                       "stdout": [
                         {
@@ -396,7 +396,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-11-05T09:19:20.289Z",
+                      "startTime": "2025-11-05T09:41:29.006Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -425,7 +425,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 9,
+                      "duration": 7,
                       "errors": [],
                       "stdout": [
                         {
@@ -443,7 +443,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-11-05T09:19:20.301Z",
+                      "startTime": "2025-11-05T09:41:29.017Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -472,7 +472,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 3059,
+                      "duration": 3924,
                       "errors": [],
                       "stdout": [
                         {
@@ -493,7 +493,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-11-05T09:19:20.319Z",
+                      "startTime": "2025-11-05T09:41:29.031Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -539,7 +539,7 @@
                       "workerIndex": 1,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2500,
+                      "duration": 2497,
                       "errors": [],
                       "stdout": [
                         {
@@ -551,7 +551,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-11-05T09:19:24.263Z",
+                      "startTime": "2025-11-05T09:41:33.782Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -580,10 +580,10 @@
                       "workerIndex": 1,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 5053,
+                      "duration": 5042,
                       "error": {
-                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('cell', { name: 'Automation Loan ypYY7F' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('cell', { name: 'Automation Loan ypYY7F' })\u001b[22m\n",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('cell', { name: 'Automation Loan ypYY7F' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('cell', { name: 'Automation Loan ypYY7F' })\u001b[22m\n\n    at PipeLinePage.Search_Valid_NewLoans (/home/runner/work/CohortCRM/CohortCRM/Pages/Pipelinepage.ts:39:65)\n    at /home/runner/work/CohortCRM/CohortCRM/tests/Pipeline/Pipeline.spec.ts:31:24",
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('cell', { name: 'Automation Loan fkW02i' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('cell', { name: 'Automation Loan fkW02i' })\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('cell', { name: 'Automation Loan fkW02i' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('cell', { name: 'Automation Loan fkW02i' })\u001b[22m\n\n    at PipeLinePage.Search_Valid_NewLoans (/home/runner/work/CohortCRM/CohortCRM/Pages/Pipelinepage.ts:39:65)\n    at /home/runner/work/CohortCRM/CohortCRM/tests/Pipeline/Pipeline.spec.ts:31:24",
                         "location": {
                           "file": "/home/runner/work/CohortCRM/CohortCRM/Pages/Pipelinepage.ts",
                           "column": 65,
@@ -598,7 +598,7 @@
                             "column": 65,
                             "line": 39
                           },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('cell', { name: 'Automation Loan ypYY7F' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('cell', { name: 'Automation Loan ypYY7F' })\u001b[22m\n\n\n   at ../Pages/Pipelinepage.ts:39\n\n  37 |     console.log('🔹 Navigating to Search New Loans...');\n  38 |     console.log(`Created loan: ${loanName}`);\n> 39 |   await expect(this.page.getByRole('cell', { name: loanName })).toBeVisible();\n     |                                                                 ^\n  40 |\n  41 |   // Log for debugging/reference\n  42 |   console.log(`✅ Verified created loan name: ${loanName}`);\n    at PipeLinePage.Search_Valid_NewLoans (/home/runner/work/CohortCRM/CohortCRM/Pages/Pipelinepage.ts:39:65)\n    at /home/runner/work/CohortCRM/CohortCRM/tests/Pipeline/Pipeline.spec.ts:31:24"
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('cell', { name: 'Automation Loan fkW02i' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('cell', { name: 'Automation Loan fkW02i' })\u001b[22m\n\n\n   at ../Pages/Pipelinepage.ts:39\n\n  37 |     console.log('🔹 Navigating to Search New Loans...');\n  38 |     console.log(`Created loan: ${loanName}`);\n> 39 |   await expect(this.page.getByRole('cell', { name: loanName })).toBeVisible();\n     |                                                                 ^\n  40 |\n  41 |   // Log for debugging/reference\n  42 |   console.log(`✅ Verified created loan name: ${loanName}`);\n    at PipeLinePage.Search_Valid_NewLoans (/home/runner/work/CohortCRM/CohortCRM/Pages/Pipelinepage.ts:39:65)\n    at /home/runner/work/CohortCRM/CohortCRM/tests/Pipeline/Pipeline.spec.ts:31:24"
                         }
                       ],
                       "stdout": [
@@ -609,12 +609,12 @@
                           "text": "🔹 Navigating to Search New Loans...\n"
                         },
                         {
-                          "text": "Created loan: Automation Loan ypYY7F\n"
+                          "text": "Created loan: Automation Loan fkW02i\n"
                         }
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-11-05T09:19:27.334Z",
+                      "startTime": "2025-11-05T09:41:37.958Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -638,10 +638,10 @@
                       "workerIndex": 2,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 5067,
+                      "duration": 5063,
                       "error": {
-                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('cell', { name: 'Automation Loan Pzd5Oi' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('cell', { name: 'Automation Loan Pzd5Oi' })\u001b[22m\n",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('cell', { name: 'Automation Loan Pzd5Oi' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('cell', { name: 'Automation Loan Pzd5Oi' })\u001b[22m\n\n    at PipeLinePage.Search_Valid_NewLoans (/home/runner/work/CohortCRM/CohortCRM/Pages/Pipelinepage.ts:39:65)\n    at /home/runner/work/CohortCRM/CohortCRM/tests/Pipeline/Pipeline.spec.ts:31:24",
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('cell', { name: 'Automation Loan ePj4ng' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('cell', { name: 'Automation Loan ePj4ng' })\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('cell', { name: 'Automation Loan ePj4ng' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('cell', { name: 'Automation Loan ePj4ng' })\u001b[22m\n\n    at PipeLinePage.Search_Valid_NewLoans (/home/runner/work/CohortCRM/CohortCRM/Pages/Pipelinepage.ts:39:65)\n    at /home/runner/work/CohortCRM/CohortCRM/tests/Pipeline/Pipeline.spec.ts:31:24",
                         "location": {
                           "file": "/home/runner/work/CohortCRM/CohortCRM/Pages/Pipelinepage.ts",
                           "column": 65,
@@ -656,7 +656,7 @@
                             "column": 65,
                             "line": 39
                           },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('cell', { name: 'Automation Loan Pzd5Oi' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('cell', { name: 'Automation Loan Pzd5Oi' })\u001b[22m\n\n\n   at ../Pages/Pipelinepage.ts:39\n\n  37 |     console.log('🔹 Navigating to Search New Loans...');\n  38 |     console.log(`Created loan: ${loanName}`);\n> 39 |   await expect(this.page.getByRole('cell', { name: loanName })).toBeVisible();\n     |                                                                 ^\n  40 |\n  41 |   // Log for debugging/reference\n  42 |   console.log(`✅ Verified created loan name: ${loanName}`);\n    at PipeLinePage.Search_Valid_NewLoans (/home/runner/work/CohortCRM/CohortCRM/Pages/Pipelinepage.ts:39:65)\n    at /home/runner/work/CohortCRM/CohortCRM/tests/Pipeline/Pipeline.spec.ts:31:24"
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('cell', { name: 'Automation Loan ePj4ng' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('cell', { name: 'Automation Loan ePj4ng' })\u001b[22m\n\n\n   at ../Pages/Pipelinepage.ts:39\n\n  37 |     console.log('🔹 Navigating to Search New Loans...');\n  38 |     console.log(`Created loan: ${loanName}`);\n> 39 |   await expect(this.page.getByRole('cell', { name: loanName })).toBeVisible();\n     |                                                                 ^\n  40 |\n  41 |   // Log for debugging/reference\n  42 |   console.log(`✅ Verified created loan name: ${loanName}`);\n    at PipeLinePage.Search_Valid_NewLoans (/home/runner/work/CohortCRM/CohortCRM/Pages/Pipelinepage.ts:39:65)\n    at /home/runner/work/CohortCRM/CohortCRM/tests/Pipeline/Pipeline.spec.ts:31:24"
                         }
                       ],
                       "stdout": [
@@ -670,12 +670,12 @@
                           "text": "🔹 Navigating to Search New Loans...\n"
                         },
                         {
-                          "text": "Created loan: Automation Loan Pzd5Oi\n"
+                          "text": "Created loan: Automation Loan ePj4ng\n"
                         }
                       ],
                       "stderr": [],
                       "retry": 1,
-                      "startTime": "2025-11-05T09:19:33.521Z",
+                      "startTime": "2025-11-05T09:41:43.966Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -699,10 +699,10 @@
                       "workerIndex": 3,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 5070,
+                      "duration": 5066,
                       "error": {
-                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('cell', { name: 'Automation Loan Q1mdRF' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('cell', { name: 'Automation Loan Q1mdRF' })\u001b[22m\n",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('cell', { name: 'Automation Loan Q1mdRF' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('cell', { name: 'Automation Loan Q1mdRF' })\u001b[22m\n\n    at PipeLinePage.Search_Valid_NewLoans (/home/runner/work/CohortCRM/CohortCRM/Pages/Pipelinepage.ts:39:65)\n    at /home/runner/work/CohortCRM/CohortCRM/tests/Pipeline/Pipeline.spec.ts:31:24",
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('cell', { name: 'Automation Loan bGYARS' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('cell', { name: 'Automation Loan bGYARS' })\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('cell', { name: 'Automation Loan bGYARS' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('cell', { name: 'Automation Loan bGYARS' })\u001b[22m\n\n    at PipeLinePage.Search_Valid_NewLoans (/home/runner/work/CohortCRM/CohortCRM/Pages/Pipelinepage.ts:39:65)\n    at /home/runner/work/CohortCRM/CohortCRM/tests/Pipeline/Pipeline.spec.ts:31:24",
                         "location": {
                           "file": "/home/runner/work/CohortCRM/CohortCRM/Pages/Pipelinepage.ts",
                           "column": 65,
@@ -717,7 +717,7 @@
                             "column": 65,
                             "line": 39
                           },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('cell', { name: 'Automation Loan Q1mdRF' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('cell', { name: 'Automation Loan Q1mdRF' })\u001b[22m\n\n\n   at ../Pages/Pipelinepage.ts:39\n\n  37 |     console.log('🔹 Navigating to Search New Loans...');\n  38 |     console.log(`Created loan: ${loanName}`);\n> 39 |   await expect(this.page.getByRole('cell', { name: loanName })).toBeVisible();\n     |                                                                 ^\n  40 |\n  41 |   // Log for debugging/reference\n  42 |   console.log(`✅ Verified created loan name: ${loanName}`);\n    at PipeLinePage.Search_Valid_NewLoans (/home/runner/work/CohortCRM/CohortCRM/Pages/Pipelinepage.ts:39:65)\n    at /home/runner/work/CohortCRM/CohortCRM/tests/Pipeline/Pipeline.spec.ts:31:24"
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('cell', { name: 'Automation Loan bGYARS' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('cell', { name: 'Automation Loan bGYARS' })\u001b[22m\n\n\n   at ../Pages/Pipelinepage.ts:39\n\n  37 |     console.log('🔹 Navigating to Search New Loans...');\n  38 |     console.log(`Created loan: ${loanName}`);\n> 39 |   await expect(this.page.getByRole('cell', { name: loanName })).toBeVisible();\n     |                                                                 ^\n  40 |\n  41 |   // Log for debugging/reference\n  42 |   console.log(`✅ Verified created loan name: ${loanName}`);\n    at PipeLinePage.Search_Valid_NewLoans (/home/runner/work/CohortCRM/CohortCRM/Pages/Pipelinepage.ts:39:65)\n    at /home/runner/work/CohortCRM/CohortCRM/tests/Pipeline/Pipeline.spec.ts:31:24"
                         }
                       ],
                       "stdout": [
@@ -731,12 +731,12 @@
                           "text": "🔹 Navigating to Search New Loans...\n"
                         },
                         {
-                          "text": "Created loan: Automation Loan Q1mdRF\n"
+                          "text": "Created loan: Automation Loan bGYARS\n"
                         }
                       ],
                       "stderr": [],
                       "retry": 2,
-                      "startTime": "2025-11-05T09:19:40.153Z",
+                      "startTime": "2025-11-05T09:41:50.424Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -781,7 +781,7 @@
                       "workerIndex": 4,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 89,
+                      "duration": 147,
                       "errors": [],
                       "stdout": [
                         {
@@ -793,7 +793,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-11-05T09:19:46.720Z",
+                      "startTime": "2025-11-05T09:41:56.974Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -822,7 +822,7 @@
                       "workerIndex": 4,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 206,
+                      "duration": 111,
                       "errors": [],
                       "stdout": [
                         {
@@ -834,7 +834,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-11-05T09:19:47.361Z",
+                      "startTime": "2025-11-05T09:41:57.716Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -863,7 +863,7 @@
                       "workerIndex": 4,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 254,
+                      "duration": 148,
                       "errors": [],
                       "stdout": [
                         {
@@ -875,7 +875,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-11-05T09:19:47.582Z",
+                      "startTime": "2025-11-05T09:41:57.843Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -895,8 +895,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2025-11-05T09:19:16.560Z",
-    "duration": 31337.722,
+    "startTime": "2025-11-05T09:41:25.709Z",
+    "duration": 32353.167999999998,
     "expected": 11,
     "skipped": 0,
     "unexpected": 1,
