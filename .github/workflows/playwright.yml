@@ -1,15 +1,13 @@
 name: Playwright Tests
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
 on:
   push:
     branches: [ main ]
-  # pull_request:
-  #   branches: [ main ]
 
 jobs:
   Staging-Tests:
@@ -37,25 +35,19 @@ jobs:
       - name: Clean previous test results
         run: |
           echo "Cleaning previous Playwright report..."
-          rm -rf playwright-report/ report.html test-log.txt all-reports/staging || true
+          rm -rf playwright-report report.html all-reports || true
 
-
-      # Step 5: Run tests (continue even if some fail)
+      # Step 6: Run Playwright tests 
       - name: Run Playwright tests 
         id: run-tests
         continue-on-error: true
         run: npx playwright test --workers=1
 
-      - name: Debug Playwright Report folder
-        run: ls -la playwright-report
-
+      # Step 7: Generate standalone HTML report
       - name: Generate standalone HTML report
         run: cp playwright-report/index.html playwright-report/report.html || true
 
-      - name: Get current date with random suffix
-        id: date
-        run: echo "date=$(date '+%Y-%m-%d')-$(shuf -i 100-999 -n 1)" >> $GITHUB_OUTPUT
-
+      # Step 8: Extract test summary (✅ re-added)
       - name: Extract test summary
         id: summary
         continue-on-error: true
@@ -76,38 +68,33 @@ jobs:
           echo "failed=${FAILED}" >> $GITHUB_OUTPUT
           echo "skipped=${SKIPPED}" >> $GITHUB_OUTPUT
           echo "total=${TOTAL}" >> $GITHUB_OUTPUT
-      - name: Prepare Report Timestamp
-        run: echo "REPORT_TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")" >> $GITHUB_ENV
 
-      - name: Prepare unique report folder
+      # Step 9: Prepare unique report folder
+      - name: Get current date with random suffix
+        id: date
+        run: echo "date=$(date '+%Y-%m-%d')-$(shuf -i 100-999 -n 1)" >> $GITHUB_OUTPUT
+
+      - name: Prepare report folder
         run: |
           mkdir -p all-reports/${{ steps.date.outputs.date }}
           cp -r playwright-report/* all-reports/${{ steps.date.outputs.date }}/
-      
-      - name: Prepare Report Timestamp
-        run: echo "REPORT_TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")" >> $GITHUB_ENV
+          touch all-reports/.nojekyll  # Prevent GH Pages ignoring folders starting with "_"
 
-      - name: Move report to environment/date directory
-        run: |
-              mkdir -p all-reports/${{ env.ENVIRONMENT }}/${{ steps.date.outputs.date }}
-              cp -r playwright-report/* all-reports/${{ env.ENVIRONMENT }}/${{ steps.date.outputs.date }}/
-      
-      - name: Upload Environment Report as Artifact
-        uses: actions/upload-artifact@v4
+      # Step 10: Upload Pages Artifact (for GitHub Pages)
+      - name: Upload report as Pages Artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-              name: report-${{ env.ENVIRONMENT }}
-              path: all-reports/${{ env.ENVIRONMENT }}
+          path: all-reports
 
+      # Step 11: Send Email Report via SMTP (✅ summary included)
       - name: Send Email Report via SMTP
         if: always()
         run: node .github/workflows/sendreport.js
         env:
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
-          REPORT_TIMESTAMP: ${{ env.REPORT_TIMESTAMP }}
           REPORT_DATE: ${{ steps.date.outputs.date }}
           REPORT_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/all-reports/${{ steps.date.outputs.date }}/report.html
-          GITHUB_REF_NAME: ${{ github.ref_name }}
           TOTAL: ${{ steps.summary.outputs.total }}
           PASSED: ${{ steps.summary.outputs.passed }}
           FAILED: ${{ steps.summary.outputs.failed }}
@@ -116,3 +103,19 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
           REPO_OWNER: ${{ github.repository_owner }}
           REPO_NAME: ${{ github.event.repository.name }}
+
+  # ✅ Deployment Job
+  deploy:
+    needs: Staging-Tests
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4
