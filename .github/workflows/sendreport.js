@@ -23,10 +23,11 @@ const skippedTests = Number(process.env.SKIPPED || '0');
 const reportDate = process.env.REPORT_TIMESTAMP || new Date().toLocaleString();
 const repoOwner = process.env.REPO_OWNER || 'your-org';
 const repoName = process.env.REPO_NAME || 'your-repo';
-const reportUrl = process.env.REPORT_URL || `https://${repoOwner}.github.io/${repoName}/report.html`;
+const reportUrl = process.env.REPORT_URL || 
+  `https://${repoOwner}.github.io/${repoName}/all-reports/${process.env.REPORT_DATE || ''}/report.html`;
 
-// // 🖼️ Local SVG logo path
-// const logoPath = path.resolve('../../assets/logo.svg'); // relative to .github/workflows/
+// 🖼️ Local SVG logo path
+const logoPath = path.resolve('.github/workflows/logo.svg'); // adjust if logo in assets/
 
 // HTML summary
 const summaryTable = `
@@ -52,7 +53,7 @@ const summaryTable = `
 const mailOptions = {
   from: 'jay5.citrusbug@gmail.com',
   to: 'qa.citrusbug@gmail.com',
-  subject: "Playwright Test Report",
+  subject: `Playwright Test Report - ${process.env.GITHUB_REF_NAME} - ${process.env.REPORT_DATE || reportDate}`,
   text: `Hello William,
 
 The automated Playwright test suite has completed.
@@ -69,26 +70,28 @@ Best regards,
 Citrusbug QA Team`,
 
   html: `
+  <div style="text-align: left; margin-bottom: 20px;">
+    <img src="cid:logo_cid" alt="App Logo" width="120" style="display: inline-block; margin-bottom:10px;" />
+  </div>
  
-      <p>Hello <strong>Bluedrop Academy</strong>,</p>
-      <p>The automated <strong>Playwright test suite</strong> for the <strong>${repoName}</strong> has completed.</p>
-      ${summaryTable}
-      <div style="margin: 20px 0;">
-        <a href="${reportUrl}" target="_blank" style="background: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">📄 View Full Report</a>
-      </div>
-      <p>Best regards,<br/>Citrusbug QA Team</p>
-    </div>
+  <p>Hello <strong>William</strong>,</p>
+  <p>The automated <strong>Playwright test suite</strong> for branch <strong>${process.env.GITHUB_REF_NAME}</strong> has completed.</p>
+  <p><strong>Date:</strong> ${reportDate}</p>
+  ${summaryTable}
+  <div style="margin: 20px 0;">
+    <a href="${reportUrl}" target="_blank" style="background: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">📄 View Full Report</a>
+  </div>
+  <p>Best regards,<br/>Citrusbug QA Team</p>
   `,
 
-  // Attachments (embed logo)
-//   attachments: [
-//     {
-//       filename: 'logo.svg',
-//       path: logoPath, // Path to your local image
-//       cid: 'logo_cid' // same as in <img src="cid:logo_cid">
-//     }
-//   ]
- };
+  attachments: [
+    {
+      filename: 'logo.svg',
+      path: logoPath,
+      cid: 'logo_cid',
+    },
+  ],
+};
 
 // Send the email
 transporter.sendMail(mailOptions, (error, info) => {
@@ -96,6 +99,6 @@ transporter.sendMail(mailOptions, (error, info) => {
     console.error('❌ Error sending email:', error.toString());
     process.exit(1);
   } else {
-    console.log('📧 Email sent successfully:', info.response);
+    console.log(`📧 Email sent successfully at ${reportDate}: ${info.response}`);
   }
 });
