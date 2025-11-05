@@ -1,13 +1,15 @@
 name: Playwright Tests
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
 on:
   push:
     branches: [ main ]
+  # pull_request:
+  #   branches: [ main ]
 
 jobs:
   Staging-Tests:
@@ -15,42 +17,91 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout code
       - uses: actions/checkout@v4
 
+      # Step 2: Setup Node.js
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
 
+      # Step 3: Install dependencies
       - name: Install dependencies
         run: npm ci
 
-      - name: Install Playwright browsers
+      # Step 4: Install Playwright browsers
+      - name: Install Playwright Browsers
         run: npx playwright install --with-deps
+      
+      # Step 5: Clean previous test results
+      - name: Clean previous test results
+        run: |
+          echo "Cleaning previous Playwright report..."
+          rm -rf playwright-report/ report.html test-log.txt all-reports/staging || true
 
-      - name: Clean previous reports
-        run: rm -rf playwright-report/ all-reports/ || true
 
-      - name: Run Playwright tests
+      # Step 5: Run tests (continue even if some fail)
+      - name: Run Playwright tests 
         id: run-tests
         continue-on-error: true
         run: npx playwright test --workers=1
 
-      - name: Generate HTML report
-        run: |
-          cp playwright-report/index.html playwright-report/report.html
+      - name: Debug Playwright Report folder
+        run: ls -la playwright-report
+
+      - name: Generate standalone HTML report
+        run: cp playwright-report/index.html playwright-report/report.html || true
 
       - name: Get current date with random suffix
         id: date
         run: echo "date=$(date '+%Y-%m-%d')-$(shuf -i 100-999 -n 1)" >> $GITHUB_OUTPUT
 
-      - name: Prepare report folder
+      - name: Extract test summary
+        id: summary
+        continue-on-error: true
+        run: |
+          if [ ! -f "playwright-report/report.json" ]; then
+            echo "Report file not found!"
+            echo "total=0" >> $GITHUB_OUTPUT
+            echo "passed=0" >> $GITHUB_OUTPUT
+            echo "failed=0" >> $GITHUB_OUTPUT
+            echo "skipped=0" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          PASSED=$(jq '.stats.expected // 0' playwright-report/report.json)
+          FAILED=$(jq '.stats.unexpected // 0' playwright-report/report.json)
+          SKIPPED=$(jq '.stats.skipped // 0' playwright-report/report.json)
+          TOTAL=$(( PASSED + FAILED + SKIPPED ))
+          echo "passed=${PASSED}" >> $GITHUB_OUTPUT
+          echo "failed=${FAILED}" >> $GITHUB_OUTPUT
+          echo "skipped=${SKIPPED}" >> $GITHUB_OUTPUT
+          echo "total=${TOTAL}" >> $GITHUB_OUTPUT
+      - name: Prepare Report Timestamp
+        run: echo "REPORT_TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")" >> $GITHUB_ENV
+
+      - name: Prepare unique report folder
         run: |
           mkdir -p all-reports/${{ steps.date.outputs.date }}
           cp -r playwright-report/* all-reports/${{ steps.date.outputs.date }}/
-          touch all-reports/${{ steps.date.outputs.date }}/.nojekyll
+      
+      - name: Upload Playwright Report
+        uses: actions/upload-artifact@v4
+        if: ${{ always() }}
+        with:
+          name: playwright-report-${{ steps.date.outputs.date }}
+          path: all-reports/${{ steps.date.outputs.date }}/
+          retention-days: 30
+    
+      - name: Debug report paths
+        run: |
+          echo "Listing all-reports directory:"
+          ls -R all-reports
 
-      - name: Verify report files
-        run: ls -R all-reports/${{ steps.date.outputs.date }}
+      - name: Deploy Playwright report to GitHub Pages
+        run: |
+            mkdir -p all-reports/${{ steps.date.outputs.date }}
+            cp -r playwright-report/* all-reports/${{ steps.date.outputs.date }}/
+            touch all-reports/${{ steps.date.outputs.date }}/.nojekyll
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
@@ -64,5 +115,15 @@ jobs:
         env:
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          REPORT_TIMESTAMP: ${{ env.REPORT_TIMESTAMP }}
           REPORT_DATE: ${{ steps.date.outputs.date }}
           REPORT_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/all-reports/${{ steps.date.outputs.date }}/report.html
+          GITHUB_REF_NAME: ${{ github.ref_name }}
+          TOTAL: ${{ steps.summary.outputs.total }}
+          PASSED: ${{ steps.summary.outputs.passed }}
+          FAILED: ${{ steps.summary.outputs.failed }}
+          SKIPPED: ${{ steps.summary.outputs.skipped }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          REPO_OWNER: ${{ github.repository_owner }}
+          REPO_NAME: ${{ github.event.repository.name }}
