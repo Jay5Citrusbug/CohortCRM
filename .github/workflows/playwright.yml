@@ -96,9 +96,27 @@ jobs:
       url: ${{ steps.deploy.outputs.page_url }}
 
     steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages (deploys the artifact uploaded earlier)
         id: deploy
         uses: actions/deploy-pages@v4
+
+      - name: Debug deployed page_url
+        run: |
+          echo "deploy step outputs:"
+          echo "page_url = ${{ steps.deploy.outputs.page_url }}"
+        # always run this (no 'if') so we have logs to inspect
+
+      # Checkout repo before running sendreport.js so script exists
+      - name: Checkout repository (for sendreport.js)
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js (for sendreport.js)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install nodemailer (only what we need for sendreport.js)
+        run: npm install nodemailer
 
       # ✅ Now that the pages are deployed, send the email
       - name: Send Email Report via SMTP
