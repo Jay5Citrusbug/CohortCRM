@@ -1,69 +1,49 @@
-name: Playwright Tests - Unified (Test → Deploy → Email)
-
-# Run on pushes to main or on-demand
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+name: Playwright Tests
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
-jobs:
-  run-tests:
-    name: Run Playwright tests & prepare report
-    runs-on: ubuntu-latest
-    # always produce outputs even if tests fail
-    continue-on-error: true
+on:
+  push:
+    branches: [ main ]
 
-    outputs:
-      date: ${{ steps.date.outputs.date }}
-      total: ${{ steps.summary.outputs.total }}
-      passed: ${{ steps.summary.outputs.passed }}
-      failed: ${{ steps.summary.outputs.failed }}
-      skipped: ${{ steps.summary.outputs.skipped }}
+jobs:
+  Staging-Tests:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: lts/*
 
-      - name: Install dependencies (repo)
+      - name: Install dependencies
         run: npm ci
 
-      - name: Install Playwright browsers
+      - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
       - name: Clean previous test results
         run: |
           echo "Cleaning previous Playwright report..."
-          rm -rf playwright-report report.html reports || true
+          rm -rf playwright-report report.html all-reports || true
 
-      - name: Run Playwright tests (HTML + JSON reporters)
-        id: playwright-run
-        run: |
-          # generate both HTML and JSON report
-          npx playwright test --workers=1 --reporter=dot,html --reporter=json
+      - name: Run Playwright tests 
+        id: run-tests
         continue-on-error: true
+        run: npx playwright test --workers=1
 
-      - name: Generate standalone HTML report (copy index -> report.html)
-        run: |
-          if [ -f "playwright-report/index.html" ]; then
-            cp playwright-report/index.html playwright-report/report.html || true
-          fi
+      - name: Generate standalone HTML report
+        run: cp playwright-report/index.html playwright-report/report.html || true
 
       - name: Extract test summary
         id: summary
         continue-on-error: true
         run: |
-          # If Playwright didn't produce a report.json, set zeros
           if [ ! -f "playwright-report/report.json" ]; then
             echo "Report file not found!"
             echo "total=0" >> $GITHUB_OUTPUT
@@ -83,84 +63,55 @@ jobs:
 
       - name: Get current date with random suffix
         id: date
-        run: |
-          # example: 2025-11-06-648
-          echo "date=$(date '+%Y-%m-%d')-$(shuf -i 100-999 -n 1)" >> $GITHUB_OUTPUT
+        run: echo "date=$(date '+%Y-%m-%d')-$(shuf -i 100-999 -n 1)" >> $GITHUB_OUTPUT
 
-      - name: Prepare reports folder (flattened structure)
+      - name: Prepare report folder
         run: |
           mkdir -p reports/${{ steps.date.outputs.date }}
-          cp -r playwright-report/* reports/${{ steps.date.outputs.date }}/ || true
-          # Prevent Pages ignoring folders starting with "_"
+          cp -r playwright-report/* reports/${{ steps.date.outputs.date }}/
           touch reports/.nojekyll
 
-      - name: Show report tree (for debug)
-        run: |
-          echo "Reports created at: reports/${{ steps.date.outputs.date }}"
-          ls -la reports || true
-          ls -la reports/${{ steps.date.outputs.date }} || true
-
-      - name: Upload Pages artifact (reports/)
+      - name: Upload report as Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: reports
 
-  deploy-and-email:
-    name: Deploy Pages and send email
-    needs: run-tests
+
+
+    outputs:
+      date: ${{ steps.date.outputs.date }}
+      total: ${{ steps.summary.outputs.total }}
+      passed: ${{ steps.summary.outputs.passed }}
+      failed: ${{ steps.summary.outputs.failed }}
+      skipped: ${{ steps.summary.outputs.skipped }}
+
+  deploy:
+    needs: Staging-Tests
     runs-on: ubuntu-latest
     permissions:
       pages: write
       id-token: write
     environment:
       name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
 
     steps:
-      - name: Deploy to GitHub Pages (deploys the artifact uploaded earlier)
+      - name: Deploy to GitHub Pages
         id: deploy
         uses: actions/deploy-pages@v4
 
-      - name: Debug deployed page_url
-        run: |
-          echo "deploy step outputs:"
-          echo "page_url = ${{ steps.deploy.outputs.page_url }}"
-        # always run this (no 'if') so we have logs to inspect
-
-      # Checkout repo before running sendreport.js so script exists
-      - name: Checkout repository (for sendreport.js)
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js (for sendreport.js)
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Install nodemailer (only what we need for sendreport.js)
-        run: npm install nodemailer
-
-      - name: Debug full report URL (sanity)
-        run: |
-          BASE_URL="${{ steps.deploy.outputs.page_url }}"
-          # ensure no double-slash
-          if [[ "${BASE_URL: -1}" != "/" ]]; then BASE_URL="${BASE_URL}/"; fi
-          FULL_URL="${BASE_URL}${{ needs.run-tests.outputs.date }}/report.html"
-          echo "✔ Final Report URL to be sent in email: $FULL_URL"
-
+      # ✅ Now that the pages are deployed, send the email
       - name: Send Email Report via SMTP
         if: always()
         run: node .github/workflows/sendreport.js
         env:
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
-          # use date from the previous job
-          REPORT_DATE: ${{ needs.run-tests.outputs.date }}
-          # the Pages base URL returned by deploy step typically ends with "/"
-          REPORT_URL: ${{ steps.deploy.outputs.page_url }}${{ needs.run-tests.outputs.date }}/report.html
-          TOTAL: ${{ needs.run-tests.outputs.total }}
-          PASSED: ${{ needs.run-tests.outputs.passed }}
-          FAILED: ${{ needs.run-tests.outputs.failed }}
-          SKIPPED: ${{ needs.run-tests.outputs.skipped }}
-          GITHUB_RUN_ID: ${{ github.run_id }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
+          REPORT_DATE: ${{ needs.Staging-Tests.outputs.date }}
+          REPORT_URL: ${{ steps.deploy.outputs.page_url }}${{ needs.Staging-Tests.outputs.date }}/report.html
+          TOTAL: ${{ needs.Staging-Tests.outputs.total }}
+          PASSED: ${{ needs.Staging-Tests.outputs.passed }}
+          FAILED: ${{ needs.Staging-Tests.outputs.failed }}
+          SKIPPED: ${{ needs.Staging-Tests.outputs.skipped }}
           REPO_OWNER: ${{ github.repository_owner }}
           REPO_NAME: ${{ github.event.repository.name }}

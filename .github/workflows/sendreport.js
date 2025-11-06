@@ -24,7 +24,7 @@ const reportDate = process.env.REPORT_TIMESTAMP || new Date().toLocaleString();
 const repoOwner = process.env.REPO_OWNER || 'your-org';
 const repoName = process.env.REPO_NAME || 'your-repo';
 const reportUrl = process.env.REPORT_URL || 
-  `https://${repoOwner}.github.io/${repoName}/all-reports/${process.env.REPORT_DATE || ''}/report.html`;
+  `https://${repoOwner}.github.io/${repoName}${process.env.REPORT_DATE || ''}/report.html`;
 
 // 🖼️ Local PNG logo path
 const logoPath = path.resolve('.github/workflows/logo.png'); // adjust if logo in assets/
