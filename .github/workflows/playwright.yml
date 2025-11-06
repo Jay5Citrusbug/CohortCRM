@@ -67,14 +67,14 @@ jobs:
 
       - name: Prepare report folder
         run: |
-          mkdir -p all-reports/${{ steps.date.outputs.date }}
-          cp -r playwright-report/* all-reports/${{ steps.date.outputs.date }}/
-          touch all-reports/.nojekyll
+          mkdir -p reports/${{ steps.date.outputs.date }}
+          cp -r playwright-report/* reports/${{ steps.date.outputs.date }}/
+          touch reports/.nojekyll
 
       - name: Upload report as Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: all-reports
+          path: reports
 
     outputs:
       date: ${{ steps.date.outputs.date }}
@@ -106,7 +106,7 @@ jobs:
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
           REPORT_DATE: ${{ needs.Staging-Tests.outputs.date }}
-          REPORT_URL: ${{ steps.deploy.outputs.page_url }}/all-reports/${{ needs.Staging-Tests.outputs.date }}/report.html
+          REPORT_URL: ${{ steps.deploy.outputs.page_url }}${{ needs.Staging-Tests.outputs.date }}/report.html
           TOTAL: ${{ needs.Staging-Tests.outputs.total }}
           PASSED: ${{ needs.Staging-Tests.outputs.passed }}
           FAILED: ${{ needs.Staging-Tests.outputs.failed }}
