@@ -82,7 +82,7 @@ jobs:
       passed: ${{ steps.summary.outputs.passed }}
       failed: ${{ steps.summary.outputs.failed }}
       skipped: ${{ steps.summary.outputs.skipped }}
-
+      
   deploy:
     needs: Staging-Tests
     runs-on: ubuntu-latest
@@ -98,7 +98,10 @@ jobs:
         id: deploy
         uses: actions/deploy-pages@v4
 
-      # ✅ Now that the pages are deployed, send the email
+      # ✅ Add this
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Send Email Report via SMTP
         if: always()
         run: node .github/workflows/sendreport.js
