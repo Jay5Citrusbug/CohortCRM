@@ -15,39 +15,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout code
       - uses: actions/checkout@v4
 
-      # Step 2: Setup Node.js
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
 
-      # Step 3: Install dependencies
       - name: Install dependencies
         run: npm ci
 
-      # Step 4: Install Playwright browsers
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
-      
-      # Step 5: Clean previous test results
+
       - name: Clean previous test results
         run: |
           echo "Cleaning previous Playwright report..."
           rm -rf playwright-report report.html all-reports || true
 
-      # Step 6: Run Playwright tests 
       - name: Run Playwright tests 
         id: run-tests
         continue-on-error: true
         run: npx playwright test --workers=1
 
-      # Step 7: Generate standalone HTML report
       - name: Generate standalone HTML report
         run: cp playwright-report/index.html playwright-report/report.html || true
 
-      # Step 8: Extract test summary (✅ re-added)
       - name: Extract test summary
         id: summary
         continue-on-error: true
@@ -69,7 +61,6 @@ jobs:
           echo "skipped=${SKIPPED}" >> $GITHUB_OUTPUT
           echo "total=${TOTAL}" >> $GITHUB_OUTPUT
 
-      # Step 9: Prepare unique report folder
       - name: Get current date with random suffix
         id: date
         run: echo "date=$(date '+%Y-%m-%d')-$(shuf -i 100-999 -n 1)" >> $GITHUB_OUTPUT
@@ -78,15 +69,20 @@ jobs:
         run: |
           mkdir -p all-reports/${{ steps.date.outputs.date }}
           cp -r playwright-report/* all-reports/${{ steps.date.outputs.date }}/
-          touch all-reports/.nojekyll  # Prevent GH Pages ignoring folders starting with "_"
+          touch all-reports/.nojekyll
 
-      # Step 10: Upload Pages Artifact (for GitHub Pages)
       - name: Upload report as Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: all-reports
 
-  # ✅ Deployment Job
+    outputs:
+      date: ${{ steps.date.outputs.date }}
+      total: ${{ steps.summary.outputs.total }}
+      passed: ${{ steps.summary.outputs.passed }}
+      failed: ${{ steps.summary.outputs.failed }}
+      skipped: ${{ steps.summary.outputs.skipped }}
+
   deploy:
     needs: Staging-Tests
     runs-on: ubuntu-latest
