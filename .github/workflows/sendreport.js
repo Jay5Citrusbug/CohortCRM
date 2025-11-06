@@ -53,7 +53,7 @@ const summaryTable = `
 const mailOptions = {
   from: 'jay5.citrusbug@gmail.com',
   to: 'qa.citrusbug@gmail.com',
-  subject: `Playwright Test Report - ${process.env.GITHUB_REF_NAME} - ${process.env.REPORT_DATE || reportDate}`,
+  subject: `Playwright Test Report - ${process.env.REPORT_DATE || reportDate}`,
   text: `Hello William,
 
 The automated Playwright test suite has completed.
@@ -75,7 +75,7 @@ Citrusbug QA Team`,
   </div>
  
   <p>Hello <strong>William</strong>,</p>
-  <p>The automated <strong>Playwright test suite</strong>has completed.</p>
+  <p>The automated <strong>Playwright test suite </strong>has completed.</p>
   <p><strong>Date:</strong> ${reportDate}</p>
   ${summaryTable}
   <div style="margin: 20px 0;">
