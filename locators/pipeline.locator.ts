@@ -1,3 +1,7 @@
+import { T } from "@faker-js/faker/dist/airline-DF6RqYmq";
+import { checkPrime } from "crypto";
+import { NOTIMP } from "dns";
+
   export const PipelineLocator = {
   
     Searchbar: {
@@ -33,7 +37,7 @@
       name: '#invite-admin_grossLoanPounds',
     },
     Security: {
-      name: 'SecurityPlease select a',
+      name: '#invite-admin_proposedSecurity',
     },
     PricingPercentPerMonth: {
       name: '#invite-admin_pricingPercentPerMonth',
@@ -69,5 +73,42 @@
     PipelineTab: {
       name: 'PipelineUnderwritingLive',
     },
+  
+    checkbox_MCQ: {
+      role: 'checkbox', name: 'Filter by MCQ',
+    },
+    
+    LoanNameExpand: {
+      locator: '//table//tr[2]/td[1]/span',
+    },
 
-} as const;
+    potentialMCQMarked: {
+      locator: '.anticon.anticon-check > svg',
+    },
+  StatusFilter: {
+    role: 'button', name: 'filter',
+  },
+  newEnquiryStatus: {
+    role: 'menuitem', name: 'New Enquiry',
+  },
+  TermsAcceptedStatus: {
+    role: 'menuitem', name: 'Terms Accepted',
+  },
+  UnderwritingProcessStatus: {
+    role: 'menuitem', name: 'Underwriting Process',
+  },
+  NPW_STATUS: {
+    role: 'menuitem', name: 'NPW',
+  },
+
+  Reset: {
+    role: 'button', name: 'Reset',
+  },
+  OK_Button: {
+    role: 'button', name: 'OK',
+  },
+
+  NewEnquiryStatus_grid: {
+     name: 'New Enquiry',
+  },
+  } as const;

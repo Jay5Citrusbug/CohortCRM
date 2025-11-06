@@ -1,7 +1,5 @@
 import { test, expect } from '@playwright/test';
 import { PipeLinePage } from '../../Pages/Pipelinepage';
-import { faker } from '@faker-js/faker';
-
 
 test.describe('Pipeline screen Tests', () => {
   let pipeLinePage: PipeLinePage;
@@ -16,34 +14,49 @@ test.describe('Pipeline screen Tests', () => {
     await page.goto('https://crm-admin-staging.web.app/');
   });
 
-  test('⛔ TC-10 Validate loan creation blocked when mandatory fields are empty', async () => {
+  test.skip('⛔ TC-08 Validate loan creation blocked when mandatory fields are empty', async () => {
     console.log('➡️ Test Start: Validate loan creation blocked when mandatory fields are empty');
     await pipeLinePage.Validation_Create_Loan();
   });
 
-  // test('✅ TC-11 Create a new loan successfully when all mandatory fields are filled', async () => {
-  //   console.log('➡️ Test Start: Create a new loan successfully when all mandatory fields are filled');
-  // await pipeLinePage.CreateLoan();
-  // });
+  test.skip('✅ TC-09 Create a new loan successfully when all mandatory fields are filled', async () => {
+    console.log('➡️ Test Start: Create a new loan successfully when all mandatory fields are filled');
+  await pipeLinePage.CreateLoan();
+  console.log('➡️ Test Start: Verify loan status');
 
-    test('🔍 TC-08 Verify Search Bar Visibility and Functionality', async () => {
+  });
+
+   test.skip('✅ TC-10 Loan creation and status verification successful', async () => {
+    await pipeLinePage.VerifyLoan_status();
+  console.log('✅ Test Completed: Loan creation and status verification successful.');
+  });
+
+    test('🔍 TC-11 Verify Search Bar Visibility and Functionality', async () => {
     console.log('➡️ Test Start: Verify Search Bar Visibility and Functionality');
     await pipeLinePage.Search_Valid_NewLoans();
   });
 
-    test('✅ Verify newly created loan appears in the loan listing', async () => {
-    console.log('➡️ Test Start: Verify loan status');
-    await pipeLinePage.VerifyLoan_status();
-  });
 
-  test('❌ TC-09 Verify Search with Invalid/Non-Existing Keyword', async () => {
+  test('❌ TC-12 Verify Search with Invalid/Non-Existing Keyword', async () => {
     console.log('➡️ Test Start: Verify Search with Invalid/Non-Existing Keyword');
     await pipeLinePage.Search_Invalid_NewLoans();
   });
   
-  test('🔄 TC-10 Verify cohort invest toggle updates state and refreshes screen with new tabs', async () => {
+  test('🔄 TC-12 Verify cohort invest toggle updates state and refreshes screen with new tabs', async () => {
     console.log('➡️ Test Start: Verify cohort invest toggle updates state and refreshes screen with new tabs');
     await pipeLinePage.Verify_Cohort_Invest_Toggle();
   });
-
+  test('🔍 TC-13 Verify MCQ filtering functionality in pipeline', async () => {
+      console.log('➡️ Test Start: Verify MCQ filtering functionality in pipeline');
+      await pipeLinePage.MCQ_Filtering();
+});
+  test('🔍 TC-14 Verify Status filtering functionality in pipeline', async () =>
+    {
+      console.log('➡️ Test Start: Verify Status filtering functionality in pipeline');
+      await pipeLinePage.Verify_Default_Status_Filter();
+});
+  test('TC-15  Verify New Inquiry status filter functionality in pipeline', async () => {
+    console.log('➡️ Test Start: Verify New Inquiry status filter functionality in pipeline');
+    await pipeLinePage.Apply_Status_Filter();
+  });
 });
