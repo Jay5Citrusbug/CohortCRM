@@ -6,8 +6,11 @@ permissions:
   id-token: write
 
 on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 23 * * *'  # 
   push:
-    branches: [ main ]
+    branches: ['main']
 
 jobs:
   Staging-Tests:
@@ -35,7 +38,7 @@ jobs:
       - name: Run Playwright tests 
         id: run-tests
         continue-on-error: true
-        run: npx playwright test --workers=1
+        run: npx playwright test --project=chromium --workers=1
 
       - name: Generate standalone HTML report
         run: cp playwright-report/index.html playwright-report/report.html || true
@@ -133,3 +136,31 @@ jobs:
           SKIPPED: ${{ needs.Staging-Tests.outputs.skipped }}
           REPO_OWNER: ${{ github.repository_owner }}
           REPO_NAME: ${{ github.event.repository.name }}
+      
+      # ✅ Discord notification
+      - name: Send Discord notification
+        if: always()
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          REPORT_URL: ${{ steps.deploy.outputs.page_url }}${{ needs.Staging-Tests.outputs.date }}/report.html
+          TOTAL: ${{ needs.Staging-Tests.outputs.total }}
+          PASSED: ${{ needs.Staging-Tests.outputs.passed }}
+          FAILED: ${{ needs.Staging-Tests.outputs.failed }}
+          SKIPPED: ${{ needs.Staging-Tests.outputs.skipped }}
+        run: |
+          curl -H "Content-Type: application/json" \
+          -X POST \
+          -d "{
+            \"username\": \"Playwright Bot\",
+            \"embeds\": [{
+              \"title\": \"🎭 Cohort CRM - Playwright Test Results\",
+              \"description\": \"**Total:** ${TOTAL}\\n✅ Passed: ${PASSED}\\n❌ Failed: ${FAILED}\\n⚪ Skipped: ${SKIPPED}\",
+              \"color\": $(if [ ${FAILED} -gt 0 ]; then echo 15158332; else echo 3066993; fi),
+              \"fields\": [{
+                \"name\": \"📎 View Report\",
+                \"value\": \"${REPORT_URL}\"
+              }],
+              \"footer\": { \"text\": \"GitHub Action - ${GITHUB_WORKFLOW}\" }
+            }]
+          }" \
+          $DISCORD_WEBHOOK_URL

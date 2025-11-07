@@ -1,9 +1,8 @@
 // tests/login/login.spec.ts
 import { Page, test } from '@playwright/test';
 import { LoginPage } from '../../Pages/login.page';
-import { Messages } from '../../messages/message';
 
-test.describe('🔐 Login and Logout tests', () => {
+test.describe('Login and Logout tests', () => {
   let loginPage: LoginPage;
   let page: Page;
 

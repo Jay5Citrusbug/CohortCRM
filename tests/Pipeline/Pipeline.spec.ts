@@ -55,7 +55,7 @@ test.describe('Pipeline screen Tests', () => {
       console.log('➡️ Test Start: Verify Status filtering functionality in pipeline');
       await pipeLinePage.Verify_Default_Status_Filter();
 });
-  test('TC-15  Verify New Inquiry status filter functionality in pipeline', async () => {
+  test('✅ TC-15  Verify New Inquiry status filter functionality in pipeline', async () => {
     console.log('➡️ Test Start: Verify New Inquiry status filter functionality in pipeline');
     await pipeLinePage.Apply_Status_Filter();
   });

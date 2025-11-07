@@ -40,7 +40,7 @@ export default defineConfig({
       },
     },
     {
-      name: 'Authenticated Tests',
+      name: '',
       testIgnore: /.*Login\.spec\.ts/,
       use: {
         ...devices['Desktop Chrome'],
@@ -48,4 +48,5 @@ export default defineConfig({
       },
     },
   ],
+  
 });
