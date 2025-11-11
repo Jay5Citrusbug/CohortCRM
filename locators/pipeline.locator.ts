@@ -2,89 +2,89 @@ import { T } from "@faker-js/faker/dist/airline-DF6RqYmq";
 import { checkPrime } from "crypto";
 import { NOTIMP } from "dns";
 
-  export const PipelineLocator = {
-  
-    Searchbar: {
-      role: 'textbox',name: 'Search New Loans',
-    },
+export const PipelineLocator = {
 
-    NoDataText: {
-      locator: 'text=No data',
-    },
-    AddLoanButton: {
-      role: 'button',name: 'add icon',
-    },
+  Searchbar: {
+    role: 'textbox', name: 'Search New Loans',
+  },
 
-    AddLoanText: {
-      locator: 'text=Add New Loan',
-    },
-    SaveChangesButton: {
-      role: 'button',name: 'Save Changes',
-    },
-    DealName: {
-      name: 'dealName',
-    },
-    PostalcodeID: {
-      name: 'postCode',
-    },
-    ValuePounds: {
-      name: '#invite-admin_valuePounds',
-    },
-    Property: {
-      name: '#invite-admin_property',
-    },
-    GrossLoanPounds: {
-      name: '#invite-admin_grossLoanPounds',
-    },
-    Security: {
-      name: '#invite-admin_proposedSecurity',
-    },
-    PricingPercentPerMonth: {
-      name: '#invite-admin_pricingPercentPerMonth',
-    },
-    Sponsor: {
-      name: '#invite-admin_sponsor',
-    },
-    Contact: {
-      name: '#invite-admin_contact',
-    },
-    Company: {
-      name: '#invite-admin_company',
-    },
+  NoDataText: {
+    locator: 'text=No data',
+  },
+  AddLoanButton: {
+    role: 'button', name: 'add icon',
+  },
 
-    AssetType: {
-      name: '#invite-admin_assetType',
-    },
+  AddLoanText: {
+    locator: 'text=Add New Loan',
+  },
+  SaveChangesButton: {
+    role: 'button', name: 'Save Changes',
+  },
+  DealName: {
+    name: 'dealName',
+  },
+  PostalcodeID: {
+    name: 'postCode',
+  },
+  ValuePounds: {
+    name: '#invite-admin_valuePounds',
+  },
+  Property: {
+    name: '#invite-admin_property',
+  },
+  GrossLoanPounds: {
+    name: '#invite-admin_grossLoanPounds',
+  },
+  Security: {
+    name: '#invite-admin_proposedSecurity',
+  },
+  PricingPercentPerMonth: {
+    name: '#invite-admin_pricingPercentPerMonth',
+  },
+  Sponsor: {
+    name: '#invite-admin_sponsor',
+  },
+  Contact: {
+    name: '#invite-admin_contact',
+  },
+  Company: {
+    name: '#invite-admin_company',
+  },
 
-    NewEnquiry: {
-      name: 'New Enquiry',
-    },
+  AssetType: {
+    name: '#invite-admin_assetType',
+  },
 
-    NameLoanColumn: {
-      name: 'Name of loan',
-    },
+  NewEnquiry: {
+    name: 'New Enquiry',
+  },
 
-    CohortInvestToggle: {
-      name: 'switch',
-    },
-    InvvestorTab: {
-      name: 'InvestorContact UsProperties',
-    },
-    PipelineTab: {
-      name: 'PipelineUnderwritingLive',
-    },
-  
-    checkbox_MCQ: {
-      role: 'checkbox', name: 'Filter by MCQ',
-    },
-    
-    LoanNameExpand: {
-      locator: '//table//tr[2]/td[1]/span',
-    },
+  NameLoanColumn: {
+    name: 'Name of loan',
+  },
 
-    potentialMCQMarked: {
-      locator: '.anticon.anticon-check > svg',
-    },
+  CohortInvestToggle: {
+    name: 'switch',
+  },
+  InvvestorTab: {
+    name: 'InvestorContact UsProperties',
+  },
+  PipelineTab: {
+    name: 'PipelineUnderwritingLive',
+  },
+
+  checkbox_MCQ: {
+    role: 'checkbox', name: 'Filter by MCQ',
+  },
+
+  LoanNameExpand: {
+    locator: '//table//tr[2]/td[1]/span',
+  },
+
+  potentialMCQMarked: {
+    locator: '.anticon.anticon-check > svg',
+  },
   StatusFilter: {
     role: 'button', name: 'filter',
   },
@@ -109,6 +109,15 @@ import { NOTIMP } from "dns";
   },
 
   NewEnquiryStatus_grid: {
-     name: 'New Enquiry',
+    name: 'New Enquiry',
   },
-  } as const;
+
+  EyeIconButton: {
+    role: 'button', name: 'eye',
+  },
+
+  EditLoanButton: {
+    role: 'button', name: 'Edit Loan',
+  },
+
+} as const;
