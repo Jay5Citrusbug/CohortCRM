@@ -80,7 +80,6 @@ jobs:
           path: reports
 
 
-
     outputs:
       date: ${{ steps.date.outputs.date }}
       total: ${{ steps.summary.outputs.total }}
@@ -137,30 +136,30 @@ jobs:
           REPO_OWNER: ${{ github.repository_owner }}
           REPO_NAME: ${{ github.event.repository.name }}
       
-      # ✅ Discord notification
-      - name: Send Discord notification
-        if: always()
-        env:
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          REPORT_URL: ${{ steps.deploy.outputs.page_url }}${{ needs.Staging-Tests.outputs.date }}/report.html
-          TOTAL: ${{ needs.Staging-Tests.outputs.total }}
-          PASSED: ${{ needs.Staging-Tests.outputs.passed }}
-          FAILED: ${{ needs.Staging-Tests.outputs.failed }}
-          SKIPPED: ${{ needs.Staging-Tests.outputs.skipped }}
-        run: |
-          curl -H "Content-Type: application/json" \
-          -X POST \
-          -d "{
-            \"username\": \"Playwright Bot\",
-            \"embeds\": [{
-              \"title\": \"🎭 Cohort CRM - Playwright Test Results\",
-              \"description\": \"**Total:** ${TOTAL}\\n✅ Passed: ${PASSED}\\n❌ Failed: ${FAILED}\\n⚪ Skipped: ${SKIPPED}\",
-              \"color\": $(if [ ${FAILED} -gt 0 ]; then echo 15158332; else echo 3066993; fi),
-              \"fields\": [{
-                \"name\": \"📎 View Report\",
-                \"value\": \"${REPORT_URL}\"
-              }],
-              \"footer\": { \"text\": \"GitHub Action - ${GITHUB_WORKFLOW}\" }
-            }]
-          }" \
-          $DISCORD_WEBHOOK_URL
+      # # ✅ Discord notification
+      # - name: Send Discord notification
+      #   if: always()
+      #   env:
+      #     DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+      #     REPORT_URL: ${{ steps.deploy.outputs.page_url }}${{ needs.Staging-Tests.outputs.date }}/report.html
+      #     TOTAL: ${{ needs.Staging-Tests.outputs.total }}
+      #     PASSED: ${{ needs.Staging-Tests.outputs.passed }}
+      #     FAILED: ${{ needs.Staging-Tests.outputs.failed }}
+      #     SKIPPED: ${{ needs.Staging-Tests.outputs.skipped }}
+      #   run: |
+      #     curl -H "Content-Type: application/json" \
+      #     -X POST \
+      #     -d "{
+      #       \"username\": \"Playwright Bot\",
+      #       \"embeds\": [{
+      #         \"title\": \"🎭 Cohort CRM - Playwright Test Results\",
+      #         \"description\": \"**Total:** ${TOTAL}\\n✅ Passed: ${PASSED}\\n❌ Failed: ${FAILED}\\n⚪ Skipped: ${SKIPPED}\",
+      #         \"color\": $(if [ ${FAILED} -gt 0 ]; then echo 15158332; else echo 3066993; fi),
+      #         \"fields\": [{
+      #           \"name\": \"📎 View Report\",
+      #           \"value\": \"${REPORT_URL}\"
+      #         }],
+      #         \"footer\": { \"text\": \"GitHub Action - ${GITHUB_WORKFLOW}\" }
+      #       }]
+      #     }" \
+      #     $DISCORD_WEBHOOK_URL
