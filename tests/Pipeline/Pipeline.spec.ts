@@ -42,24 +42,24 @@ test.describe('Pipeline screen Tests', () => {
     await pipeLinePage.Search_Invalid_NewLoans();
   });
   
-  test('🔄 TC-12 Verify cohort invest toggle updates state and refreshes screen with new tabs', async () => {
+  test('🔄 TC-13 Verify cohort invest toggle updates state and refreshes screen with new tabs', async () => {
     console.log('➡️ Test Start: Verify cohort invest toggle updates state and refreshes screen with new tabs');
     await pipeLinePage.Verify_Cohort_Invest_Toggle();
   });
-  test('🔍 TC-13 Verify MCQ filtering functionality in pipeline', async () => {
+  test('🔍 TC-14 Verify MCQ filtering functionality in pipeline', async () => {
       console.log('➡️ Test Start: Verify MCQ filtering functionality in pipeline');
       await pipeLinePage.MCQ_Filtering();
 });
-  test('🔍 TC-14 Verify Status filtering functionality in pipeline', async () =>
+  test('🔍 TC-15 Verify Status filtering functionality in pipeline', async () =>
     {
       console.log('➡️ Test Start: Verify Status filtering functionality in pipeline');
       await pipeLinePage.Verify_Default_Status_Filter();
 });
-  test('✅ TC-15  Verify New Inquiry status filter functionality in pipeline', async () => {
+  test('✅ TC-16Verify New Inquiry status filter functionality in pipeline', async () => {
     console.log('➡️ Test Start: Verify New Inquiry status filter functionality in pipeline');
     await pipeLinePage.Apply_Status_Filter();
   });
-    test('✅ TC-16  Verify navigation to Loan Detail page from Loan Listing', async () => {
+    test('✅ TC-17  Verify navigation to Loan Detail page from Loan Listing', async () => {
     console.log('➡️ Test Start: Verify navigation to Loan Detail page from Loan Listing');
     await pipeLinePage.Loan_Listing();
   });

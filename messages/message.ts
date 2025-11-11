@@ -15,7 +15,10 @@ export const Messages = {
   // Alerts, validations, and info
   logoutSuccess: 'You have successfully logged out.',
   validationMessageLoan: 'Please enter your deal name!',
-
-
+  ContactFirstName: 'Please enter first name',
+  ContactLastName: 'Please enter last name',
+  ContactAdded: 'Contact added successfully.',
+  ContactDeleted: 'Contact marked as deleted.',
+  DELETE_CONTACT_CONFIRMATION: 'Are you sure you want to mark this contact as deleted?',
   },
 };
