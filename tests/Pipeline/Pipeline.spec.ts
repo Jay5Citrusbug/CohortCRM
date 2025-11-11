@@ -59,4 +59,8 @@ test.describe('Pipeline screen Tests', () => {
     console.log('➡️ Test Start: Verify New Inquiry status filter functionality in pipeline');
     await pipeLinePage.Apply_Status_Filter();
   });
+    test('✅ TC-16  Verify navigation to Loan Detail page from Loan Listing', async () => {
+    console.log('➡️ Test Start: Verify navigation to Loan Detail page from Loan Listing');
+    await pipeLinePage.Loan_Listing();
+  });
 });
