@@ -241,6 +241,54 @@ export class PipeLinePage {
 
   }
 
+async Edit_Loan_Discard() {
+  console.log('🔹 Verifying Edit Loan pop-up functionality...') 
+  await this.page.evaluate(() => {
+    const scrollable = document.querySelector('.ant-table-body');
+    if (scrollable) scrollable.scrollBy({ left: 1000, behavior: 'smooth' });
+  });
+ await this.page.getByRole(PipelineLocator.EditIconButton.role, { name: PipelineLocator.EditIconButton.name }).first().waitFor();
+  await this.page.getByRole(PipelineLocator.EditIconButton.role, { name: PipelineLocator.EditIconButton.name }).first().click();
+console.log('🖱️ Clicked the first Edit button.');
+const popupVisible = await this.page.getByText(PipelineLocator.NameEditName.name).isVisible();
+  if (popupVisible) {
+    await this.page.locator(PipelineLocator.DiscardButton.locator).click();
+    console.log('🗑️ Clicked on Discard button.');
+    await expect(this.page.getByRole(PipelineLocator.LogoImage.role, { name: PipelineLocator.LogoImage.name }).first()).toBeVisible();
+    console.log('✅ Logo is visible after closing the Edit Loan pop-up.');
+  } else {
+    console.error('❌ Edit Loan pop-up not found.');
+  }
+}
+
+async Edit_Loan_Update() {
+  console.log('🔹 Verifying Edit Loan pop-up functionality...'
+)
+  await this.page.evaluate(() => {
+    const scrollable = document.querySelector('.ant-table-body');
+    if (scrollable) scrollable.scrollBy({ left: 1000, behavior: 'smooth' });
+  });
+  await this.page.getByRole(PipelineLocator.EditIconButton.role, { name: PipelineLocator.EditIconButton.name }).first().waitFor();
+  await this.page.getByRole(PipelineLocator.EditIconButton.role, { name: PipelineLocator.EditIconButton.name }).first().click();
+  const popupVisible = await this.page.getByText(PipelineLocator.NameEditName.name).isVisible();
+  if (popupVisible) {
+      await this.page.getByRole('banner').filter({ hasText: 'Main Section' }).click();
+      console.log("main section open");
+        const dealNameInput = this.page.getByTestId('dealName');
+  await dealNameInput.click();
+  await dealNameInput.fill('Updated Deal Name1');
+  console.log('✏️ Deal name updated successfully.');
+  await this.page.getByRole('button', { name: 'Save Changes' }).click();
+  console.log('💾 Clicked on Save Changes button.');
+  await this.page.waitForTimeout(9000);
+await expect(
+  this.page.getByRole('cell', { name: 'Updated Deal Name1' })
+).toBeVisible({ timeout: 10000 }); 
+  } else {
+    console.error('❌ Edit Loan pop-up not found.');
+  }
+}
+
 async Loan_Listing() {
   console.log('🔹 Navigating to Loan Detail page from Loan Listing...');
   await this.page.evaluate(() => {

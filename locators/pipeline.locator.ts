@@ -119,5 +119,16 @@ export const PipelineLocator = {
   EditLoanButton: {
     role: 'button', name: 'Edit Loan',
   },
-
+  EditIconButton: {
+    role: 'button', name: 'edit',
+  },  
+  NameEditName: {
+    name: 'Edit Loan',
+  },
+   DiscardButton: {
+    locator: '[data-test-id="discard-btn"]',
+  },
+LogoImage: {
+    role: 'img', name: 'logo',
+  },
 } as const;
