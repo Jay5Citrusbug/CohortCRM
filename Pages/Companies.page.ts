@@ -60,8 +60,8 @@ export class CompaniesPage {
     // Edit Company
 
     await this.page.getByRole(CompaniesLocator.AddCompaniesTab.role, { name: CompaniesLocator.AddCompaniesTab.name }).click();
-
     await this.page.getByRole(CompaniesLocator.editIcon.role, { name: CompaniesLocator.editIcon.name }).first().click();
+    await this.page.getByTestId(CompaniesLocator.Name.testId).clear();
     await this.page.getByTestId(CompaniesLocator.Name.testId).fill(UpdatedCompanyName);
     await this.page.getByRole(CompaniesLocator.UpdateCompanybtn.role, { name: CompaniesLocator.AddCompanybtn.name }).click();
     await this.page.getByRole(CompaniesLocator.SearchCompanyInput.role, { name: CompaniesLocator.SearchCompanyInput.name }).fill(UpdatedCompanyName);
@@ -83,11 +83,11 @@ export class CompaniesPage {
       const scrollable = document.querySelector('.ant-table-body');
       if (scrollable) scrollable.scrollBy({ left: 1000, behavior: 'smooth' });
     });
+    await this.page.getByRole(CompaniesLocator.SearchCompanyInput.role, { name: CompaniesLocator.SearchCompanyInput.name }).fill(UpdatedCompanyName);
     await this.page.getByRole(CompaniesLocator.DeleteCompanybtn.role, { name: CompaniesLocator.DeleteCompanybtn.name }).first().click();
     await this.page.locator('div').filter({ hasText: Messages.Alerts.DELETE_COMPANY_CONFIRMATION }).nth(5).isVisible();
     await this.page.getByText(CompaniesLocator.Companydelete_header).isVisible();
     await this.page.locator(CompaniesLocator.DeleteCompanyYesBtn.locator).click();
-    await this.page.getByRole(CompaniesLocator.SearchCompanyInput.role, { name: CompaniesLocator.SearchCompanyInput.name }).fill(UpdatedCompanyName);
     expect(await this.page.getByRole(ContactLocator.editIcon.role, { name: ContactLocator.editIcon.name }).first().isDisabled());
     expect(await this.page.getByRole(ContactLocator.DeleteContactbtn.role, { name: ContactLocator.DeleteContactbtn.name }).first().isDisabled());
     await this.page.getByRole(CompaniesLocator.SearchCompanyInput.role, { name: CompaniesLocator.SearchCompanyInput.name }).clear();

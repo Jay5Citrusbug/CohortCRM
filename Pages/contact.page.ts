@@ -39,7 +39,7 @@ export class ContactPage {
     //Search Contact assetion pending as search feature is not working
     //await page.getByRole('textbox', { name: 'Search Contacts' }).fill('Test Rathod');
   }
-  async Edit_Contact() {
+  async   Edit_Contact() {
     // Edit Contact
     await this.page.getByRole(ContactLocator.AddContactsTab.role, { name: ContactLocator.AddContactsTab.name }).click();
 
