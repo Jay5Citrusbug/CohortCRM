@@ -20,5 +20,9 @@ export const Messages = {
   ContactAdded: 'Contact added successfully.',
   ContactDeleted: 'Contact marked as deleted.',
   DELETE_CONTACT_CONFIRMATION: 'Are you sure you want to mark this contact as deleted?',
+  DELETE_COMPANY_CONFIRMATION: 'Are you sure you want to mark this company as deleted?',
+  CompanyNameRequired: 'Please enter company name',
+  CompanyDeleted: 'Company marked as deleted.',
+
   },
 };

@@ -1,6 +1,4 @@
   import { test, expect, Page, BrowserContext } from '@playwright/test';
-  import { PipeLinePage } from '../../Pages/Pipelinepage';
-  import { faker } from '@faker-js/faker';
 import { ContactPage } from '../../Pages/contact.page';
 
 
