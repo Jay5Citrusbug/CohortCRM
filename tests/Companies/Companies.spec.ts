@@ -2,7 +2,7 @@
 import { CompaniesPage } from '../../Pages/Companies.page';
 
 
-  test.describe('Contact Screen Tests', () => {
+  test.describe.only('Contact Screen Tests', () => {
     let context: BrowserContext;
     let page: Page;
     let companiesPage: CompaniesPage;

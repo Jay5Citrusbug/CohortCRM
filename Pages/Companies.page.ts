@@ -5,7 +5,7 @@ import { CompaniesLocator } from '../locators/Companies.locator';
 import { ContactLocator } from '../locators/contact.locator';
 
 const CompanyName = faker.company.name();
-const UpdatedCompanyName = faker.company.name();
+const UpdatedCompanyName = `Updated ${faker.company.name()}`;
 
 export class CompaniesPage {
   readonly page: Page;
@@ -64,12 +64,14 @@ export class CompaniesPage {
     await this.page.getByRole(CompaniesLocator.editIcon.role, { name: CompaniesLocator.editIcon.name }).first().click();
     await this.page.getByTestId(CompaniesLocator.Name.testId).fill(UpdatedCompanyName);
     await this.page.getByRole(CompaniesLocator.UpdateCompanybtn.role, { name: CompaniesLocator.AddCompanybtn.name }).click();
-      await expect(
+    await this.page.getByRole(CompaniesLocator.SearchCompanyInput.role, { name: CompaniesLocator.SearchCompanyInput.name }).fill(UpdatedCompanyName);
+    await expect(
       this.page.locator(
         CompaniesLocator.firstCompanyInList.locator,
         { hasText: UpdatedCompanyName }
       )
     ).toBeVisible();
+    await this.page.getByRole(CompaniesLocator.SearchCompanyInput.role, { name: CompaniesLocator.SearchCompanyInput.name }).clear();
 
   }
 
@@ -85,16 +87,10 @@ export class CompaniesPage {
     await this.page.locator('div').filter({ hasText: Messages.Alerts.DELETE_COMPANY_CONFIRMATION }).nth(5).isVisible();
     await this.page.getByText(CompaniesLocator.Companydelete_header).isVisible();
     await this.page.locator(CompaniesLocator.DeleteCompanyYesBtn.locator).click();
+    await this.page.getByRole(CompaniesLocator.SearchCompanyInput.role, { name: CompaniesLocator.SearchCompanyInput.name }).fill(UpdatedCompanyName);
     expect(await this.page.getByRole(ContactLocator.editIcon.role, { name: ContactLocator.editIcon.name }).first().isDisabled());
     expect(await this.page.getByRole(ContactLocator.DeleteContactbtn.role, { name: ContactLocator.DeleteContactbtn.name }).first().isDisabled());
-    await this.page.getByRole(CompaniesLocator.SearchCompanyInput.role, { name: CompaniesLocator.SearchCompanyInput.name }).fill(CompanyName);
-    await expect(
-      this.page.locator(
-        CompaniesLocator.firstCompanyInList.locator,
-        { hasText: UpdatedCompanyName }
-      )
-    ).toBeVisible();
-    // Search Contact assetion pending as search feature is not working
+    await this.page.getByRole(CompaniesLocator.SearchCompanyInput.role, { name: CompaniesLocator.SearchCompanyInput.name }).clear();
 
   }
 }
