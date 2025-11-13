@@ -62,10 +62,11 @@ export class CompaniesPage {
     await this.page.getByRole(CompaniesLocator.AddCompaniesTab.role, { name: CompaniesLocator.AddCompaniesTab.name }).click();
     await this.page.getByRole(CompaniesLocator.editIcon.role, { name: CompaniesLocator.editIcon.name }).first().click();
     await this.page.getByTestId(CompaniesLocator.Name.testId).waitFor({ state: 'visible' });;
+    await this.page.waitForTimeout(5000)
     await this.page.getByTestId(CompaniesLocator.Name.testId).clear();
     await this.page.getByTestId(CompaniesLocator.Name.testId).fill(UpdatedCompanyName);
     await this.page.getByRole(CompaniesLocator.UpdateCompanybtn.role, { name: CompaniesLocator.AddCompanybtn.name }).click();
-    await this.page.waitForTimeout(3000)
+    await this.page.waitForTimeout(5000)
     await this.page.getByRole(CompaniesLocator.SearchCompanyInput.role, { name: CompaniesLocator.SearchCompanyInput.name }).fill(UpdatedCompanyName);
     // Wait until the first company name matches the updated name
     await expect(
