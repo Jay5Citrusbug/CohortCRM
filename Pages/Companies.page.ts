@@ -61,15 +61,16 @@ export class CompaniesPage {
 
     await this.page.getByRole(CompaniesLocator.AddCompaniesTab.role, { name: CompaniesLocator.AddCompaniesTab.name }).click();
     await this.page.getByRole(CompaniesLocator.editIcon.role, { name: CompaniesLocator.editIcon.name }).first().click();
-        await this.page.getByTestId(CompaniesLocator.Name.testId).isVisible();
-    await this.page.getByTestId(CompaniesLocator.Name.testId).clear({timeout:1000});
+    await this.page.getByTestId(CompaniesLocator.Name.testId).isVisible();
+    await this.page.getByTestId(CompaniesLocator.Name.testId).clear({ timeout: 1000 });
     await this.page.getByTestId(CompaniesLocator.Name.testId).fill(UpdatedCompanyName);
     await this.page.getByRole(CompaniesLocator.UpdateCompanybtn.role, { name: CompaniesLocator.AddCompanybtn.name }).click();
+    await this.page.waitForTimeout(3000)
     await this.page.getByRole(CompaniesLocator.SearchCompanyInput.role, { name: CompaniesLocator.SearchCompanyInput.name }).fill(UpdatedCompanyName);
     // Wait until the first company name matches the updated name
     await expect(
       this.page.locator(CompaniesLocator.firstCompanyInList.locator, { hasText: UpdatedCompanyName })
-    ).toBeVisible({ timeout: 5000 }); // waits up to 10s automatically for visibility
+    ).toBeVisible({ timeout: 5000 }); // waits up to 5s automatically for visibility
     await this.page.getByRole(CompaniesLocator.SearchCompanyInput.role, { name: CompaniesLocator.SearchCompanyInput.name }).clear();
 
   }
