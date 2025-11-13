@@ -61,8 +61,8 @@ export class CompaniesPage {
 
     await this.page.getByRole(CompaniesLocator.AddCompaniesTab.role, { name: CompaniesLocator.AddCompaniesTab.name }).click();
     await this.page.getByRole(CompaniesLocator.editIcon.role, { name: CompaniesLocator.editIcon.name }).first().click();
-    await this.page.getByTestId(CompaniesLocator.Name.testId).isVisible();
-    await this.page.getByTestId(CompaniesLocator.Name.testId).clear({ timeout: 1000 });
+    await this.page.getByTestId(CompaniesLocator.Name.testId).waitFor({ state: 'visible' });;
+    await this.page.getByTestId(CompaniesLocator.Name.testId).clear();
     await this.page.getByTestId(CompaniesLocator.Name.testId).fill(UpdatedCompanyName);
     await this.page.getByRole(CompaniesLocator.UpdateCompanybtn.role, { name: CompaniesLocator.AddCompanybtn.name }).click();
     await this.page.waitForTimeout(3000)
@@ -84,8 +84,8 @@ export class CompaniesPage {
       if (scrollable) scrollable.scrollBy({ left: 1000, behavior: 'smooth' });
     });
     await this.page.getByRole(CompaniesLocator.DeleteCompanybtn.role, { name: CompaniesLocator.DeleteCompanybtn.name }).first().click();
-    await this.page.locator('div').filter({ hasText: Messages.Alerts.DELETE_COMPANY_CONFIRMATION }).nth(5).isVisible();
-    await this.page.getByText(CompaniesLocator.Companydelete_header).isVisible();
+    await this.page.locator('div').filter({ hasText: Messages.Alerts.DELETE_COMPANY_CONFIRMATION }).nth(5).waitFor({ state: 'visible' });;
+    await this.page.getByText(CompaniesLocator.Companydelete_header).waitFor({ state: 'visible' });;
     await this.page.locator(CompaniesLocator.DeleteCompanyYesBtn.locator).click();
     expect(await this.page.getByRole(ContactLocator.editIcon.role, { name: ContactLocator.editIcon.name }).first().isDisabled());
     expect(await this.page.getByRole(ContactLocator.DeleteContactbtn.role, { name: ContactLocator.DeleteContactbtn.name }).first().isDisabled());
