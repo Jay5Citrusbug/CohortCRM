@@ -121,14 +121,54 @@ export const PipelineLocator = {
   },
   EditIconButton: {
     role: 'button', name: 'edit',
-  },  
+  },
   NameEditName: {
     name: 'Edit Loan',
   },
-   DiscardButton: {
+  DiscardButton: {
     locator: '[data-test-id="discard-btn"]',
   },
-LogoImage: {
+  LogoImage: {
     role: 'img', name: 'logo',
   },
+  MainSectionBanner: {
+    role: 'banner',
+    name: 'Main Section',
+  },
+  DealNameInput: {
+    locator: 'dealName',
+  },
+  DealNameCell: {
+    role: 'cell',
+  },
+  AddCommentButton: {
+  role: 'button',
+  name: 'Add',
+},
+
+CommentPopupHeading: {
+  role: 'heading',
+  name: 'Add New Comment',
+},
+
+CommentTypeDropdown: {
+  locator: '#comment-form_commentType',
+},
+
+CommentTypeOption: {
+  role: 'option',
+  name: 'KYC',
+},
+
+CommentTextEditor: {
+  locator: '.ql-editor',
+},
+
+CommentTextFallback: {
+  locator: '#comment-form_comment >> p',
+},
+
+SaveCommentButton: {
+  locator: 'save-btn',
+},
 } as const;

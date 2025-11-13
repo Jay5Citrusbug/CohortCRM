@@ -74,4 +74,8 @@ test.describe('Pipeline screen Tests', () => {
     console.log('➡️ Test Start: Verify navigation to Loan Detail page from Loan Listing');
     await pipeLinePage.Loan_Listing();
   });
+  test('✅ TC-20  Verify that user can successfully add a comment', async () => {
+    console.log('➡️ Test Start: Verify that user can successfully add a comment');
+    await pipeLinePage.Comment_Creation();
+  });
 });
