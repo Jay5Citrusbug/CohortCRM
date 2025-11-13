@@ -272,20 +272,21 @@ export class PipeLinePage {
     await this.page.getByRole(PipelineLocator.EditIconButton.role, { name: PipelineLocator.EditIconButton.name }).first().click();
     const popupVisible = await this.page.getByText(PipelineLocator.NameEditName.name).isVisible();
     if (popupVisible) {
-      await this.page.getByRole('banner').filter({ hasText: 'Main Section' }).click();
-      console.log("main section open");
-      const dealNameInput = this.page.getByTestId('dealName');
-      await dealNameInput.click();
-      await dealNameInput.fill('Updated Deal Name1');
-      console.log('✏️ Deal name updated successfully.');
-      await this.page.getByRole('button', { name: 'Save Changes' }).click();
+      await this.page.getByRole(PipelineLocator.MainSectionBanner.role).filter({ hasText: PipelineLocator.MainSectionBanner.name }).waitFor();
+
+      await this.page.getByRole(PipelineLocator.MainSectionBanner.role).filter({ hasText: PipelineLocator.MainSectionBanner.name }).click();
+
+      console.log("main section");
+      const randomDealName = faker.company.name();
+      await this.page.getByTestId(PipelineLocator.DealNameInput.locator).click();
+      await this.page.getByTestId(PipelineLocator.DealNameInput.locator).fill(randomDealName);
+      console.log('✏️ Deal name updated successfully.')
+      // await this.page.getByRole(PipelineLocator.SaveChangesButton.role, { name: PipelineLocator.SaveChangesButton.name }).waitFor();
+      await this.page.getByRole(PipelineLocator.SaveChangesButton.role, { name: PipelineLocator.SaveChangesButton.name }).
+        click();
       console.log('💾 Clicked on Save Changes button.');
       await this.page.waitForTimeout(9000);
-      await expect(
-        this.page.getByRole('cell', { name: 'Updated Deal Name1' })
-      ).toBeVisible({ timeout: 10000 });
-    } else {
-      console.error('❌ Edit Loan pop-up not found.');
+      await expect(this.page.getByRole(PipelineLocator.DealNameCell.role, { name: randomDealName })).toBeVisible({ timeout: 10000 });
     }
   }
 
@@ -300,4 +301,37 @@ export class PipeLinePage {
     await expect(this.page.getByRole(PipelineLocator.EditLoanButton.role, { name: PipelineLocator.EditLoanButton.name })).toBeVisible();
     console.log('✅ "Edit Loan" button is visible — verification successful.');
   }
+
+  async Comment_Creation() {
+    console.log('🔹 Starting comment creation process...');
+    // await this.Loan_Listing();
+  await this.page.getByRole(PipelineLocator.AddCommentButton.role, { name: PipelineLocator.AddCommentButton.name }).waitFor();
+  await this.page.getByRole(PipelineLocator.AddCommentButton.role, { name: PipelineLocator.AddCommentButton.name }).click();
+  console.log('🖱️ Clicked on "Add" button — opening comment pop-up.');
+
+  await expect(this.page.getByRole(PipelineLocator.CommentPopupHeading.role, { name: PipelineLocator.CommentPopupHeading.name }))
+    .toBeVisible({ timeout: 5000 });
+  console.log('✅ "Add New Comment" pop-up is visible.');
+  await this.page.locator(PipelineLocator.CommentTypeDropdown.locator).click();
+  console.log('📂 Opened comment type dropdown.');
+await this.page.waitForTimeout(1000);
+await this.page.getByText(PipelineLocator.CommentTypeOption.name).nth(1).click();
+console.log('✅ Selected comment type: KYC.');
+  const randomComment = `comment: ${faker.lorem.sentence()}`;
+  const editorLocator = this.page.locator(PipelineLocator.CommentTextEditor.locator);
+  const paragraphLocator = this.page.locator(PipelineLocator.CommentTextFallback.locator);
+  if (await editorLocator.isVisible()) {
+    await editorLocator.click();
+    await editorLocator.fill(randomComment);
+  } else {
+    await paragraphLocator.click();
+    await paragraphLocator.fill(randomComment);
+  }
+
+  console.log(`📝 Entered comment: "${randomComment}"`);
+  await this.page.getByTestId(PipelineLocator.SaveCommentButton.locator).click();
+  console.log('💾 Clicked on Save button to create comment.');
+ await expect(this.page.getByText(randomComment)).toBeVisible({ timeout: 10000 });
+console.log(`✅ Verified comment is visible in the list: "${randomComment}"`);
+}
 }
