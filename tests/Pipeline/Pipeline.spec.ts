@@ -31,7 +31,7 @@ test.describe('Pipeline screen Tests', () => {
     console.log('✅ Test Completed: Loan creation and status verification successful.');
   });
 
-    test('🔍 TC-11 Verify Search Bar Visibility and Functionality', async () => {
+  test('🔍 TC-11 Verify Search Bar Visibility and Functionality', async () => {
     console.log('➡️ Test Start: Verify Search Bar Visibility and Functionality');
     await pipeLinePage.Search_Valid_NewLoans();
   });
@@ -50,8 +50,7 @@ test.describe('Pipeline screen Tests', () => {
     console.log('➡️ Test Start: Verify MCQ filtering functionality in pipeline');
     await pipeLinePage.MCQ_Filtering();
   });
-  test('🔍 TC-15 Verify Status filtering functionality in pipeline', async () =>
-    {
+  test('🔍 TC-15 Verify Status filtering functionality in pipeline', async () => {
     console.log('➡️ Test Start: Verify Status filtering functionality in pipeline');
     await pipeLinePage.Verify_Default_Status_Filter();
   });
@@ -65,7 +64,7 @@ test.describe('Pipeline screen Tests', () => {
     await pipeLinePage.Edit_Loan_Discard();
   });
 
-    test('✅ TC-18  Verify Edit option opens Edit Loan pop-up screen and editing the name', async () => {
+  test('✅ TC-18  Verify Edit option opens Edit Loan pop-up screen and editing the name', async () => {
     console.log('➡️ Test Start: Verify Edit option opens Edit Loan pop-up screen and editing the name');
     await pipeLinePage.Edit_Loan_Update();
   });
@@ -78,4 +77,14 @@ test.describe('Pipeline screen Tests', () => {
     console.log('➡️ Test Start: Verify that user can successfully add a comment');
     await pipeLinePage.Comment_Creation();
   });
+
+  test.only('🔄 Verify loan status can be updated from New Inquiry to Underwriting Process', async () => {
+    // await pipeLinePage.Validation_Create_Loan();
+
+    // await pipeLinePage.CreateLoan();
+    console.log('➡️ Test Start: Verify loan status');
+    await pipeLinePage.changeStatusToUnderwriting()
+
+
+  })
 });

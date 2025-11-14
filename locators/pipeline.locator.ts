@@ -170,5 +170,13 @@ CommentTextFallback: {
 
 SaveCommentButton: {
   locator: 'save-btn',
+
 },
+  LoanType:{
+    locator:'#invite-admin_loanType',
+  },
+
+  propertyAddress:{
+    locator:'#invite-admin_property'
+  }
 } as const;

@@ -43,8 +43,8 @@ export class PipeLinePage {
     // Log for debugging/reference
     console.log(`✅ Verified created loan name: ${loanName}`);
     await this.page.getByRole(PipelineLocator.Searchbar.role, { name: PipelineLocator.Searchbar.name }).isVisible();
-    //await this.page.getByRole(PipelineLocator.Searchbar.role, { name: PipelineLocator.Searchbar.name }).fill(loanName);
-    await this.page.getByRole(PipelineLocator.Searchbar.role, { name: PipelineLocator.Searchbar.name }).fill("testing loan");
+    await this.page.getByRole(PipelineLocator.Searchbar.role, { name: PipelineLocator.Searchbar.name }).fill(loanName);
+    //await this.page.getByRole(PipelineLocator.Searchbar.role, { name: PipelineLocator.Searchbar.name }).fill("testing loan");
     await this.page.waitForTimeout(3000);
     await expect(
       this.page.locator('div').filter({ hasText: 'Name of loan#StatusLoan' }).nth(3)
@@ -79,9 +79,12 @@ export class PipeLinePage {
     //Fill mandatory fields (from provided raw steps)
     await this.page.getByTestId(PipelineLocator.DealName.name).first().fill(loanName);
     console.log('✅ Deal name filled successfully.');
+    await this.page.locator(PipelineLocator.LoanType.locator).first().click()
+    await this.page.getByText('Bridge').nth(1).click();
 
     await this.page.locator(PipelineLocator.AssetType.name).first().click();
     await this.page.locator(PipelineLocator.AssetType.name).first().fill(Loan_FakerData.randomAssetType);
+
     await this.page.waitForTimeout(1000);
     await this.page.keyboard.press('Enter');
     console.log('✅ Asset type selected.');
@@ -89,13 +92,13 @@ export class PipeLinePage {
     await this.page.getByTestId(PipelineLocator.PostalcodeID.name).first().click();
     await this.page.getByTestId(PipelineLocator.PostalcodeID.name).first().fill(Loan_FakerData.randomPostalCode);
     console.log('✅ Postal code entered.');
+    await this.page.locator(PipelineLocator.propertyAddress.locator).first().fill(faker.location.buildingNumber())
+    console.log('✅ Property added.');
 
     await this.page.locator(PipelineLocator.ValuePounds.name).first().click();
     await this.page.locator(PipelineLocator.ValuePounds.name).first().fill(Loan_FakerData.randomValue);
     console.log('✅ Property value entered.');
 
-    await this.page.locator(PipelineLocator.Property.name).first().click();
-    await this.page.waitForTimeout(4000);
     await this.page.keyboard.press('Enter');
     console.log('✅ Property selected.');
 
@@ -305,33 +308,65 @@ export class PipeLinePage {
   async Comment_Creation() {
     console.log('🔹 Starting comment creation process...');
     // await this.Loan_Listing();
-  await this.page.getByRole(PipelineLocator.AddCommentButton.role, { name: PipelineLocator.AddCommentButton.name }).waitFor();
-  await this.page.getByRole(PipelineLocator.AddCommentButton.role, { name: PipelineLocator.AddCommentButton.name }).click();
-  console.log('🖱️ Clicked on "Add" button — opening comment pop-up.');
+    await this.page.getByRole(PipelineLocator.AddCommentButton.role, { name: PipelineLocator.AddCommentButton.name }).waitFor();
+    await this.page.getByRole(PipelineLocator.AddCommentButton.role, { name: PipelineLocator.AddCommentButton.name }).click();
+    console.log('🖱️ Clicked on "Add" button — opening comment pop-up.');
 
-  await expect(this.page.getByRole(PipelineLocator.CommentPopupHeading.role, { name: PipelineLocator.CommentPopupHeading.name }))
-    .toBeVisible({ timeout: 5000 });
-  console.log('✅ "Add New Comment" pop-up is visible.');
-  await this.page.locator(PipelineLocator.CommentTypeDropdown.locator).click();
-  console.log('📂 Opened comment type dropdown.');
-await this.page.waitForTimeout(1000);
-await this.page.getByText(PipelineLocator.CommentTypeOption.name).nth(1).click();
-console.log('✅ Selected comment type: KYC.');
-  const randomComment = `comment: ${faker.lorem.sentence()}`;
-  const editorLocator = this.page.locator(PipelineLocator.CommentTextEditor.locator);
-  const paragraphLocator = this.page.locator(PipelineLocator.CommentTextFallback.locator);
-  if (await editorLocator.isVisible()) {
-    await editorLocator.click();
-    await editorLocator.fill(randomComment);
-  } else {
-    await paragraphLocator.click();
-    await paragraphLocator.fill(randomComment);
+    await expect(this.page.getByRole(PipelineLocator.CommentPopupHeading.role, { name: PipelineLocator.CommentPopupHeading.name }))
+      .toBeVisible({ timeout: 5000 });
+    console.log('✅ "Add New Comment" pop-up is visible.');
+    await this.page.locator(PipelineLocator.CommentTypeDropdown.locator).click();
+    console.log('📂 Opened comment type dropdown.');
+    await this.page.waitForTimeout(1000);
+    await this.page.getByText(PipelineLocator.CommentTypeOption.name).nth(1).click();
+    console.log('✅ Selected comment type: KYC.');
+    const randomComment = `comment: ${faker.lorem.sentence()}`;
+    const editorLocator = this.page.locator(PipelineLocator.CommentTextEditor.locator);
+    const paragraphLocator = this.page.locator(PipelineLocator.CommentTextFallback.locator);
+    if (await editorLocator.isVisible()) {
+      await editorLocator.click();
+      await editorLocator.fill(randomComment);
+    } else {
+      await paragraphLocator.click();
+      await paragraphLocator.fill(randomComment);
+    }
+
+    console.log(`📝 Entered comment: "${randomComment}"`);
+    await this.page.getByTestId(PipelineLocator.SaveCommentButton.locator).click();
+    console.log('💾 Clicked on Save button to create comment.');
+    await expect(this.page.getByText(randomComment)).toBeVisible({ timeout: 10000 });
+    console.log(`✅ Verified comment is visible in the list: "${randomComment}"`);
+  }
+  async changeStatusToUnderwriting() {
+
+    await
+      console.log(`Created loan: ${loanName}`);
+
+    // Log for debugging/reference
+    console.log(`✅ Verified created loan name: ${loanName}`);
+    await this.page.getByRole(PipelineLocator.Searchbar.role, { name: PipelineLocator.Searchbar.name }).isVisible();
+    await this.page.getByRole(PipelineLocator.Searchbar.role, { name: PipelineLocator.Searchbar.name }).fill(loanName);
+    await this.page.waitForTimeout(3000);
+    await expect(
+      this.page.locator('div').filter({ hasText: 'Name of loan#StatusLoan' }).nth(3)
+    ).toBeVisible({ timeout: 10000 });
+
+    await this.page.getByText('New Enquiry').first().isVisible();
+    await this.page.getByText('New Enquiry').first().click();
+    await this.page.getByText('Underwriting Process').click();
+    await this.page.getByText('Confirm Status Change').click();
+    await this.page.getByRole('button', { name: 'Confirm' }).click();
+    await this.page.getByRole('cell', { name: 'Underwriting Process' }).first().isVisible();
+    await this.page.getByRole('link', { name: 'Underwriting' }).click();
+    await
+      console.log(`Created loan: ${loanName}`);
+
+    // Log for debugging/reference
+    console.log(`✅ Verified created loan name: ${loanName}`);
+    await this.page.getByRole('textbox', { name: 'Search New Loans' }).fill(loanName);
+    await this.page.waitForTimeout(3000);
+
+
   }
 
-  console.log(`📝 Entered comment: "${randomComment}"`);
-  await this.page.getByTestId(PipelineLocator.SaveCommentButton.locator).click();
-  console.log('💾 Clicked on Save button to create comment.');
- await expect(this.page.getByText(randomComment)).toBeVisible({ timeout: 10000 });
-console.log(`✅ Verified comment is visible in the list: "${randomComment}"`);
-}
 }
