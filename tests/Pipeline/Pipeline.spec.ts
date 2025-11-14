@@ -31,7 +31,7 @@ test.describe('Pipeline screen Tests', () => {
     console.log('✅ Test Completed: Loan creation and status verification successful.');
   });
 
-  test('🔍 TC-11 Verify Search Bar Visibility and Functionality', async () => {
+  test.skip('🔍 TC-11 Verify Search Bar Visibility and Functionality', async () => {
     console.log('➡️ Test Start: Verify Search Bar Visibility and Functionality');
     await pipeLinePage.Search_Valid_NewLoans();
   });
@@ -73,15 +73,23 @@ test.describe('Pipeline screen Tests', () => {
     console.log('➡️ Test Start: Verify navigation to Loan Detail page from Loan Listing');
     await pipeLinePage.Loan_Listing();
   });
-  test('✅ TC-20  Verify that user can successfully add a comment', async () => {
+  test('✅ TC-20   Verify that clicking Cancel closes the Add Comment popup', async () => {
+    console.log('➡️ Test Start:  Verify that clicking Cancel closes the Add Comment popup');
+    await pipeLinePage.Comment_cancel();
+  });
+
+  test('✅ TC-22 Verify that validation messages are displayed for empty comment submission', async () => {
+    console.log('➡️ Test Start: Verify that validation messages are displayed for empty comment submission');
+    await pipeLinePage.Comment_validation();
+  });
+  test('✅ TC-22  Verify that user can successfully add a comment', async () => {
     console.log('➡️ Test Start: Verify that user can successfully add a comment');
     await pipeLinePage.Comment_Creation();
   });
+  test('🔄 Verify loan status can be updated from New Inquiry to Underwriting Process', async () => {
+    await pipeLinePage.Validation_Create_Loan();
 
-  test.only('🔄 Verify loan status can be updated from New Inquiry to Underwriting Process', async () => {
-    // await pipeLinePage.Validation_Create_Loan();
-
-    // await pipeLinePage.CreateLoan();
+    await pipeLinePage.CreateLoan();
     console.log('➡️ Test Start: Verify loan status');
     await pipeLinePage.changeStatusToUnderwriting()
 

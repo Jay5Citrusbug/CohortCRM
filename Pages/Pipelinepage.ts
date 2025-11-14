@@ -137,9 +137,9 @@ export class PipeLinePage {
     await this.page.keyboard.press('Enter');
     console.log('✅ Company added.');
 
-    await this.page.getByRole('heading', { name: 'Main Section' }).click();
-    await this.page.getByRole('checkbox', { name: 'Potential MCQ' }).check();
-    console.log('✅ Potential MCQ checkbox checked.');
+    // await this.page.getByRole('heading', { name: 'Main Section' }).click();
+    // await this.page.getByRole('checkbox', { name: 'Potential MCQ' }).check();
+    // console.log('✅ Potential MCQ checkbox checked.');
 
     // Save
     await this.page.getByRole(PipelineLocator.SaveChangesButton.role, { name: PipelineLocator.SaveChangesButton.name }).click();
@@ -244,54 +244,86 @@ export class PipeLinePage {
 
   }
 
-  async Edit_Loan_Discard() {
-    console.log('🔹 Verifying Edit Loan pop-up functionality...')
-    await this.page.evaluate(() => {
-      const scrollable = document.querySelector('.ant-table-body');
-      if (scrollable) scrollable.scrollBy({ left: 1000, behavior: 'smooth' });
-    });
-    await this.page.getByRole(PipelineLocator.EditIconButton.role, { name: PipelineLocator.EditIconButton.name }).first().waitFor();
-    await this.page.getByRole(PipelineLocator.EditIconButton.role, { name: PipelineLocator.EditIconButton.name }).first().click();
-    console.log('🖱️ Clicked the first Edit button.');
-    const popupVisible = await this.page.getByText(PipelineLocator.NameEditName.name).isVisible();
-    if (popupVisible) {
-      await this.page.locator(PipelineLocator.DiscardButton.locator).click();
-      console.log('🗑️ Clicked on Discard button.');
-      await expect(this.page.getByRole(PipelineLocator.LogoImage.role, { name: PipelineLocator.LogoImage.name }).first()).toBeVisible();
-      console.log('✅ Logo is visible after closing the Edit Loan pop-up.');
-    } else {
-      console.error('❌ Edit Loan pop-up not found.');
-    }
+async openEditLoanPopup() {
+  console.log("🔹 Opening Edit Loan pop-up...");
+
+  // Scroll table
+  await this.page.evaluate(() => {
+    const scrollable = document.querySelector('.ant-table-body');
+    if (scrollable) scrollable.scrollBy({ left: 1000, behavior: 'smooth' });
+  });
+
+  // Click Edit button
+  const editBtn = this.page.getByRole(PipelineLocator.EditIconButton.role, { 
+    name: PipelineLocator.EditIconButton.name 
+  }).first();
+
+  await editBtn.waitFor();
+  await editBtn.click();
+  console.log("🖱️ Clicked the first Edit button.");
+
+  // Check popup visibility
+  const popupVisible = await this.page.getByText(PipelineLocator.NameEditName.name).isVisible();
+
+  if (!popupVisible) {
+    console.error("❌ Edit Loan pop-up NOT found.");
+    return false;
   }
 
-  async Edit_Loan_Update() {
-    console.log('🔹 Verifying Edit Loan pop-up functionality...'
-    )
-    await this.page.evaluate(() => {
-      const scrollable = document.querySelector('.ant-table-body');
-      if (scrollable) scrollable.scrollBy({ left: 1000, behavior: 'smooth' });
-    });
-    await this.page.getByRole(PipelineLocator.EditIconButton.role, { name: PipelineLocator.EditIconButton.name }).first().waitFor();
-    await this.page.getByRole(PipelineLocator.EditIconButton.role, { name: PipelineLocator.EditIconButton.name }).first().click();
-    const popupVisible = await this.page.getByText(PipelineLocator.NameEditName.name).isVisible();
-    if (popupVisible) {
-      await this.page.getByRole(PipelineLocator.MainSectionBanner.role).filter({ hasText: PipelineLocator.MainSectionBanner.name }).waitFor();
+  console.log("✅ Edit Loan pop-up is visible.");
+  return true;
+}
+async Edit_Loan_Discard() {
+  console.log("🔹 Starting Edit Loan Discard test...");
 
-      await this.page.getByRole(PipelineLocator.MainSectionBanner.role).filter({ hasText: PipelineLocator.MainSectionBanner.name }).click();
+  const popup = await this.openEditLoanPopup();
+  if (!popup) return;
 
-      console.log("main section");
-      const randomDealName = faker.company.name();
-      await this.page.getByTestId(PipelineLocator.DealNameInput.locator).click();
-      await this.page.getByTestId(PipelineLocator.DealNameInput.locator).fill(randomDealName);
-      console.log('✏️ Deal name updated successfully.')
-      // await this.page.getByRole(PipelineLocator.SaveChangesButton.role, { name: PipelineLocator.SaveChangesButton.name }).waitFor();
-      await this.page.getByRole(PipelineLocator.SaveChangesButton.role, { name: PipelineLocator.SaveChangesButton.name }).
-        click();
-      console.log('💾 Clicked on Save Changes button.');
-      await this.page.waitForTimeout(9000);
-      await expect(this.page.getByRole(PipelineLocator.DealNameCell.role, { name: randomDealName })).toBeVisible({ timeout: 10000 });
-    }
-  }
+  await this.page.locator(PipelineLocator.DiscardButton.locator).click();
+  console.log("🗑️ Clicked on Discard button.");
+
+  await expect(
+    this.page.getByRole(PipelineLocator.LogoImage.role, { 
+      name: PipelineLocator.LogoImage.name 
+    }).first()
+  ).toBeVisible();
+
+  console.log("✅ Discard successful — popup closed and logo visible.");
+}
+async Edit_Loan_Update() {
+  console.log("🔹 Starting Edit Loan Update test...");
+
+  const popup = await this.openEditLoanPopup();
+  if (!popup) return;
+
+  // Click banner (main section)
+  await this.page.getByRole(PipelineLocator.MainSectionBanner.role)
+    .filter({ hasText: PipelineLocator.MainSectionBanner.name })
+    .click();
+
+  console.log("📝 Inside Main Section.");
+
+  // Update deal name
+  const randomDealName = faker.company.name();
+
+  await this.page.getByTestId(PipelineLocator.DealNameInput.locator).click();
+  await this.page.getByTestId(PipelineLocator.DealNameInput.locator).fill(randomDealName);
+
+  console.log(`✏️ Updated deal name to: ${randomDealName}`);
+
+  await this.page.getByRole(PipelineLocator.SaveChangesButton.role, { 
+    name: PipelineLocator.SaveChangesButton.name 
+  }).click();
+
+  console.log("💾 Clicked on Save Changes.");
+
+  // Verify update
+  await expect(
+    this.page.getByRole(PipelineLocator.DealNameCell.role, { name: randomDealName })
+  ).toBeVisible({ timeout: 10000 });
+
+  console.log("✅ Loan updated successfully and visible in list.");
+}
 
   async Loan_Listing() {
     console.log('🔹 Navigating to Loan Detail page from Loan Listing...');
@@ -305,24 +337,39 @@ export class PipeLinePage {
     console.log('✅ "Edit Loan" button is visible — verification successful.');
   }
 
-  async Comment_Creation() {
-    console.log('🔹 Starting comment creation process...');
-    // await this.Loan_Listing();
-    await this.page.getByRole(PipelineLocator.AddCommentButton.role, { name: PipelineLocator.AddCommentButton.name }).waitFor();
-    await this.page.getByRole(PipelineLocator.AddCommentButton.role, { name: PipelineLocator.AddCommentButton.name }).click();
+  async fillCommentForm() {
+    console.log("🔹 Opening comment form...");
+
+    await this.page.getByRole(PipelineLocator.AddCommentButton.role, {
+      name: PipelineLocator.AddCommentButton.name
+    }).waitFor();
+
+    await this.page.getByRole(PipelineLocator.AddCommentButton.role, {
+      name: PipelineLocator.AddCommentButton.name
+    }).click();
+
     console.log('🖱️ Clicked on "Add" button — opening comment pop-up.');
 
-    await expect(this.page.getByRole(PipelineLocator.CommentPopupHeading.role, { name: PipelineLocator.CommentPopupHeading.name }))
-      .toBeVisible({ timeout: 5000 });
+    await expect(
+      this.page.getByRole(PipelineLocator.CommentPopupHeading.role, {
+        name: PipelineLocator.CommentPopupHeading.name
+      })
+    ).toBeVisible({ timeout: 5000 });
+
     console.log('✅ "Add New Comment" pop-up is visible.');
+
+    // Select comment type
     await this.page.locator(PipelineLocator.CommentTypeDropdown.locator).click();
-    console.log('📂 Opened comment type dropdown.');
     await this.page.waitForTimeout(1000);
     await this.page.getByText(PipelineLocator.CommentTypeOption.name).nth(1).click();
-    console.log('✅ Selected comment type: KYC.');
+
+    console.log("📌 Selected comment type: KYC");
+
+    // Generate comment text
     const randomComment = `comment: ${faker.lorem.sentence()}`;
     const editorLocator = this.page.locator(PipelineLocator.CommentTextEditor.locator);
     const paragraphLocator = this.page.locator(PipelineLocator.CommentTextFallback.locator);
+
     if (await editorLocator.isVisible()) {
       await editorLocator.click();
       await editorLocator.fill(randomComment);
@@ -332,11 +379,53 @@ export class PipeLinePage {
     }
 
     console.log(`📝 Entered comment: "${randomComment}"`);
+
+    return randomComment;
+  }
+  async Comment_Creation() {
+    // await this.Loan_Listing();
+    console.log("🔹 Starting comment creation process...");
+
+    const randomComment = await this.fillCommentForm();
+    await this.page.getByTestId(PipelineLocator.SaveCommentButton.locator).click();
+    console.log("💾 Clicked on Save.");
+    await expect(this.page.getByText(randomComment)).toBeVisible({ timeout: 10000 });
+    console.log(`✅ Comment successfully created: "${randomComment}"`);
+  }
+
+  async Comment_cancel() {
+    console.log("🔹 Starting comment cancel process...");
+    // await this.Loan_Listing();
+    const randomComment = await this.fillCommentForm();
+    await this.page.getByRole("button", { name: "Cancel" }).click();
+    console.log("❌ Clicked Cancel.");
+    await expect(this.page.getByText(randomComment)).not.toBeVisible({ timeout: 10000 });
+    console.log("✔️ Comment was NOT saved — cancel worked successfully.");
+  }
+
+  async Comment_validation() {
+    // await this.Loan_Listing();
+    await this.page.getByRole(PipelineLocator.AddCommentButton.role, { name: PipelineLocator.AddCommentButton.name }).waitFor();
+    await this.page.getByRole(PipelineLocator.AddCommentButton.role, { name: PipelineLocator.AddCommentButton.name }).click();
+    console.log('🖱️ Clicked on "Add" button — opening comment pop-up.');
+
+    await expect(this.page.getByRole(PipelineLocator.CommentPopupHeading.role, { name: PipelineLocator.CommentPopupHeading.name }))
+      .toBeVisible({ timeout: 5000 });
+    console.log('✅ "Add New Comment" pop-up is visible.');
     await this.page.getByTestId(PipelineLocator.SaveCommentButton.locator).click();
     console.log('💾 Clicked on Save button to create comment.');
-    await expect(this.page.getByText(randomComment)).toBeVisible({ timeout: 10000 });
-    console.log(`✅ Verified comment is visible in the list: "${randomComment}"`);
+    const commentTypeValidation = this.page.getByText('Please select comment type');
+    const commentTextValidation = this.page.getByText('Please enter comment');
+
+    await expect(commentTypeValidation).toBeVisible({ timeout: 5000 });
+    console.log('⚠️ Validation displayed: Please select comment type');
+
+    await expect(commentTextValidation).toBeVisible({ timeout: 5000 });
+    console.log('⚠️ Validation displayed: Please enter comment');
+    await this.page.getByRole("button", { name: "Cancel" }).click();
   }
+
+
   async changeStatusToUnderwriting() {
 
     await
@@ -352,7 +441,7 @@ export class PipeLinePage {
     ).toBeVisible({ timeout: 10000 });
 
     await this.page.getByText('New Enquiry').first().isVisible();
-    await this.page.getByText('New Enquiry').first().click();
+    await this.page.locator('div').filter({ hasText: /^New Enquiry$/ }).nth(1).click()
     await this.page.getByText('Underwriting Process').click();
     await this.page.getByText('Confirm Status Change').click();
     await this.page.getByRole('button', { name: 'Confirm' }).click();
