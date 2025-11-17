@@ -441,7 +441,7 @@ async Edit_Loan_Update() {
     ).toBeVisible({ timeout: 10000 });
 
     await this.page.getByText('New Enquiry').first().isVisible();
-    await this.page.locator('div').filter({ hasText: /^New Enquiry$/ }).nth(1).click()
+  await this.page.locator("//html/body/div/div/div/div/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[3]/div/div/span/span[2]").click();
     await this.page.getByText('Underwriting Process').click();
     await this.page.getByText('Confirm Status Change').click();
     await this.page.getByRole('button', { name: 'Confirm' }).click();
@@ -457,5 +457,15 @@ async Edit_Loan_Update() {
 
 
   }
+
+  async StatusNPW_cancel() {
+    console.log('🔹 Starting Status NPW cancel process...')
+    // await page.locator('div').filter({ hasText: /^New Enquiry$/ }).nth(1).click();
+    // await page.getByRole('cell', { name: 'Underwriting Process' }).first().click();
+    // await page.getByRole('banner').click();
+    // await page.getByRole('cell', { name: 'Underwriting Process' }).nth(1).click();
+    // await page.locator('div').filter({ hasText: 'Current pipelineSum (£)£283,' }).nth(1).click();
+    
+  };
 
 }

@@ -68,6 +68,15 @@ test.describe('Pipeline screen Tests', () => {
     console.log('➡️ Test Start: Verify Edit option opens Edit Loan pop-up screen and editing the name');
     await pipeLinePage.Edit_Loan_Update();
   });
+  test('🔄 Verify loan status can be updated from New Inquiry to Underwriting Process', async () => {
+    await pipeLinePage.Validation_Create_Loan();
+
+    await pipeLinePage.CreateLoan();
+    console.log('➡️ Test Start: Verify loan status');
+    await pipeLinePage.changeStatusToUnderwriting()
+
+
+  })
 
   test('✅ TC-19  Verify navigation to Loan Detail page from Loan Listing', async () => {
     console.log('➡️ Test Start: Verify navigation to Loan Detail page from Loan Listing');
@@ -82,17 +91,13 @@ test.describe('Pipeline screen Tests', () => {
     console.log('➡️ Test Start: Verify that validation messages are displayed for empty comment submission');
     await pipeLinePage.Comment_validation();
   });
-  test('✅ TC-22  Verify that user can successfully add a comment', async () => {
+  test('✅ TC-23  Verify that user can successfully add a comment', async () => {
     console.log('➡️ Test Start: Verify that user can successfully add a comment');
     await pipeLinePage.Comment_Creation();
   });
-  test('🔄 Verify loan status can be updated from New Inquiry to Underwriting Process', async () => {
-    await pipeLinePage.Validation_Create_Loan();
-
-    await pipeLinePage.CreateLoan();
-    console.log('➡️ Test Start: Verify loan status');
-    await pipeLinePage.changeStatusToUnderwriting()
-
-
-  })
+  
+  //  test.skip('✅ TC-24  Verify Cancel Action on Status Change Popup', async () => {
+  //   console.log('➡️ Test Start: Verify Cancel Action on Status Change Popup');
+  //   await pipeLinePage.StatusNPW_cancel();
+  // });
 });
