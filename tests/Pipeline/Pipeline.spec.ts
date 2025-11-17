@@ -79,9 +79,9 @@ test.describe('Pipeline screen Tests', () => {
   });
 
   test.only('🔄 Verify loan status can be updated from New Inquiry to Underwriting Process', async () => {
-    // await pipeLinePage.Validation_Create_Loan();
+    await pipeLinePage.Validation_Create_Loan();
 
-    // await pipeLinePage.CreateLoan();
+    await pipeLinePage.CreateLoan();
     console.log('➡️ Test Start: Verify loan status');
     await pipeLinePage.changeStatusToUnderwriting()
 

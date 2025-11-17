@@ -352,7 +352,7 @@ export class PipeLinePage {
     ).toBeVisible({ timeout: 10000 });
 
     await this.page.getByText('New Enquiry').first().isVisible();
-    await this.page.getByText('New Enquiry').first().click();
+    await this.page.locator("//html/body/div/div/div/div/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[3]/div/div/span/span[2]").click();
     await this.page.getByText('Underwriting Process').click();
     await this.page.getByText('Confirm Status Change').click();
     await this.page.getByRole('button', { name: 'Confirm' }).click();
