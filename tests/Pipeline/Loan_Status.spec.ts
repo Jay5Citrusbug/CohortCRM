@@ -36,6 +36,10 @@ test.describe('Pipeline screen Tests', () => {
     console.log('➡️ Test Start: Verify New Inquiry status filter functionality in pipeline');
     await loanStatusPage.Apply_Status_Filter();
   });
+     test('✅ TC-24  Verify Cancel Action on Status Change Popup', async () => {
+    console.log('➡️ Test Start: Verify Cancel Action on Status Change Popup');
+    await loanStatusPage.StatusNPW_cancel();
+   })
 
   test('🔄 Verify loan status can be updated from New Inquiry to Underwriting Process', async () => {
     await pipeLinePage.Validation_Create_Loan();
@@ -44,7 +48,6 @@ test.describe('Pipeline screen Tests', () => {
     await loanStatusPage.changeStatusToUnderwriting()
 
   })
-  //  test.skip('✅ TC-24  Verify Cancel Action on Status Change Popup', async () => {
-  //   console.log('➡️ Test Start: Verify Cancel Action on Status Change Popup');
-  //   await pipeLinePage.StatusNPW_cancel();
-   });
+
+
+  });

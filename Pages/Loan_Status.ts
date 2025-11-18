@@ -49,7 +49,30 @@ export class LoanStatus {
 
   }
 
-    async changeStatusToUnderwriting() {
+  async StatusNPW_cancel() {
+    console.log('🔹 Starting NPW status change cancellation verification...');
+
+    console.log("new enquiry visible")
+    await this.page.waitForTimeout(10000);
+    await this.page.locator("//html/body/div/div/div/div/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[3]/div/div/span/span[2]").isVisible();
+    await this.page.locator("//html/body/div/div/div/div/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[3]/div/div/span/span[2]").click();
+
+    // await this.page.waitForTimeout(10000);
+    await this.page.getByText('NPW').nth(1).isVisible();
+        await this.page.waitForTimeout(8000);
+    await this.page.getByText('NPW').nth(1).click();
+    await this.page.waitForTimeout(10000);
+
+    await this.page.getByText('Confirm Status Change').click();
+    await this.page.getByRole('button', { name: 'Cancel' }).click();
+    await expect(this.page.getByRole('button', { name: 'Cancel' })).not.toBeVisible();
+
+
+
+  }
+
+
+  async changeStatusToUnderwriting() {
 
     await
       console.log(`Created loan: ${loanName}`);

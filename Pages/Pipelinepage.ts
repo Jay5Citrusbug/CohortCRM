@@ -392,14 +392,6 @@ export class PipeLinePage {
     await this.page.getByRole("button", { name: "Cancel" }).click();
   }
 
-  async StatusNPW_cancel() {
-    console.log('🔹 Starting Status NPW cancel process...')
-    // await page.locator('div').filter({ hasText: /^New Enquiry$/ }).nth(1).click();
-    // await page.getByRole('cell', { name: 'Underwriting Process' }).first().click();
-    // await page.getByRole('banner').click();
-    // await page.getByRole('cell', { name: 'Underwriting Process' }).nth(1).click();
-    // await page.locator('div').filter({ hasText: 'Current pipelineSum (£)£283,' }).nth(1).click();
 
-  };
 
 }
