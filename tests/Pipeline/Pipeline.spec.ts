@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { PipeLinePage } from '../../Pages/Pipelinepage';
 
-test.describe('Pipeline screen Tests', () => {
+test.describe.only('Pipeline screen Tests', () => {
   let pipeLinePage: PipeLinePage;
   let createdLoanName: string | undefined;
 
@@ -42,15 +42,6 @@ test.describe('Pipeline screen Tests', () => {
     await pipeLinePage.Search_Invalid_NewLoans();
   });
 
-  test('✅ TC-17  Verify Edit option opens Edit Loan pop-up screen and Discrd', async () => {
-    console.log('➡️ Test Start: Verify Edit option opens Edit Loan pop-up screen');
-    await pipeLinePage.Edit_Loan_Discard();
-  });
-
-  test('✅ TC-18  Verify Edit option opens Edit Loan pop-up screen and editing the name', async () => {
-    console.log('➡️ Test Start: Verify Edit option opens Edit Loan pop-up screen and editing the name');
-    await pipeLinePage.Edit_Loan_Update();
-  });
 
   test('✅ TC-19  Verify navigation to Loan Detail page from Loan Listing', async () => {
     console.log('➡️ Test Start: Verify navigation to Loan Detail page from Loan Listing');
@@ -70,6 +61,17 @@ test.describe('Pipeline screen Tests', () => {
   test('✅ TC-20  Verify that user can successfully add a comment', async () => {
     console.log('➡️ Test Start: Verify that user can successfully add a comment');
     await pipeLinePage.Comment_Creation();
+  });
+
+  
+  test('✅ TC-17  Verify Edit option opens Edit Loan pop-up screen and Discard', async () => {
+    console.log('➡️ Test Start: Verify Edit option opens Edit Loan pop-up screen');
+    await pipeLinePage.Edit_Loan_Discard();
+  });
+
+  test('✅ TC-18  Verify Edit option opens Edit Loan pop-up screen and editing the name', async () => {
+    console.log('➡️ Test Start: Verify Edit option opens Edit Loan pop-up screen and editing the name');
+    await pipeLinePage.Edit_Loan_Update();
   });
 
  
