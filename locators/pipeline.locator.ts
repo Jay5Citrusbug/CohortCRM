@@ -9,7 +9,7 @@ export const PipelineLocator = {
   },
 
   NoDataText: {
-    locator: 'text=No data',
+    name: 'No data',
   },
   AddLoanButton: {
     role: 'button', name: 'add icon',
@@ -178,5 +178,38 @@ SaveCommentButton: {
 
   propertyAddress:{
     locator:'#invite-admin_property'
+  },
+   NewEnquiryCell: {
+    locator: "//html/body/div/div/div/div/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[3]/div/div/span/span[2]"
+  },
+
+  NPWOption: {
+    text: "NPW",
+  },
+
+  ConfirmStatusChange: {
+    text: "Confirm Status Change",
+  },
+
+  CancelButton: {
+    role: "button",
+    name: "Cancel",
+  },
+   PopupConfirmButton: {
+    role: "button",
+    name: "Confirm"
+  },
+
+  PopupCancelButton: {
+    role: "button",
+    name: "Cancel"
+  },
+
+  PopupNPWText: {
+    dialogNPWText: "NPW"
+  },
+
+  PopupDialog: {
+    role: "dialog"
   }
 } as const;

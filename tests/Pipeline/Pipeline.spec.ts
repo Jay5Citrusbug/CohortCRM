@@ -43,36 +43,36 @@ test.describe('Pipeline screen Tests', () => {
   });
 
 
-  test('✅ TC-19  Verify navigation to Loan Detail page from Loan Listing', async () => {
-    console.log('➡️ Test Start: Verify navigation to Loan Detail page from Loan Listing');
-    await pipeLinePage.Loan_details();
-  });
-
-    test('✅ TC-22 Verify that validation messages are displayed for empty comment submission', async () => {
-    console.log('➡️ Test Start: Verify that validation messages are displayed for empty comment submission');
-    await pipeLinePage.Comment_validation();
-  });
-
-    test('✅ TC-20   Verify that clicking Cancel closes the Add Comment popup', async () => {
-    console.log('➡️ Test Start:  Verify that clicking Cancel closes the Add Comment popup');
-    await pipeLinePage.Comment_cancel();
-  });
-
-  test('✅ TC-20  Verify that user can successfully add a comment', async () => {
-    console.log('➡️ Test Start: Verify that user can successfully add a comment');
-    await pipeLinePage.Comment_Creation();
-  });
-
-  
-  test('✅ TC-17  Verify Edit option opens Edit Loan pop-up screen and Discard', async () => {
-    console.log('➡️ Test Start: Verify Edit option opens Edit Loan pop-up screen');
-    await pipeLinePage.Edit_Loan_Discard();
-  });
-
   test('✅ TC-18  Verify Edit option opens Edit Loan pop-up screen and editing the name', async () => {
     console.log('➡️ Test Start: Verify Edit option opens Edit Loan pop-up screen and editing the name');
     await pipeLinePage.Edit_Loan_Update();
   });
 
- 
-   });
+  test('✅ TC-19  Verify navigation to Loan Detail page from Loan Listing', async () => {
+    console.log('➡️ Test Start: Verify navigation to Loan Detail page from Loan Listing');
+    await pipeLinePage.Loan_details();
+
+  });
+
+  test('✅ TC-20 Verify that validation messages are displayed for empty comment submission', async () => {
+    console.log('➡️ Test Start: Verify that validation messages are displayed for empty comment submission');
+    await pipeLinePage.Comment_validation();
+  });
+
+  test('✅ TC-21   Verify that clicking Cancel closes the Add Comment popup', async () => {
+    console.log('➡️ Test Start:  Verify that clicking Cancel closes the Add Comment popup');
+    await pipeLinePage.Comment_cancel();
+  });
+
+  test('✅ TC-22  Verify that user can successfully add a comment', async () => {
+    console.log('➡️ Test Start: Verify that user can successfully add a comment');
+    await pipeLinePage.Comment_Creation();
+  });
+
+  test('✅ TC-17  Verify Edit option opens Edit Loan pop-up screen and Discard', async () => {
+    console.log('➡️ Test Start: Verify Edit option opens Edit Loan pop-up screen');
+    await pipeLinePage.Edit_Loan_Discard();
+  });
+
+
+});

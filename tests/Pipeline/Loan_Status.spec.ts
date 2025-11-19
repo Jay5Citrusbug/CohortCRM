@@ -1,10 +1,10 @@
 import { test, expect } from '@playwright/test';
 import { PipeLinePage } from '../../Pages/Pipelinepage';
-import {LoanStatus} from '../../Pages/Loan_Status'
+import { LoanStatus } from '../../Pages/Loan_Status'
 
 test.describe('Pipeline screen Tests', () => {
   let loanStatusPage: LoanStatus;
-    let pipeLinePage: PipeLinePage;
+  let pipeLinePage: PipeLinePage;
 
   let createdLoanName: string | undefined;
 
@@ -19,7 +19,7 @@ test.describe('Pipeline screen Tests', () => {
     await page.goto('https://crm-admin-staging.web.app/');
   });
 
-    test('🔄 TC-13 Verify cohort invest toggle updates state and refreshes screen with new tabs', async () => {
+  test('🔄 TC-13 Verify cohort invest toggle updates state and refreshes screen with new tabs', async () => {
     console.log('➡️ Test Start: Verify cohort invest toggle updates state and refreshes screen with new tabs');
     await pipeLinePage.Verify_Cohort_Invest_Toggle();
   });
@@ -36,10 +36,14 @@ test.describe('Pipeline screen Tests', () => {
     console.log('➡️ Test Start: Verify New Inquiry status filter functionality in pipeline');
     await loanStatusPage.Apply_Status_Filter();
   });
-     test('✅ TC-24  Verify Cancel Action on Status Change Popup', async () => {
+  test('✅ TC-17  Verify Cancel Action on Status Change Popup', async () => {
     console.log('➡️ Test Start: Verify Cancel Action on Status Change Popup');
     await loanStatusPage.StatusNPW_cancel();
-   })
+  })
+ test('✅ TC-18  Verify Cancel Action on NPW Reason Popup', async () => {
+    console.log('➡️ Test Start: Verify Cancel Action on NPW Reason Popup');
+    await loanStatusPage.npwReasonCancel();
+  })
 
   test('🔄 Verify loan status can be updated from New Inquiry to Underwriting Process', async () => {
     await pipeLinePage.Validation_Create_Loan();
@@ -50,4 +54,4 @@ test.describe('Pipeline screen Tests', () => {
   })
 
 
-  });
+});

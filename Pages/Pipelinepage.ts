@@ -98,12 +98,13 @@ export class PipeLinePage {
 
     await searchBox.fill(faker.lorem.words(3));
 
-    await this.page.waitForTimeout(3000); // Wait for search results to update
+    await this.page.waitForTimeout(8000); // Wait for search results to update
     await this.page.evaluate(() => {
       window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     });
     await expect(
-      this.page.getByText(PipelineLocator.NoDataText.locator).nth(1)
+      this.page.getByText(PipelineLocator.NoDataText.name).nth(1)
+      // await this.page.getByText('No data').nth(1)/
     ).toBeVisible();
 
     await searchBox.clear();
@@ -311,8 +312,7 @@ export class PipeLinePage {
   //---------------------------
 
   async Edit_Loan_Discard() {
-    await this.page.getByText(PipelineLocator.PipelineTab.name).click();
-
+    await this.page.goBack()
     console.log("🔹 Starting Edit Loan Discard test...");
 
     const popup = await this.openEditLoanPopup();
