@@ -265,11 +265,17 @@ export class PipeLinePage {
       name: PipelineLocator.checkbox_MCQ.name
     });
 
-    await filter.check();
+await filter.check();
 
-    await expect(this.page.locator(PipelineLocator.LoanNameExpand.locator)).toBeVisible();
-    await this.page.locator(PipelineLocator.LoanNameExpand.locator).click();
+// Wait for the row to appear
+const loanNameExpand = this.page.locator(PipelineLocator.LoanNameExpand.locator);
+await expect(loanNameExpand).toBeVisible({ timeout: 5000 });
 
+// Ensure clickable
+await loanNameExpand.waitFor({ state: 'attached' });
+
+// Click
+await loanNameExpand.click();
     await expect(this.page.locator(PipelineLocator.potentialMCQMarked.locator)).toBeVisible();
 
     await filter.uncheck();
