@@ -80,8 +80,9 @@ export class PipeLinePage {
       this.page.locator('div').filter({ hasText: 'Name of loan#StatusLoan' }).nth(3)
     ).toBeVisible();
 
-    await expect(this.page.getByRole('cell', { name: loanName })).toBeVisible();
-
+await expect(
+  this.page.getByRole('cell').filter({ hasText: loanName }).first()
+).toBeVisible();
     console.log(`✅ Verified created loan name: ${loanName}`);
   }
 
