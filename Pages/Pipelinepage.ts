@@ -133,18 +133,40 @@ export class PipeLinePage {
 
     // Postal Code
     const postal = this.page.getByTestId(PipelineLocator.PostalcodeID.name).first();
-    await postal.fill(Loan_FakerData.randomPostalCode);
+    //    await postal.fill(Loan_FakerData.randomPostalCode);
+    await postal.fill("385555");
+
     console.log('✅ Postal code entered.');
 
     //-------------------------
     // Popup Handling (Optimized)
     //-------------------------
     const popup = this.page.getByText('Matching Postcode Warning');
+    const cancelBtn = this.page.getByRole('button', { name: 'Cancel' }).nth(1);
 
+
+    // Dynamically wait up to 5sec for popup to appear
+    let popupVisible = false;
+    try {
+      await popup.waitFor({ state: 'visible', timeout: 5000 });
+      popupVisible = true;
+    } catch {
+      popupVisible = false;
+    }
+
+    // Check popup visible 
     if (await this.safeIsVisible(popup)) {
+
       console.log('⚠️ Matching Postcode Warning appeared.');
-      await this.page.getByRole('button', { name: 'Cancel' }).nth(1).click();
+
+      // Wait for cancel button
+      await cancelBtn.waitFor({ state: 'visible', timeout: 2000 });
+
+      // Click cancel
+      await cancelBtn.click();
+
       console.log('✅ Matching Postcode Warning handled.');
+
     } else {
       console.log('✅ No postcode warning popup.');
     }
@@ -265,17 +287,17 @@ export class PipeLinePage {
       name: PipelineLocator.checkbox_MCQ.name
     });
 
-await filter.check();
+    await filter.check();
 
-// Wait for the row to appear
-const loanNameExpand = this.page.locator(PipelineLocator.LoanNameExpand.locator);
-await expect(loanNameExpand).toBeVisible({ timeout: 5000 });
+    // Wait for the row to appear
+    const loanNameExpand = this.page.locator(PipelineLocator.LoanNameExpand.locator);
+    await expect(loanNameExpand).toBeVisible({ timeout: 5000 });
 
-// Ensure clickable
-await loanNameExpand.waitFor({ state: 'attached' });
+    // Ensure clickable
+    await loanNameExpand.waitFor({ state: 'attached' });
 
-// Click
-await loanNameExpand.click();
+    // Click
+    await loanNameExpand.click();
     await expect(this.page.locator(PipelineLocator.potentialMCQMarked.locator)).toBeVisible();
 
     await filter.uncheck();
@@ -290,12 +312,12 @@ await loanNameExpand.click();
   async openEditLoanPopup() {
     console.log("🔹 Opening Edit Loan pop-up...");
 
-      await this.page.evaluate(() => {
+    await this.page.evaluate(() => {
       const scrollable = document.querySelector('.ant-table-body');
       if (scrollable) scrollable.scrollBy({ left: 1000, behavior: 'smooth' });
     });
 
-   const editBtn = this.page.getByRole(PipelineLocator.EditIconButton.role, {
+    const editBtn = this.page.getByRole(PipelineLocator.EditIconButton.role, {
       name: PipelineLocator.EditIconButton.name
     }).first();
 
@@ -345,7 +367,7 @@ await loanNameExpand.click();
 
     console.log('🔹 Starting Edit Loan Update test...');
 
-      await this.page.evaluate(() => {
+    await this.page.evaluate(() => {
       const scrollable = document.querySelector('.ant-table-body');
       if (scrollable) scrollable.scrollBy({ left: 1000, behavior: 'smooth' });
     });
@@ -367,7 +389,7 @@ await loanNameExpand.click();
     }).click();
     await this.page.waitForTimeout(5000); // Wait for update to process
     await expect(
-           this.page.getByRole(PipelineLocator.DealNameCell.role, { name: updatedName })
+      this.page.getByRole(PipelineLocator.DealNameCell.role, { name: updatedName })
     ).toBeVisible({ timeout: 10000 });
 
     console.log('✅ Loan updated successfully.');
@@ -381,7 +403,7 @@ await loanNameExpand.click();
     console.log('🔹 Navigating to Loan Detail page...');
 
     // await this.scrollTableRight();
-     await this.page.evaluate(() => {
+    await this.page.evaluate(() => {
       const scrollable = document.querySelector('.ant-table-body');
       if (scrollable) scrollable.scrollBy({ left: 1000, behavior: 'smooth' });
     });
