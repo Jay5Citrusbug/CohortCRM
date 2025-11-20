@@ -284,19 +284,19 @@ export class PipeLinePage {
   async openEditLoanPopup() {
     console.log("🔹 Opening Edit Loan pop-up...");
 
-    await this.scrollTableRight();
+      await this.page.evaluate(() => {
+      const scrollable = document.querySelector('.ant-table-body');
+      if (scrollable) scrollable.scrollBy({ left: 1000, behavior: 'smooth' });
+    });
 
-    const editBtn = this.page
-      .getByRole(PipelineLocator.EditIconButton.role, {
-        name: PipelineLocator.EditIconButton.name
-      })
-      .first();
+   const editBtn = this.page.getByRole(PipelineLocator.EditIconButton.role, {
+      name: PipelineLocator.EditIconButton.name
+    }).first();
 
-    await this.waitAndClick(editBtn);
-
-    const popupVisible = await this.safeIsVisible(
-      this.page.getByText(PipelineLocator.SaveChangesButton.name)
-    );
+    await editBtn.waitFor();
+    await editBtn.click();
+    console.log("🖱️ Clicked the first Edit button.");
+    const popupVisible = await this.page.getByText(PipelineLocator.NameEditName.name).isVisible();
 
     if (!popupVisible) {
       console.error("❌ Edit Loan pop-up NOT found.");
@@ -339,7 +339,10 @@ export class PipeLinePage {
 
     console.log('🔹 Starting Edit Loan Update test...');
 
-    await this.scrollTableRight();
+      await this.page.evaluate(() => {
+      const scrollable = document.querySelector('.ant-table-body');
+      if (scrollable) scrollable.scrollBy({ left: 1000, behavior: 'smooth' });
+    });
 
     const popup = await this.openEditLoanPopup();
     if (!popup) return;
@@ -356,12 +359,10 @@ export class PipeLinePage {
     await this.page.getByRole(PipelineLocator.SaveChangesButton.role, {
       name: PipelineLocator.SaveChangesButton.name
     }).click();
-
+    await this.page.waitForTimeout(5000); // Wait for update to process
     await expect(
-      this.page.getByRole(PipelineLocator.DealNameCell.role, {
-        name: updatedName
-      })
-    ).toBeVisible();
+           this.page.getByRole(PipelineLocator.DealNameCell.role, { name: updatedName })
+    ).toBeVisible({ timeout: 10000 });
 
     console.log('✅ Loan updated successfully.');
   }
@@ -373,7 +374,11 @@ export class PipeLinePage {
   async Loan_details() {
     console.log('🔹 Navigating to Loan Detail page...');
 
-    await this.scrollTableRight();
+    // await this.scrollTableRight();
+     await this.page.evaluate(() => {
+      const scrollable = document.querySelector('.ant-table-body');
+      if (scrollable) scrollable.scrollBy({ left: 1000, behavior: 'smooth' });
+    });
 
     const eye = this.page.getByRole(PipelineLocator.EyeIconButton.role, {
       name: PipelineLocator.EyeIconButton.name
