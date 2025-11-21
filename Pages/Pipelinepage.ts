@@ -134,8 +134,8 @@ await expect(
 
     // Postal Code
     const postal = this.page.getByTestId(PipelineLocator.PostalcodeID.name).first();
-    //    await postal.fill(Loan_FakerData.randomPostalCode);
-    await postal.fill("385555");
+     await postal.fill(Loan_FakerData.randomPostalCode);
+    //await postal.fill("385555");
 
     console.log('✅ Postal code entered.');
 

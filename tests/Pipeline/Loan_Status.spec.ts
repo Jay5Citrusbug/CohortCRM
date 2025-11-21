@@ -36,16 +36,9 @@ test.describe('Pipeline screen Tests', () => {
     console.log('➡️ Test Start: Verify New Inquiry status filter functionality in pipeline');
     await loanStatusPage.Apply_Status_Filter();
   });
-  test('✅ TC-17  Verify Cancel Action on Status Change Popup', async () => {
-    console.log('➡️ Test Start: Verify Cancel Action on Status Change Popup');
-    await loanStatusPage.StatusNPW_cancel();
-  })
- test('✅ TC-18  Verify Cancel Action on NPW Reason Popup', async () => {
-    console.log('➡️ Test Start: Verify Cancel Action on NPW Reason Popup');
-    await loanStatusPage.npwReasonCancel();
-  })
+  
 
-  test('🔄 Verify loan status can be updated from New Inquiry to Underwriting Process', async () => {
+  test('🔄 Verify loan status can be updated from “New Inquiry” to “Underwriting Process”', async () => {
     await pipeLinePage.Validation_Create_Loan();
     await pipeLinePage.CreateLoan();
     console.log('➡️ Test Start: Verify loan status');
@@ -53,5 +46,29 @@ test.describe('Pipeline screen Tests', () => {
 
   })
 
+  test(' 🗂️ Verify updated loan is visible under “Underwriting Process” tab', async () => {
+    await loanStatusPage.VerifyUnderwritingTab();
+  });
+
+  test('🚀 Verify loan status can be updated from “Underwriting Process” to “Live Loan', async () => {
+    await loanStatusPage.changeStatusToLiveLoan();
+
+  })
+
+   test(' 👁️ Verify updated loan is visible under “Live Loan” tab', async () => {
+    await loanStatusPage.Verify_LiveLoanTab();
+  });
+  
+  test('✅ TC-17  Verify Cancel Action on Status Change Popup', async () => {
+    console.log('➡️ Test Start: Verify Cancel Action on Status Change Popup');
+    await loanStatusPage.StatusNPW_cancel();
+  })
+  test('✅ TC-18  Verify Cancel Action on NPW Reason Popup', async () => {
+    console.log('➡️ Test Start: Verify Cancel Action on NPW Reason Popup');
+    await loanStatusPage.npwReasonCancel();
+  })
+    test('✅ Verify Successful NPW Status Change', async () => {
+    await loanStatusPage.ChangeStatusToNPW();
+  })
 
 });

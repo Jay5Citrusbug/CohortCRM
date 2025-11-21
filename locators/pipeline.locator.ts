@@ -64,6 +64,9 @@ export const PipelineLocator = {
     name: 'Name of loan',
   },
 
+NPWFilterOption: {
+    role: 'menu', name: 'NPW',
+  },
   CohortInvestToggle: {
     name: 'switch',
   },
@@ -179,7 +182,7 @@ SaveCommentButton: {
   propertyAddress:{
     locator:'#invite-admin_property'
   },
-   NewEnquiryCell: {
+   ChangeStatus: {
     locator: "//html/body/div/div/div/div/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[3]/div/div/span/span[2]"
   },
 
@@ -211,5 +214,10 @@ SaveCommentButton: {
 
   PopupDialog: {
     role: "dialog"
-  }
+  },
+    NPWPopupconfirmButton: {
+    role: "button",
+    name: "Confirm"
+  },
+
 } as const;
