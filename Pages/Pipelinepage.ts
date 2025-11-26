@@ -1,4 +1,4 @@
-import { Page, expect } from '@playwright/test';
+import { Locator, Page, expect } from '@playwright/test';
 import { LoginLocator } from '../locators/login.locator';
 import { Messages } from '../messages/message';
 import { PipelineLocator } from '../locators/pipeline.locator';
@@ -80,9 +80,9 @@ export class PipeLinePage {
       this.page.locator('div').filter({ hasText: 'Name of loan#StatusLoan' }).nth(3)
     ).toBeVisible();
 
-await expect(
-  this.page.getByRole('cell').filter({ hasText: loanName }).first()
-).toBeVisible();
+    await expect(
+      this.page.getByRole('cell').filter({ hasText: loanName }).first()
+    ).toBeVisible();
     console.log(`✅ Verified created loan name: ${loanName}`);
   }
 
@@ -96,8 +96,10 @@ await expect(
     const searchBox = this.page.getByRole(PipelineLocator.Searchbar.role, {
       name: PipelineLocator.Searchbar.name
     });
+    const invalidLoanName = faker.lorem.words(3);
+    await searchBox.fill(invalidLoanName);
+    console.log(`✅ Verified created loan name: ${invalidLoanName}`);
 
-    await searchBox.fill(faker.lorem.words(3));
 
     await this.page.waitForTimeout(8000); // Wait for search results to update
     await this.page.evaluate(() => {
@@ -119,7 +121,7 @@ await expect(
     console.log('🔹 Starting Create Loan process...');
 
     await this.page.getByTestId(PipelineLocator.DealName.name).first().fill(loanName);
-    console.log('✅ Deal name filled successfully.');
+    console.log(`✅ Deal name is added: ${loanName}`);
 
     // Loan Type
     await this.waitAndClick(this.page.locator(PipelineLocator.LoanType.locator).first());
@@ -134,7 +136,7 @@ await expect(
 
     // Postal Code
     const postal = this.page.getByTestId(PipelineLocator.PostalcodeID.name).first();
-     await postal.fill(Loan_FakerData.randomPostalCode);
+    await postal.fill(Loan_FakerData.randomPostalCode);
     //await postal.fill("385555");
 
     console.log('✅ Postal code entered.');
@@ -215,6 +217,7 @@ await expect(
 
     await expect(this.page.getByText(PipelineLocator.NameLoanColumn.name)).toBeVisible();
     console.log('💾 Loan created successfully.');
+    await this.page.waitForTimeout(3000); // Wait for 3 seconds to ensure loan is created
   }
 
   //---------------------------
@@ -299,8 +302,14 @@ await expect(
 
     // Click
     await loanNameExpand.click();
-    await expect(this.page.locator(PipelineLocator.potentialMCQMarked.locator)).toBeVisible();
+    await this.page.waitForTimeout(4000); // Wait for 4 seconds for the expansion animation
+    await this.page.evaluate(() => {
+      window.scrollTo(0, document.body.scrollHeight);
+    });
 
+    // ⏳ NEW: Wait for potentialMCQMarked to appear after expand
+    const mcqMarked = this.page.locator(PipelineLocator.potentialMCQMarked.locator);
+    await expect(mcqMarked).toBeVisible({ timeout: 7000 });
     await filter.uncheck();
 
     console.log('✅ MCQ filtering verified successfully.');
@@ -363,35 +372,74 @@ await expect(
   //---------------------------
 
   async Edit_Loan_Update() {
-    // await this.page.getByRole('link', { name: 'Underwriting' }).click();
-    // await this.page.getByText(PipelineLocator.PipelineTab.name).click();
-
     console.log('🔹 Starting Edit Loan Update test...');
 
+    // Reusable helper to wait for visibility before any action
+    const waitVisible = async (locator: Locator, name: string) => {
+      console.log(`⏳ Waiting for ${name}...`);
+      await locator.waitFor({ state: 'visible', timeout: 10000 });
+      return locator;
+    };
+
+    // Scroll table horizontally
     await this.page.evaluate(() => {
       const scrollable = document.querySelector('.ant-table-body');
-      if (scrollable) scrollable.scrollBy({ left: 1000, behavior: 'smooth' });
+      scrollable?.scrollTo({ left: 1000 });
     });
 
+    // 🟦 Step 1: OPEN THE EDIT POPUP
     const popup = await this.openEditLoanPopup();
-    if (!popup) return;
+    if (!popup) {
+      console.log('❌ Edit Loan popup did not open.');
+      return;
+    }
 
+    // Ensure popup fully loaded
+    await waitVisible(
+      this.page.getByRole(PipelineLocator.MainSectionBanner.role).filter({
+        hasText: PipelineLocator.MainSectionBanner.name
+      }),
+      'Edit Loan popup main banner'
+    );
+
+    // 🟦 Step 2: CLICK ON MAIN BANNER
     await this.page
       .getByRole(PipelineLocator.MainSectionBanner.role)
       .filter({ hasText: PipelineLocator.MainSectionBanner.name })
       .click();
 
+    // 🟦 Step 3: UPDATE DEAL NAME
     const updatedName = faker.company.name();
+    const dealNameInput = this.page.getByTestId(PipelineLocator.DealNameInput.locator);
 
-    await this.page.getByTestId(PipelineLocator.DealNameInput.locator).fill(updatedName);
+    await waitVisible(dealNameInput, 'Deal Name input');
+    await dealNameInput.fill(updatedName);
 
-    await this.page.getByRole(PipelineLocator.SaveChangesButton.role, {
+    // 🟦 Step 4: CLICK SAVE (Wait until enabled)
+    const saveButton = this.page.getByRole(PipelineLocator.SaveChangesButton.role, {
       name: PipelineLocator.SaveChangesButton.name
-    }).click();
-    await this.page.waitForTimeout(5000); // Wait for update to process
-    await expect(
-      this.page.getByRole(PipelineLocator.DealNameCell.role, { name: updatedName })
-    ).toBeVisible({ timeout: 10000 });
+    });
+
+    await waitVisible(saveButton, 'Save Changes button');
+    await saveButton.waitFor({ state: 'attached' });
+    await expect(saveButton).toBeEnabled({ timeout: 8000 });
+
+    console.log('🔘 Clicking Save...');
+    saveButton.click()
+    const searchBox = this.page.getByRole(PipelineLocator.Searchbar.role, {
+      name: PipelineLocator.Searchbar.name
+    });
+
+    await searchBox.fill(updatedName);
+
+    // 🟦 Step 5: VERIFY UPDATE (Dynamic wait)
+    const updatedCell = this.page.getByRole(PipelineLocator.DealNameCell.role, {
+      name: updatedName
+    });
+
+    await expect(updatedCell).toBeVisible({
+      timeout: 15000
+    });
 
     console.log('✅ Loan updated successfully.');
   }

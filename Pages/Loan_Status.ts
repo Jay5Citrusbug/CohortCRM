@@ -136,34 +136,63 @@ export class LoanStatus {
 
   }
 
+async changeStatusToUnderwriting() {
+  console.log(`✅ Verified created loan name: ${loanName}`);
 
-  async changeStatusToUnderwriting() {
-    console.log(`Created loan: ${loanName}`);
+  // Wait for search bar visible, then type loan name
+  const searchBar = this.page.getByRole(PipelineLocator.Searchbar.role, {
+    name: PipelineLocator.Searchbar.name
+  });
+  await expect(searchBar).toBeVisible();
+  await searchBar.fill(loanName);
 
-    // Log for debugging/reference
-    console.log(`✅ Verified created loan name: ${loanName}`);
-    await this.page.getByRole(PipelineLocator.Searchbar.role, { name: PipelineLocator.Searchbar.name }).isVisible();
-    await this.page.getByRole(PipelineLocator.Searchbar.role, { name: PipelineLocator.Searchbar.name }).fill(loanName);
-    await this.page.waitForTimeout(3000);
-    await expect(
-      this.page.locator('div').filter({ hasText: 'Name of loan#StatusLoan' }).nth(3)
-    ).toBeVisible({ timeout: 10000 });
+  // ⛔ Removed static wait — replaced with dynamic wait for loan row
+  await expect(
+    this.page.locator('div').filter({ hasText: 'Name of loan#StatusLoan' }).nth(3)
+  ).toBeVisible({ timeout: 10000 });
 
-    await this.page.getByText('New Enquiry').first().isVisible();
-    await this.page.locator("//html/body/div/div/div/div/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[3]/div/div/span/span[2]").click();
-    await this.page.getByText('Underwriting Process').click();
-    await this.page.getByText('Confirm Status Change').click();
-    await this.page.getByRole('button', { name: 'Confirm' }).click();
+  // Wait for “New Enquiry” to be visible instead of checking .isVisible()
+  const newEnquiry = this.page.getByText('New Enquiry').first();
+  await expect(newEnquiry).toBeVisible();
 
-    pipeLinePage = new PipeLinePage(this.page);  // <-- create instance
-    await pipeLinePage.Search_Valid_NewLoans();
-    const searchBox = this.page.getByRole(PipelineLocator.Searchbar.role, {
-      name: PipelineLocator.Searchbar.name
-    });
-    await expect(this.page.getByRole('cell', { name: 'Underwriting Process' }).first()).toBeVisible();
-    await searchBox.clear();
+  // Click the status dropdown
+  const statusDropdown = this.page.locator(
+    "//html/body/div/div/div/div/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[3]/div/div/span/span[2]"
+  );
+  await expect(statusDropdown).toBeVisible();
+  await statusDropdown.click();
 
-  }
+  // Select "Underwriting Process"
+  const underwritingOption = this.page.getByText('Underwriting Process');
+  await expect(underwritingOption).toBeVisible();
+  await underwritingOption.click();
+
+  // Confirm status change popup
+  const confirmStatusChange = this.page.getByText('Confirm Status Change');
+  await expect(confirmStatusChange).toBeVisible();
+  await confirmStatusChange.click();
+
+  const confirmButton = this.page.getByRole('button', { name: 'Confirm' });
+  await expect(confirmButton).toBeVisible();
+  await confirmButton.click();
+
+  // Run pipeline search for new loans
+  pipeLinePage = new PipeLinePage(this.page);
+  await pipeLinePage.Search_Valid_NewLoans();
+
+  const searchBox = this.page.getByRole(PipelineLocator.Searchbar.role, {
+    name: PipelineLocator.Searchbar.name
+  });
+
+  // Verify status changed to "Underwriting Process"
+  const uwCell = this.page.getByRole('cell', { name: 'Underwriting Process' }).first();
+  await expect(uwCell).toBeVisible({ timeout: 10000 });
+
+  // Clear search
+  await expect(searchBox).toBeVisible();
+  await searchBox.clear();
+}
+
   async VerifyUnderwritingTab() {
 
     await this.page.getByRole('link', { name: 'Underwriting' }).click();
