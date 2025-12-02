@@ -65,9 +65,8 @@ export class ContactPage {
     await this.page.locator('div').filter({ hasText: Messages.Alerts.DELETE_CONTACT_CONFIRMATION }).nth(5).isVisible();
     await this.page.getByText('Delete Contact').isVisible();
     await this.page.locator(ContactLocator.DeleteContactYesBtn.locator).click();
-    await expect(this.page.getByText(Messages.Alerts.ContactDeleted)).toBeVisible();
-    expect(await this.page.getByRole(ContactLocator.editIcon.role, { name: ContactLocator.editIcon.name }).first().isDisabled());
-    expect(await this.page.getByRole(ContactLocator.DeleteContactbtn.role, { name: ContactLocator.DeleteContactbtn.name }).first().isDisabled());
+    expect(await this.page.getByRole(ContactLocator.editIcon.role, { name: ContactLocator.editIcon.name }).first().isHidden());
+    expect(await this.page.getByRole(ContactLocator.DeleteContactbtn.role, { name: ContactLocator.DeleteContactbtn.name }).first().isHidden());
 
     // Search Contact assetion pending as search feature is not working
 

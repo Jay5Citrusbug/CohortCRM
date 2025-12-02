@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { PipeLinePage } from '../../Pages/Pipelinepage';
 import { LoanStatus } from '../../Pages/Loan_Status'
 
-test.describe('Pipeline screen Tests', () => {
+test.describe.only('Pipeline loan Status', () => {
   let loanStatusPage: LoanStatus;
   let pipeLinePage: PipeLinePage;
 

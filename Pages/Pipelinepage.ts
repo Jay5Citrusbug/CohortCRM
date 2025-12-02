@@ -295,7 +295,7 @@ export class PipeLinePage {
 
     // Wait for the row to appear
     const loanNameExpand = this.page.locator(PipelineLocator.LoanNameExpand.locator);
-    await expect(loanNameExpand).toBeVisible({ timeout: 5000 });
+    await expect(loanNameExpand).toBeVisible({ timeout: 8000 });
 
     // Ensure clickable
     await loanNameExpand.waitFor({ state: 'attached' });

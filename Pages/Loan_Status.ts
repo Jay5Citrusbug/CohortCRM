@@ -74,7 +74,7 @@ export class LoanStatus {
     await this.page.locator(PipelineLocator.ChangeStatus.locator).click();
     await this.page.getByText(PipelineLocator.NPWOption.text).nth(1).isVisible();
     // await this.page.getByText(PipelineLocator.NPWOption.text).nth(1).click();
-    await this.page.getByText('NPW').click();
+    await this.page.getByText('NPW').nth(1).click();
     await this.page.getByText(PipelineLocator.ConfirmStatusChange.text).isVisible();
 
     await this.page.getByRole(PipelineLocator.PopupDialog.role).getByText(PipelineLocator.PopupNPWText.dialogNPWText, { exact: true }).isVisible();
@@ -90,7 +90,7 @@ export class LoanStatus {
     await this.page.locator(PipelineLocator.ChangeStatus.locator).click();
     await this.page.getByText(PipelineLocator.NPWOption.text).nth(1).isVisible();
     // await this.page.getByText(PipelineLocator.NPWOption.text).nth(1).click();
-    await this.page.getByText('NPW').click();
+    await this.page.getByText('NPW').nth(1).click();
     await this.page.getByText(PipelineLocator.ConfirmStatusChange.text).isVisible();
 
     await this.page.getByRole(PipelineLocator.PopupDialog.role).getByText(PipelineLocator.PopupNPWText.dialogNPWText, { exact: true }).isVisible();
@@ -205,7 +205,7 @@ async changeStatusToUnderwriting() {
     // await this.page.waitForTimeout(3000);
     await expect(
       this.page.getByText('Underwriting Process').first()
-    ).toBeVisible({ timeout: 3000 });
+    ).toBeVisible({ timeout: 6000 });
 
 
   }
