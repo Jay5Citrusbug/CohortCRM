@@ -34,7 +34,6 @@ import { ContactPage } from '../../Pages/contact.page';
       await contactPage.Delete_Contact();
     });
 
-    
 
     test.afterAll(async () => {
       console.log('🧹 Closing browser context...');

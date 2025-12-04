@@ -1,6 +1,6 @@
 import { Page, expect } from '@playwright/test';
 import { Messages } from '../messages/message';
-import { faker } from '@faker-js/faker';
+import { faker, fakerRO } from '@faker-js/faker';
 import { CompaniesLocator } from '../locators/Companies.locator';
 import { ContactLocator } from '../locators/contact.locator';
 
@@ -87,9 +87,54 @@ export class CompaniesPage {
     await this.page.locator('div').filter({ hasText: Messages.Alerts.DELETE_COMPANY_CONFIRMATION }).nth(5).waitFor({ state: 'visible' });;
     await this.page.getByText(CompaniesLocator.Companydelete_header).waitFor({ state: 'visible' });;
     await this.page.locator(CompaniesLocator.DeleteCompanyYesBtn.locator).click();
-    expect(await this.page.getByRole(ContactLocator.editIcon.role, { name: ContactLocator.editIcon.name }).first().isHidden());
-    expect(await this.page.getByRole(ContactLocator.DeleteContactbtn.role, { name: ContactLocator.DeleteContactbtn.name }).first().isHidden());
-    await this.page.getByRole(CompaniesLocator.SearchCompanyInput.role, { name: CompaniesLocator.SearchCompanyInput.name }).clear();
+    await this.page.waitForTimeout(8000)
+    await expect(this.page.getByText('No data').nth(1)).toBeVisible();
+  }
+
+  async CreateContactInCompany() {
+    await this.page.getByRole(CompaniesLocator.AddCompaniesTab.role, { name: CompaniesLocator.AddCompaniesTab.name }).click();
+
+    await this.page.getByRole('button', { name: 'add icon Add New Company' }).click();
+    await this.page.getByTestId('name').isVisible();
+    await this.page.getByTestId('name').fill(faker.company.name());
+    await this.page.getByTestId('post_code').isVisible();
+    await this.page.getByTestId('post_code').fill(faker.location.zipCode());
+    const field = this.page.locator('#invite-admin_address');
+
+    await field.isVisible();
+
+    await field.click();          // focus input
+    await this.page.waitForTimeout(5000); // wait for dropdown
+
+    await field.press('ArrowDown');
+    await field.press('Enter');
+    await this.page.getByTestId('companiesHouseNumber').isVisible();
+    await this.page.getByTestId('companiesHouseNumber').fill(faker.string.numeric(4));
+    await this.page.getByText('Shareholders Enter').click();
+    await this.page.locator('.ant-select.ant-select-outlined.ant-select-in-form-item.text-start.css-5uvb3z.ant-select-multiple > .ant-select-selector').first().click();
+    await this.page.locator('span').filter({ hasText: 'Enter shareholders' }).first().click();
+    await this.page.getByText('Ocean Holland', { exact: true }).click();
+    await this.page.locator('div:nth-child(7) > .select-wrapper > .ant-form-item > .ant-row > .ant-col > .ant-form-item-control-input > .ant-form-item-control-input-content > .ant-select > .ant-select-selector > .ant-select-selection-wrap > .ant-select-selection-overflow').click();
+    await this.page.getByRole('button', { name: 'add icon Add New Contact' }).nth(1).isVisible();
+
+    await this.page.getByRole('button', { name: 'add icon Add New Contact' }).nth(1).click();
+
+    const firstname = faker.person.firstName();
+    const lastname = faker.person.lastName();
+    await this.page.getByTestId('firstname').isVisible();
+    await this.page.getByTestId('firstName').fill(firstname);
+    await this.page.getByTestId('lastName').isVisible();
+    await this.page.getByTestId('lastName').fill(lastname);
+    await this.page.getByTestId('email').isVisible();
+    await this.page.getByTestId('email').fill(faker.internet.email());
+    await this.page.getByTestId('phoneNumber').isVisible();
+    await this.page.getByTestId('phoneNumber').fill(faker.phone.number());
+    await this.page.getByTestId('phoneNumber').press('ControlOrMeta+a');
+    await this.page.getByRole('button', { name: 'Add Contact' }).click();
+    await this.page.waitForTimeout(5000);
+    await expect(this.page.getByTestId('contacts').getByText(firstname + ' ' + lastname)).toBeVisible();
+    await this.page.getByRole(CompaniesLocator.AddCompanybtn.role, { name: CompaniesLocator.AddCompanybtn.name }).click();
+
 
   }
 }

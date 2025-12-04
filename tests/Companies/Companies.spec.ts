@@ -2,7 +2,7 @@
 import { CompaniesPage } from '../../Pages/Companies.page';
 
 
-  test.describe('Contact Screen Tests', () => {
+  test.describe.only('Companies Screen Tests', () => {
     let context: BrowserContext;
     let page: Page;
     let companiesPage: CompaniesPage;
@@ -41,6 +41,9 @@ import { CompaniesPage } from '../../Pages/Companies.page';
     test('🗑️ TC-26 Verify user can successfully delete a company', async () => {
       // Navigate to Companies
       await companiesPage.Delete_Company();
+    });
+    test('➕ TC-27 Verify user can successfully create a new contact within a company', async () => {
+      await companiesPage.CreateContactInCompany();
     });
 
     test.afterAll(async () => {

@@ -60,7 +60,7 @@ export class LoanStatus {
     await this.page.locator(PipelineLocator.ChangeStatus.locator).click();
     await this.page.getByText(PipelineLocator.NPWOption.text).nth(1).isVisible();
     // await this.page.getByText(PipelineLocator.NPWOption.text).nth(1).click();
-    await this.page.getByText('NPW').click();
+    await this.page.getByText('NPW').nth(1).click();
     await this.page.getByText(PipelineLocator.ConfirmStatusChange.text).isVisible();
     await this.page.getByRole(PipelineLocator.CancelButton.role, { name: PipelineLocator.CancelButton.name }).click();
 

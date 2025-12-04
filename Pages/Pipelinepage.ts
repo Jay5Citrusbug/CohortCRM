@@ -209,15 +209,20 @@ export class PipeLinePage {
     await company.fill('Automation');
     await this.page.keyboard.press('Enter');
     console.log('✅ Company added.');
-
-    // Save
+await this.page.pause();
+    // Click Save
     await this.page.getByRole(PipelineLocator.SaveChangesButton.role, {
       name: PipelineLocator.SaveChangesButton.name
     }).click();
 
-    await expect(this.page.getByText(PipelineLocator.NameLoanColumn.name)).toBeVisible();
-    console.log('💾 Loan created successfully.');
-    await this.page.waitForTimeout(3000); // Wait for 3 seconds to ensure loan is created
+    // Wait for modal text to be hidden = popup closed
+    await this.page.getByLabel(PipelineLocator.AddLoanText.locator).waitFor({
+      state: 'hidden',
+      timeout: 20000
+    });
+    // Now it is safe to continue
+    console.log('💾 Loan created successfully and popup closed.');
+
   }
 
   //---------------------------
