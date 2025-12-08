@@ -4,6 +4,7 @@ export const CompaniesLocator = {
    UpdateCompanybtn: { role: 'button', name: 'Update Company' },
    DeleteCompanybtn: { role: 'button', name: 'Delete' },
    AddCompanybtn: { role: 'button', name: 'Add Company' },
+   UpdateConmpybtn: { role: 'button', name: 'Update Company' },
    SearchCompanyInput: { role: 'textbox', name: 'Search Companies' },
    CompaniesList: { role: 'listbox', name: 'Companies List' },
    editIcon: { role: 'button', name: 'Edit' },

@@ -65,7 +65,8 @@ export class CompaniesPage {
     await this.page.waitForTimeout(5000)
     await this.page.getByTestId(CompaniesLocator.Name.testId).clear();
     await this.page.getByTestId(CompaniesLocator.Name.testId).fill(UpdatedCompanyName);
-    await this.page.getByRole(CompaniesLocator.UpdateCompanybtn.role, { name: CompaniesLocator.AddCompanybtn.name }).click();
+    await this.page.getByRole(CompaniesLocator.UpdateCompanybtn.role, { name: CompaniesLocator.UpdateCompanybtn
+      .name }).click();
     await this.page.waitForTimeout(5000)
     await this.page.getByRole(CompaniesLocator.SearchCompanyInput.role, { name: CompaniesLocator.SearchCompanyInput.name }).fill(UpdatedCompanyName);
     // Wait until the first company name matches the updated name
