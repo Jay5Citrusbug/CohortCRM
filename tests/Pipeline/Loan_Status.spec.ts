@@ -27,24 +27,14 @@ test.describe('Pipeline loan Status', () => {
     console.log('➡️ Test Start: Verify MCQ filtering functionality in pipeline');
     await pipeLinePage.MCQ_Filtering();
   });
-
-  test('🔍 TC-15 Verify Status filtering functionality in pipeline', async () => {
-    console.log('➡️ Test Start: Verify Status filtering functionality in pipeline');
-    await loanStatusPage.Verify_Default_Status_Filter();
-  });
-  test('✅ TC-16Verify New Inquiry status filter functionality in pipeline', async () => {
-    console.log('➡️ Test Start: Verify New Inquiry status filter functionality in pipeline');
-    await loanStatusPage.Apply_Status_Filter();
-  });
-  
-
-  test('🔄 Verify loan status can be updated from “New Inquiry” to “Underwriting Process”', async () => {
+    test('🔄 Verify loan status can be updated from “New Inquiry” to “Underwriting Process”', async () => {
     await pipeLinePage.Validation_Create_Loan();
     await pipeLinePage.CreateLoan();
     console.log('➡️ Test Start: Verify loan status');
     await loanStatusPage.changeStatusToUnderwriting()
 
   })
+  
 
   test(' 🗂️ Verify updated loan is visible under “Underwriting Process” tab', async () => {
     await loanStatusPage.VerifyUnderwritingTab();
@@ -70,5 +60,14 @@ test.describe('Pipeline loan Status', () => {
     test('✅ Verify Successful NPW Status Change', async () => {
     await loanStatusPage.ChangeStatusToNPW();
   })
+    test('🔍 TC-15 Verify Status filtering functionality in pipeline', async () => {
+    console.log('➡️ Test Start: Verify Status filtering functionality in pipeline');
+    await loanStatusPage.Verify_Default_Status_Filter();
+  });
+  test('✅ TC-16Verify New Inquiry status filter functionality in pipeline', async () => {
+    console.log('➡️ Test Start: Verify New Inquiry status filter functionality in pipeline');
+    await loanStatusPage.Apply_Status_Filter();
+  });
+
 
 });
