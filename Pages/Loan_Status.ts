@@ -66,8 +66,8 @@ export class LoanStatus {
   async StatusNPW_cancel() {
     await this.page.locator(PipelineLocator.ChangeStatus.locator).isVisible();
     await this.page.locator(PipelineLocator.ChangeStatus.locator).click();
-    await this.page.getByText(PipelineLocator.NPWOption.text).isVisible();
-    await this.page.getByText(PipelineLocator.NPWOption.text).click();
+    await this.page.getByText(PipelineLocator.NPWOption.text).nth(1).isVisible();
+    await this.page.getByText(PipelineLocator.NPWOption.text).nth(1).click();
 
     // await this.page.getByText('NPW').click();
     await this.page.getByText(PipelineLocator.ConfirmStatusChange.text).isVisible();
@@ -81,9 +81,9 @@ export class LoanStatus {
     console.log('🔹 Starting NPW reason popup cancellation verification...');
     await this.page.locator(PipelineLocator.ChangeStatus.locator).isVisible();
     await this.page.locator(PipelineLocator.ChangeStatus.locator).click();
-    await this.page.getByText(PipelineLocator.NPWOption.text).isVisible();
+    await this.page.getByText(PipelineLocator.NPWOption.text).nth(1).isVisible();
     // await this.page.getByText(PipelineLocator.NPWOption.text).nth(1).click();
-    await this.page.getByText(PipelineLocator.NPWOption.text).click();
+    await this.page.getByText(PipelineLocator.NPWOption.text).nth(1).click();
     await this.page.getByText(PipelineLocator.ConfirmStatusChange.text).isVisible();
 
     await this.page.getByRole(PipelineLocator.PopupDialog.role).getByText(PipelineLocator.PopupNPWText.dialogNPWText, { exact: true }).isVisible();
@@ -97,9 +97,9 @@ export class LoanStatus {
     console.log('🔹 Starting NPW reason popup cancellation verification...');
     await this.page.locator(PipelineLocator.ChangeStatus.locator).isVisible();
     await this.page.locator(PipelineLocator.ChangeStatus.locator).click();
-    await this.page.getByText(PipelineLocator.NPWOption.text).isVisible();
+    await this.page.getByText(PipelineLocator.NPWOption.text).nth(1).isVisible();
     // await this.page.getByText(PipelineLocator.NPWOption.text).nth(1).click();
-    await this.page.getByText(PipelineLocator.NPWOption.text).click();
+    await this.page.getByText(PipelineLocator.NPWOption.text).nth(1).click();
     await this.page.getByText(PipelineLocator.ConfirmStatusChange.text).isVisible();
 
     await this.page.getByRole(PipelineLocator.PopupDialog.role).getByText(PipelineLocator.PopupNPWText.dialogNPWText, { exact: true }).isVisible();
