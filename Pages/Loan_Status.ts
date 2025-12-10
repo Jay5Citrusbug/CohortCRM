@@ -64,12 +64,17 @@ export class LoanStatus {
 
   }
   async StatusNPW_cancel() {
+    await this.page.getByRole('textbox', { name: 'Search New Loans' }).clear();
+    console.log('🔹 Starting Status Change popup cancellation verification...');
+    await this.page.getByRole('textbox', { name: 'Search New Loans' }).fill(loanName);
+
     await this.page.locator(PipelineLocator.ChangeStatus.locator).isVisible();
     await this.page.locator(PipelineLocator.ChangeStatus.locator).click();
-    await this.page.locator('text=NPW', { hasNot: this.page.locator('[aria-hidden="true"]') }).isVisible();
-    await this.page.locator('text=NPW', { hasNot: this.page.locator('[aria-hidden="true"]') }).click();
-
-    //await this.page.getByText(PipelineLocator.NPWOption.text).isVisible();
+    await this.page
+      .locator('text=NPW', { hasNot: this.page.locator('[aria-hidden="true"]') }).isVisible();
+    await this.page
+      .locator('text=NPW', { hasNot: this.page.locator('[aria-hidden="true"]') }).click();
+    // await this.page.getByText(PipelineLocator.NPWOption.text).isVisible();
     // await this.page.getByText(PipelineLocator.NPWOption.text).click();
 
     // await this.page.getByText('NPW').click();
@@ -87,8 +92,10 @@ export class LoanStatus {
     // await this.page.getByText(PipelineLocator.NPWOption.text).isVisible();
     // // await this.page.getByText(PipelineLocator.NPWOption.text).nth(1).click();
     // await this.page.getByText(PipelineLocator.NPWOption.text).click();
-    await this.page.locator('text=NPW', { hasNot: this.page.locator('[aria-hidden="true"]') }).isVisible();
-    await this.page.locator('text=NPW', { hasNot: this.page.locator('[aria-hidden="true"]') }).click();
+    await this.page
+      .locator('text=NPW', { hasNot: this.page.locator('[aria-hidden="true"]') }).isVisible();
+    await this.page
+      .locator('text=NPW', { hasNot: this.page.locator('[aria-hidden="true"]') }).click();
 
     await this.page.getByText(PipelineLocator.ConfirmStatusChange.text).isVisible();
 
@@ -106,8 +113,10 @@ export class LoanStatus {
     // await this.page.getByText(PipelineLocator.NPWOption.text).isVisible();
     // // await this.page.getByText(PipelineLocator.NPWOption.text).nth(1).click();
     // await this.page.getByText(PipelineLocator.NPWOption.text).click();
-    await this.page.locator('text=NPW', { hasNot: this.page.locator('[aria-hidden="true"]') }).isVisible();
-    await this.page.locator('text=NPW', { hasNot: this.page.locator('[aria-hidden="true"]') }).click();
+    await this.page
+      .locator('text=NPW', { hasNot: this.page.locator('[aria-hidden="true"]') }).isVisible();
+    await this.page
+      .locator('text=NPW', { hasNot: this.page.locator('[aria-hidden="true"]') }).click();
 
     await this.page.getByText(PipelineLocator.ConfirmStatusChange.text).isVisible();
 
