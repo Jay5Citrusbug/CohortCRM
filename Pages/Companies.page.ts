@@ -111,14 +111,13 @@ export class CompaniesPage {
     await field.press('Enter');
     await this.page.getByTestId('companiesHouseNumber').isVisible();
     await this.page.getByTestId('companiesHouseNumber').fill(faker.string.numeric(4));
-    await this.page.getByText('Shareholders Enter').click();
-    await this.page.locator('.ant-select.ant-select-outlined.ant-select-in-form-item.text-start.css-5uvb3z.ant-select-multiple > .ant-select-selector').first().click();
-    await this.page.locator('span').filter({ hasText: 'Enter shareholders' }).first().click();
-    await this.page.getByText('Ocean Holland', { exact: true }).click();
+   // await this.page.locator('.ant-select.ant-select-outlined.ant-select-in-form-item.text-start.css-5uvb3z.ant-select-multiple > .ant-select-selector').first().click();
+   // await this.page.locator('span').filter({ hasText: 'Enter shareholders' }).first().click();
+    //await this.page.getByText('Ocean Holland', { exact: true }).click();
     await this.page.locator('div:nth-child(7) > .select-wrapper > .ant-form-item > .ant-row > .ant-col > .ant-form-item-control-input > .ant-form-item-control-input-content > .ant-select > .ant-select-selector > .ant-select-selection-wrap > .ant-select-selection-overflow').click();
-    await this.page.getByRole('button', { name: 'add icon Add New Contact' }).nth(1).isVisible();
+    await this.page.getByRole('button', { name: 'add icon Add New Contact' }).isVisible();
 
-    await this.page.getByRole('button', { name: 'add icon Add New Contact' }).nth(1).click();
+    await this.page.getByRole('button', { name: 'add icon Add New Contact' }).click();
 
     const firstname = faker.person.firstName();
     const lastname = faker.person.lastName();
