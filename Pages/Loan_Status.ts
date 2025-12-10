@@ -66,8 +66,8 @@ export class LoanStatus {
   async StatusNPW_cancel() {
     await this.page.locator(PipelineLocator.ChangeStatus.locator).isVisible();
     await this.page.locator(PipelineLocator.ChangeStatus.locator).click();
-    await this.page.getByText(PipelineLocator.NPWOption.text).nth(1).isVisible();
-    await this.page.getByText(PipelineLocator.NPWOption.text).nth(1).click();
+    await this.page.getByText(PipelineLocator.NPWOption.text).isVisible();
+    await this.page.getByText(PipelineLocator.NPWOption.text).click();
 
     // await this.page.getByText('NPW').click();
     await this.page.getByText(PipelineLocator.ConfirmStatusChange.text).isVisible();
@@ -81,9 +81,9 @@ export class LoanStatus {
     console.log('🔹 Starting NPW reason popup cancellation verification...');
     await this.page.locator(PipelineLocator.ChangeStatus.locator).isVisible();
     await this.page.locator(PipelineLocator.ChangeStatus.locator).click();
-    await this.page.getByText(PipelineLocator.NPWOption.text).nth(1).isVisible();
+    await this.page.getByText(PipelineLocator.NPWOption.text).isVisible();
     // await this.page.getByText(PipelineLocator.NPWOption.text).nth(1).click();
-    await this.page.getByText(PipelineLocator.NPWOption.text).nth(1).click();
+    await this.page.getByText(PipelineLocator.NPWOption.text).click();
     await this.page.getByText(PipelineLocator.ConfirmStatusChange.text).isVisible();
 
     await this.page.getByRole(PipelineLocator.PopupDialog.role).getByText(PipelineLocator.PopupNPWText.dialogNPWText, { exact: true }).isVisible();
@@ -97,9 +97,9 @@ export class LoanStatus {
     console.log('🔹 Starting NPW reason popup cancellation verification...');
     await this.page.locator(PipelineLocator.ChangeStatus.locator).isVisible();
     await this.page.locator(PipelineLocator.ChangeStatus.locator).click();
-    await this.page.getByText(PipelineLocator.NPWOption.text).nth(1).isVisible();
+    await this.page.getByText(PipelineLocator.NPWOption.text).isVisible();
     // await this.page.getByText(PipelineLocator.NPWOption.text).nth(1).click();
-    await this.page.getByText(PipelineLocator.NPWOption.text).nth(1).click();
+    await this.page.getByText(PipelineLocator.NPWOption.text).click();
     await this.page.getByText(PipelineLocator.ConfirmStatusChange.text).isVisible();
 
     await this.page.getByRole(PipelineLocator.PopupDialog.role).getByText(PipelineLocator.PopupNPWText.dialogNPWText, { exact: true }).isVisible();
@@ -119,7 +119,12 @@ export class LoanStatus {
     await this.page.getByTestId('npwComments').fill(faker.lorem.sentence());
     await this.page.getByTestId('save-btn').click();
     await this.page.waitForTimeout(5000);
+    await this.page.getByRole('textbox', { name: 'Search New Loans' }).fill(loanName);
+
     console.log('✅ NPW status change completed successfully.');
+     await this.page.evaluate(() => {
+    window.scrollTo(0, document.body.scrollHeight);
+  });
     await expect(
       this.page.getByText(PipelineLocator.NoDataText.name).nth(1)
     ).toBeVisible();
