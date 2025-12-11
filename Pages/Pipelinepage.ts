@@ -194,8 +194,9 @@ export class PipeLinePage {
 
     // Sponsor
     const sponsor = this.page.locator(PipelineLocator.Sponsor.name).first();
-    await sponsor.fill('Automation user');
-    await this.page.keyboard.press('Enter');
+    await sponsor.click();
+    await this.page.getByRole('button', { name: 'TBC' }).isVisible();
+    await this.page.getByRole('button', { name: 'TBC' }).click();
     console.log('✅ Sponsor added.');
 
     // Contact
