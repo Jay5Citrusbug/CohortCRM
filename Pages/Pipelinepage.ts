@@ -200,16 +200,21 @@ export class PipeLinePage {
     console.log('✅ Sponsor added.');
 
     // Contact
-    const contact = this.page.locator(PipelineLocator.Contact.name).first();
-    await contact.fill('automation user');
-    await this.page.keyboard.press('Enter');
+    await this.page.locator('#invite-admin_contact').first().click();
+    await this.page.getByRole('button', { name: 'Direct' }).isVisible();
+    await this.page.getByRole('button', { name: 'Direct' }).click();
+const keyboard= this.page.getByText('0U9dxIrHBqN4HvHw08dG0X119UQ4NxbK1Z7UrGuG0cQFq1XA5PBJhb9w92e6DirectGREENSLEEVES')
+await this.page.keyboard.press('Escape');
+
     console.log('✅ Contact selected.');
 
     // Company
-    const company = this.page.locator(PipelineLocator.Company.name).first();
-    await company.fill('Automation');
-    await this.page.keyboard.press('Enter');
-    console.log('✅ Company added.');
+    // const company = this.page.locator(PipelineLocator.Company.name).first();
+    // await company.click();
+    // await this.page.getByRole('button', { name: 'Direct' }).isVisible();
+    // await this.page.getByRole('button', { name: 'Direct' }).click();
+
+    // console.log('✅ Company added');
     // Click Save
     await this.page.getByRole(PipelineLocator.SaveChangesButton.role, {
       name: PipelineLocator.SaveChangesButton.name
