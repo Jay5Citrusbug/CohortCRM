@@ -125,7 +125,7 @@ export class PipeLinePage {
 
     // Loan Type
     await this.waitAndClick(this.page.locator(PipelineLocator.LoanType.locator).first());
-    await this.page.getByText('Bridge').nth(1).click();
+    await this.page.getByTitle('Bridge').click();
 
     // Asset type
     const assetField = this.page.locator(PipelineLocator.AssetType.name).first();
