@@ -46,6 +46,13 @@ export class CompaniesPage {
 
   }
 
+  async Open_Company_Details() {
+    // Open Company Details
+    await this.page.getByText(CompanyName).isVisible();
+    await this.page.getByText(CompanyName).click();
+  
+  }
+
   async SearchInvalidCompany() {
 
     //Search Company

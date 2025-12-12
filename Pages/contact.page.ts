@@ -31,21 +31,28 @@ export class ContactPage {
 
   async Add_Contact() {
     // Add New Contact
+
     await this.page.getByTestId(ContactLocator.FirstNameInput.testId).fill(firstName);
     await this.page.getByTestId(ContactLocator.LastNameInput.testId).fill(lastName);
     await this.page.getByRole(ContactLocator.AddContactbtn.role, { name: ContactLocator.AddContactbtn.name }).click();
     // await expect(this.page.getByText(Messages.Alerts.ContactAdded)).toBeVisible();
 
     //Search Contact assetion pending as search feature is not working
-    //await page.getByRole('textbox', { name: 'Search Contacts' }).fill('Test Rathod');
+    await this.page.getByRole('textbox', { name: 'Search Contacts' }).fill(firstName);
   }
-  async   Edit_Contact() {
+
+  async Open_Contact_Details() {
+    // Open Contact Details
+    await this.page.getByText(`${firstName} ${lastName}`).isVisible();
+    await this.page.getByText(`${firstName} ${lastName}`).click();
+  }
+  async Edit_Contact() {
     // Edit Contact
     await this.page.getByRole(ContactLocator.AddContactsTab.role, { name: ContactLocator.AddContactsTab.name }).click();
 
     await this.page.getByRole(ContactLocator.editIcon.role, { name: ContactLocator.editIcon.name }).first().click();
     await this.page.getByTestId(ContactLocator.FirstNameInput.testId).fill(firstName);
-    await this.page.getByTestId(ContactLocator.FirstNameInput.testId).fill('Automation');
+    // await this.page.getByTestId(ContactLocator.FirstNameInput.testId).fill('Automation');
     await this.page.getByTestId(ContactLocator.LastNameInput.testId).fill(lastName);
 
     await this.page.getByRole(ContactLocator.UpdateContactbtn.role, { name: ContactLocator.UpdateContactbtn.name }).click();

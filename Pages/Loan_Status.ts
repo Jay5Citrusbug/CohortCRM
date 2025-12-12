@@ -1,10 +1,7 @@
 import { Page, expect } from '@playwright/test';
 import { PipelineLocator } from '../locators/pipeline.locator';
 import { PipeLinePage } from '../Pages/Pipelinepage';
-
 import { Loan_FakerData } from '../Utility/fakerData';
-import { pipeline } from 'stream';
-import { fa } from '@faker-js/faker/.';
 import { faker } from '@faker-js/faker/locale/af_ZA';
 
 const loanName = Loan_FakerData.randomDealName;

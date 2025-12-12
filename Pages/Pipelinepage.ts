@@ -221,10 +221,9 @@ await this.page.keyboard.press('Escape');
     }).click();
 
     // Wait for modal text to be hidden = popup closed
-    await this.page.waitForTimeout(15000);
-
-    console.log('✅ Loan created successfully.');
-
+const loanCell = this.page.getByRole('cell', { name: PipelineLocator.NewEnquiry.name }).first()
+   await loanCell.waitFor({ state: 'visible'});
+ await expect(loanCell).toBeVisible();    console.log('✅ Loan created successfully.');
   }
 
   //---------------------------
