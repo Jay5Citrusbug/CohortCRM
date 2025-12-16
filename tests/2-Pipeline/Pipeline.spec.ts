@@ -42,6 +42,12 @@ test.describe('Pipeline screen Tests', () => {
     await pipeLinePage.Search_Invalid_NewLoans();
   });
 
+  test('Verify “Add New Company” and “Add New Contact” buttons are available in all company dropdowns during loan creation', async () => {
+    console.log('➡️ Test Start: Verify “Add New Company” and “Add New Contact” buttons are available in all company dropdowns during loan creation');
+    await pipeLinePage.Verify_Company_Contact_Dropdown_Creation();
+  })
+
+
 
   test('✅ TC-18  Verify Edit option opens Edit Loan pop-up screen and editing the name', async () => {
     console.log('➡️ Test Start: Verify Edit option opens Edit Loan pop-up screen and editing the name');
@@ -51,8 +57,12 @@ test.describe('Pipeline screen Tests', () => {
   test('✅ TC-19  Verify navigation to Loan Detail page from Loan Listing', async () => {
     console.log('➡️ Test Start: Verify navigation to Loan Detail page from Loan Listing');
     await pipeLinePage.Loan_details();
-
   });
+
+   test('Verify “Add New Company” and “Add New Contact” buttons are available in all company dropdowns during loan editting', async () => {
+    console.log('➡️ Test Start: Verify “Add New Company” and “Add New Contact” buttons are available in all company dropdowns during loan ediitting');
+    await pipeLinePage.Verify_Company_Contact_Dropdown_Editting();
+  })
 
   test('✅ TC-20 Verify that validation messages are displayed for empty comment submission', async () => {
     console.log('➡️ Test Start: Verify that validation messages are displayed for empty comment submission');
@@ -76,3 +86,4 @@ test.describe('Pipeline screen Tests', () => {
 
 
 });
+

@@ -42,7 +42,8 @@ test.describe('Pipeline loan Status', () => {
         await contactPage.Add_Contact();
         await contactPage.Open_Contact_Details();
 
-        const contactHeader = await page.getByRole('heading', { name: 'Contact Information' });
+        const contactHeader = await page.getByRole('heading', { name: 'First Name' });
+        await contactHeader.waitFor({ state: 'visible' });
         await expect(contactHeader).toBeVisible();
         await page.reload();
         await contactHeader.waitFor({ state: 'visible' });

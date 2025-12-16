@@ -43,8 +43,15 @@ export class ContactPage {
 
   async Open_Contact_Details() {
     // Open Contact Details
+await this.page
+  .getByTestId(ContactLocator.FirstNameInput.testId)
+  .waitFor({ state: 'hidden' });
+
     await this.page.getByText(`${firstName} ${lastName}`).isVisible();
+        console.log("fist name==========");
+
     await this.page.getByText(`${firstName} ${lastName}`).click();
+    console.log("fist name");
   }
   async Edit_Contact() {
     // Edit Contact

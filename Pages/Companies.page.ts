@@ -68,7 +68,7 @@ export class CompaniesPage {
 
     await this.page.getByRole(CompaniesLocator.AddCompaniesTab.role, { name: CompaniesLocator.AddCompaniesTab.name }).click();
     await this.page.getByRole(CompaniesLocator.editIcon.role, { name: CompaniesLocator.editIcon.name }).first().click();
-    await this.page.getByTestId(CompaniesLocator.Name.testId).waitFor({ state: 'visible' });;
+    await this.page.getByTestId(CompaniesLocator.Name.testId).waitFor({ state: 'visible' })
     await this.page.waitForTimeout(5000)
     await this.page.getByTestId(CompaniesLocator.Name.testId).clear();
     await this.page.getByTestId(CompaniesLocator.Name.testId).fill(UpdatedCompanyName);

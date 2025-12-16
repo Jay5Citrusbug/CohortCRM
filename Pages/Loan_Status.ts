@@ -199,7 +199,7 @@ export class LoanStatus {
     await statusDropdown.click();
 
     // Select "Underwriting Process"
-    const underwritingOption = this.page.getByText('Underwriting Process').first();
+    const underwritingOption = this.page.getByText('Underwriting Process');
     await expect(underwritingOption).toBeVisible();
     await underwritingOption.click();
 

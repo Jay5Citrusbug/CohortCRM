@@ -99,12 +99,12 @@ export class PipeLinePage {
     const invalidLoanName = faker.lorem.words(3);
     await searchBox.fill(invalidLoanName);
     console.log(`✅ Verified created loan name: ${invalidLoanName}`);
+    const noData = this.page.getByText(PipelineLocator.NoDataText.name).nth(1)
 
-
-    await this.page.waitForTimeout(8000); // Wait for search results to update
-    await this.page.evaluate(() => {
-      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-    });
+    await noData.waitFor({ state: 'visible' }); // Wait for search results to update
+    // await this.page.evaluate(() => {
+    //   window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    // });
     await expect(
       this.page.getByText(PipelineLocator.NoDataText.name).nth(1)
       // await this.page.getByText('No data').nth(1)/
@@ -203,8 +203,8 @@ export class PipeLinePage {
     await this.page.locator('#invite-admin_contact').first().click();
     await this.page.getByRole('button', { name: 'Direct' }).isVisible();
     await this.page.getByRole('button', { name: 'Direct' }).click();
-const keyboard= this.page.getByText('0U9dxIrHBqN4HvHw08dG0X119UQ4NxbK1Z7UrGuG0cQFq1XA5PBJhb9w92e6DirectGREENSLEEVES')
-await this.page.keyboard.press('Escape');
+    const keyboard = this.page.getByText('0U9dxIrHBqN4HvHw08dG0X119UQ4NxbK1Z7UrGuG0cQFq1XA5PBJhb9w92e6DirectGREENSLEEVES')
+    await this.page.keyboard.press('Escape');
 
     console.log('✅ Contact selected.');
 
@@ -221,9 +221,9 @@ await this.page.keyboard.press('Escape');
     }).click();
 
     // Wait for modal text to be hidden = popup closed
-const loanCell = this.page.getByRole('cell', { name: PipelineLocator.NewEnquiry.name }).first()
-   await loanCell.waitFor({ state: 'visible'});
- await expect(loanCell).toBeVisible();    console.log('✅ Loan created successfully.');
+    const loanCell = this.page.getByRole('cell', { name: PipelineLocator.NewEnquiry.name }).first()
+    await loanCell.waitFor({ state: 'visible' });
+    await expect(loanCell).toBeVisible(); console.log('✅ Loan created successfully.');
   }
 
   //---------------------------
@@ -232,6 +232,10 @@ const loanCell = this.page.getByRole('cell', { name: PipelineLocator.NewEnquiry.
 
   async VerifyLoan_status() {
     console.log('🔹 Verifying loan status...');
+await this.page
+  .getByTestId(PipelineLocator.DealName.name)
+  .first()
+  .waitFor({ state: 'hidden' });
 
     await expect(
       this.page.getByRole('cell', { name: PipelineLocator.NewEnquiry.name }).first()
@@ -573,4 +577,168 @@ const loanCell = this.page.getByRole('cell', { name: PipelineLocator.NewEnquiry.
 
     await this.page.getByRole('button', { name: 'Cancel' }).click();
   }
+
+  async Verify_Company_Contact_Dropdown_Creation() {
+    console.log('🔹 Starting verification of "Add New Company" and "Add New Contact" buttons in dropdowns...');
+    await this.page.waitForTimeout(10000);
+    // Click main "add icon" button
+    const addIconButton = this.page.getByRole('button', { name: 'add icon' });
+    await expect(addIconButton).toBeVisible();
+    await addIconButton.click();
+
+    // Sponsor section
+    const sponsorOption = this.page.locator('#invite-admin_sponsor').first();
+    await expect(sponsorOption).toBeVisible();
+    await sponsorOption.click();
+
+    // Verify first Company & Contact
+    await expect(this.page.getByRole('button', { name: 'add icon Add New Company' }).first()).toBeVisible();
+    await expect(this.page.getByRole('button', { name: 'add icon Add New Contact' }).first()).toBeVisible();
+
+    // Click first Contact & Company
+    await this.page.locator('#invite-admin_contact').first().click();
+    await expect(this.page.getByRole('button', { name: 'add icon Add New Contact' }).first()).toBeVisible();
+
+    await this.page.locator('#invite-admin_company').first().click();
+    await expect(this.page.getByRole('button', { name: 'add icon Add New Company' }).first()).toBeVisible();
+
+    // Sponsor Information section
+    const sponsorBanner = this.page.getByRole('banner').filter({ hasText: 'Sponsor Information' });
+    await expect(sponsorBanner).toBeVisible();
+    await sponsorBanner.click();
+
+    const uboSelectors = [
+      '#invite-admin_ubo',
+      '#invite-admin_secondUbo',
+      '#invite-admin_thirdUbo',
+      '#invite-admin_guarantor'
+    ];
+
+    for (const selector of uboSelectors) {
+      const element = this.page.locator(selector);
+      await expect(element).toBeVisible();
+      await element.click();
+      await expect(this.page.getByRole('button', { name: 'add icon Add New Contact' }).first()).toBeVisible();
+    }
+
+    // Introducer Information section
+    const introducerBanner = this.page.getByRole('banner').filter({ hasText: 'Introducer Information' });
+    await expect(introducerBanner).toBeVisible();
+    await introducerBanner.click();
+
+    const introducerSelectors = [
+      '#invite-admin_contact',
+      '#invite-admin_company'
+    ];
+
+    for (const [index, selector] of introducerSelectors.entries()) {
+      const element = this.page.locator(selector).nth(index);
+      await expect(element).toBeVisible();
+      await element.click();
+
+      const buttonName = selector.includes('contact') ? 'add icon Add New Contact' : 'add icon Add New Company';
+      await expect(this.page.getByRole('button', { name: buttonName }).first()).toBeVisible();
+    }
+
+    // Valuation Information section
+    const valuationBanner = this.page.getByRole('banner').filter({ hasText: 'Valuation Information' });
+    await expect(valuationBanner).toBeVisible();
+    await valuationBanner.click();
+
+    const valuerContact = this.page.locator('#invite-admin_valuerContact');
+    await expect(valuerContact).toBeVisible();
+    await valuerContact.click();
+    await expect(this.page.getByRole('button', { name: 'add icon Add New Contact' }).first()).toBeVisible();
+
+    const valuerCompany = this.page.locator('#invite-admin_valuerCompany');
+    await expect(valuerCompany).toBeVisible();
+    await valuerCompany.click();
+    await expect(this.page.getByRole('button', { name: 'add icon Add New Company' }).first()).toBeVisible();
+
+    // Solicitor Information section
+    const solicitorBanner = this.page.getByRole('banner').filter({ hasText: 'Solicitor Information' });
+    await expect(solicitorBanner).toBeVisible();
+    await solicitorBanner.click();
+
+    const solicitorContact = this.page.locator('#invite-admin_solicitorContact');
+    await expect(solicitorContact).toBeVisible();
+    await solicitorContact.click();
+    await expect(this.page.getByRole('button', { name: 'add icon Add New Contact' }).first()).toBeVisible();
+
+    const solicitorCompany = this.page.locator('#invite-admin_solicitorCompany');
+    await expect(solicitorCompany).toBeVisible();
+    await solicitorCompany.click();
+    await expect(this.page.getByRole('button', { name: 'add icon Add New Company' }).first()).toBeVisible();
+
+    console.log('🔹 Verification completed successfully.');
+   await this.page.locator('[data-test-id="discard-btn"]').click();
+  }
+
+
+async Verify_Company_Contact_Dropdown_Editting() {
+  console.log('🔹 Starting verification of dropdown buttons...');
+
+  const dropdown1 = this.page.locator(
+    'div:nth-child(6) > .deal-overview-content > .grid > div:nth-child(2) > .cursor-pointer'
+  );
+
+  await dropdown1.scrollIntoViewIfNeeded();
+  await dropdown1.click();
+
+  await expect(this.page.getByRole('button', { name: 'add icon Add New Contact' })).toBeVisible();
+
+  await this.page.mouse.click(5, 5);
+
+  const dropdown2 = this.page.locator('div:nth-child(6) > .deal-overview-content > .grid > div:nth-child(3) > .cursor-pointer');
+
+  await dropdown2.scrollIntoViewIfNeeded();
+  await dropdown2.click();
+
+  await expect(this.page.getByRole('button', { name: 'add icon Add New Contact' })).toBeVisible();
+
+  await this.page.mouse.click(5, 5);
+
+  const dropdown3 = this.page.locator('div:nth-child(6) > .deal-overview-content > .grid > div:nth-child(4) > .cursor-pointer');
+
+  await dropdown3.scrollIntoViewIfNeeded();
+  await dropdown3.click();
+
+  await expect(this.page.getByRole('button', { name: 'add icon Add New Contact' })).toBeVisible();
+
+  console.log('✅ "Add New Contact" button is visible for 5th column dropdown');
+
+  await this.page.mouse.click(5, 5);
+
+  const dropdown4 = this.page.locator('div:nth-child(6) > .deal-overview-content > .grid > div:nth-child(5) > .cursor-pointer');
+
+  await dropdown4.scrollIntoViewIfNeeded();
+  await dropdown4.click();
+
+  await expect(this.page.getByRole('button', { name: 'add icon Add New Contact' })).toBeVisible();
+
+  await this.page.mouse.click(5, 5);
+
+  const companyContactDropdown = this.page.locator('div:nth-child(8) > .deal-overview-content > .grid > div > .cursor-pointer').first();
+
+  await companyContactDropdown.scrollIntoViewIfNeeded();
+  await companyContactDropdown.click();
+
+  await expect(this.page.getByRole('button', { name: 'add icon Add New Contact' })).toBeVisible();
+
+  await this.page.mouse.click(5, 5);
+
+  const companyDropdown = this.page.locator(
+    'div:nth-child(8) > .deal-overview-content > .grid > div:nth-child(2) > .cursor-pointer');
+
+  await companyDropdown.scrollIntoViewIfNeeded();
+  await companyDropdown.click();
+
+  await expect(
+    this.page.getByRole('button', { name: 'add icon Add New Company' })).toBeVisible();
+
+  await this.page.mouse.click(5, 5);
+
+  console.log('✅ All dropdowns verified successfully');
+}
+
 }
