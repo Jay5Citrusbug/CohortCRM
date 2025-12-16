@@ -31,9 +31,10 @@ test.describe('Pipeline loan Status', () => {
         });
 
         await page.getByRole('button', { name: 'eye' }).first().click();
-        console.log("🔹 View Loan Opened");
-        await expect(page.getByText('Comments Add')).toBeVisible();
+        await expect(page.getByRole('button', { name: 'Add' })).toBeVisible();
         await expect(page.getByRole('button', { name: 'Edit Loan' })).toBeVisible();
+       
+
         await page.reload();
 
         // Contact Page

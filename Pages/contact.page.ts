@@ -48,10 +48,7 @@ await this.page
   .waitFor({ state: 'hidden' });
 
     await this.page.getByText(`${firstName} ${lastName}`).isVisible();
-        console.log("fist name==========");
-
     await this.page.getByText(`${firstName} ${lastName}`).click();
-    console.log("fist name");
   }
   async Edit_Contact() {
     // Edit Contact
