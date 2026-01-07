@@ -137,10 +137,9 @@ export class PipeLinePage {
     // Postal Code
     const postal = this.page.getByTestId(PipelineLocator.PostalcodeID.name).first();
     await postal.fill(Loan_FakerData.randomPostalCode);
-    //await postal.fill("385555");
 
     console.log('✅ Postal code entered.');
-
+    //await this.page.waitForTimeout(3000);
     //-------------------------
     // Popup Handling (Optimized)
     //-------------------------
@@ -232,10 +231,10 @@ export class PipeLinePage {
 
   async VerifyLoan_status() {
     console.log('🔹 Verifying loan status...');
-await this.page
-  .getByTestId(PipelineLocator.DealName.name)
-  .first()
-  .waitFor({ state: 'hidden' });
+    await this.page
+      .getByTestId(PipelineLocator.DealName.name)
+      .first()
+      .waitFor({ state: 'hidden' });
 
     await expect(
       this.page.getByRole('cell', { name: PipelineLocator.NewEnquiry.name }).first()
@@ -249,9 +248,9 @@ await this.page
   //---------------------------
 
   async Validation_Create_Loan() {
-    await this.page.getByText(PipelineLocator.PipelineTab.name).click();
-
-    console.log('🔹 Starting validation for Create Loan...');
+    // await this.page.getByText(PipelineLocator.PipelineTab.name).click();
+    // console.log('🔹 Navigated to Pipeline tab.');
+    //     console.log('🔹 Starting validation for Create Loan...');
 
     await this.waitAndClick(
       this.page.getByRole(PipelineLocator.AddLoanButton.role, {
@@ -303,23 +302,27 @@ await this.page
 
     await filter.check();
 
+    const OpenLoan_Drawer = this.page.locator(PipelineLocator.Open_loan_Drawer.locator);
+    await OpenLoan_Drawer.waitFor({ state: 'visible' });
+    await OpenLoan_Drawer.click();
+
     // Wait for the row to appear
-    const loanNameExpand = this.page.locator(PipelineLocator.LoanNameExpand.locator);
-    await expect(loanNameExpand).toBeVisible({ timeout: 8000 });
+    const loan_Opened = this.page.getByRole(PipelineLocator.LoanDrawer_opened.role, {
+      name: PipelineLocator.LoanDrawer_opened.name
+    });
+    await OpenLoan_Drawer.waitFor({ state: 'visible' });
 
-    // Ensure clickable
-    await loanNameExpand.waitFor({ state: 'attached' });
+    await expect(loan_Opened).toBeVisible();
 
-    // Click
-    await loanNameExpand.click();
-    await this.page.waitForTimeout(4000); // Wait for 4 seconds for the expansion animation
     await this.page.evaluate(() => {
       window.scrollTo(0, document.body.scrollHeight);
     });
 
     // ⏳ NEW: Wait for potentialMCQMarked to appear after expand
-    const mcqMarked = this.page.locator(PipelineLocator.potentialMCQMarked.locator);
-    await expect(mcqMarked).toBeVisible({ timeout: 7000 });
+    const mcqMarked = this.page.getByLabel('', { exact: true });
+    await mcqMarked.waitFor({ state: 'visible' });
+    await expect(mcqMarked).toBeChecked();
+    await this.page.locator('button').filter({ hasText: 'Close' }).click();
     await filter.uncheck();
 
     console.log('✅ MCQ filtering verified successfully.');
@@ -671,74 +674,74 @@ await this.page
     await expect(this.page.getByRole('button', { name: 'add icon Add New Company' }).first()).toBeVisible();
 
     console.log('🔹 Verification completed successfully.');
-   await this.page.locator('[data-test-id="discard-btn"]').click();
+    await this.page.locator('[data-test-id="discard-btn"]').click();
   }
 
 
-async Verify_Company_Contact_Dropdown_Editting() {
-  console.log('🔹 Starting verification of dropdown buttons...');
+  async Verify_Company_Contact_Dropdown_Editting() {
+    console.log('🔹 Starting verification of dropdown buttons...');
 
-  const dropdown1 = this.page.locator(
-    'div:nth-child(6) > .deal-overview-content > .grid > div:nth-child(2) > .cursor-pointer'
-  );
+    const dropdown1 = this.page.locator(
+      'div:nth-child(6) > .deal-overview-content > .grid > div:nth-child(2) > .cursor-pointer'
+    );
 
-  await dropdown1.scrollIntoViewIfNeeded();
-  await dropdown1.click();
+    await dropdown1.scrollIntoViewIfNeeded();
+    await dropdown1.click();
 
-  await expect(this.page.getByRole('button', { name: 'add icon Add New Contact' })).toBeVisible();
+    await expect(this.page.getByRole('button', { name: 'add icon Add New Contact' })).toBeVisible();
 
-  await this.page.mouse.click(5, 5);
+    await this.page.mouse.click(5, 5);
 
-  const dropdown2 = this.page.locator('div:nth-child(6) > .deal-overview-content > .grid > div:nth-child(3) > .cursor-pointer');
+    const dropdown2 = this.page.locator('div:nth-child(6) > .deal-overview-content > .grid > div:nth-child(3) > .cursor-pointer');
 
-  await dropdown2.scrollIntoViewIfNeeded();
-  await dropdown2.click();
+    await dropdown2.scrollIntoViewIfNeeded();
+    await dropdown2.click();
 
-  await expect(this.page.getByRole('button', { name: 'add icon Add New Contact' })).toBeVisible();
+    await expect(this.page.getByRole('button', { name: 'add icon Add New Contact' })).toBeVisible();
 
-  await this.page.mouse.click(5, 5);
+    await this.page.mouse.click(5, 5);
 
-  const dropdown3 = this.page.locator('div:nth-child(6) > .deal-overview-content > .grid > div:nth-child(4) > .cursor-pointer');
+    const dropdown3 = this.page.locator('div:nth-child(6) > .deal-overview-content > .grid > div:nth-child(4) > .cursor-pointer');
 
-  await dropdown3.scrollIntoViewIfNeeded();
-  await dropdown3.click();
+    await dropdown3.scrollIntoViewIfNeeded();
+    await dropdown3.click();
 
-  await expect(this.page.getByRole('button', { name: 'add icon Add New Contact' })).toBeVisible();
+    await expect(this.page.getByRole('button', { name: 'add icon Add New Contact' })).toBeVisible();
 
-  console.log('✅ "Add New Contact" button is visible for 5th column dropdown');
+    console.log('✅ "Add New Contact" button is visible for 5th column dropdown');
 
-  await this.page.mouse.click(5, 5);
+    await this.page.mouse.click(5, 5);
 
-  const dropdown4 = this.page.locator('div:nth-child(6) > .deal-overview-content > .grid > div:nth-child(5) > .cursor-pointer');
+    const dropdown4 = this.page.locator('div:nth-child(6) > .deal-overview-content > .grid > div:nth-child(5) > .cursor-pointer');
 
-  await dropdown4.scrollIntoViewIfNeeded();
-  await dropdown4.click();
+    await dropdown4.scrollIntoViewIfNeeded();
+    await dropdown4.click();
 
-  await expect(this.page.getByRole('button', { name: 'add icon Add New Contact' })).toBeVisible();
+    await expect(this.page.getByRole('button', { name: 'add icon Add New Contact' })).toBeVisible();
 
-  await this.page.mouse.click(5, 5);
+    await this.page.mouse.click(5, 5);
 
-  const companyContactDropdown = this.page.locator('div:nth-child(8) > .deal-overview-content > .grid > div > .cursor-pointer').first();
+    const companyContactDropdown = this.page.locator('div:nth-child(8) > .deal-overview-content > .grid > div > .cursor-pointer').first();
 
-  await companyContactDropdown.scrollIntoViewIfNeeded();
-  await companyContactDropdown.click();
+    await companyContactDropdown.scrollIntoViewIfNeeded();
+    await companyContactDropdown.click();
 
-  await expect(this.page.getByRole('button', { name: 'add icon Add New Contact' })).toBeVisible();
+    await expect(this.page.getByRole('button', { name: 'add icon Add New Contact' })).toBeVisible();
 
-  await this.page.mouse.click(5, 5);
+    await this.page.mouse.click(5, 5);
 
-  const companyDropdown = this.page.locator(
-    'div:nth-child(8) > .deal-overview-content > .grid > div:nth-child(2) > .cursor-pointer');
+    const companyDropdown = this.page.locator(
+      'div:nth-child(8) > .deal-overview-content > .grid > div:nth-child(2) > .cursor-pointer');
 
-  await companyDropdown.scrollIntoViewIfNeeded();
-  await companyDropdown.click();
+    await companyDropdown.scrollIntoViewIfNeeded();
+    await companyDropdown.click();
 
-  await expect(
-    this.page.getByRole('button', { name: 'add icon Add New Company' })).toBeVisible();
+    await expect(
+      this.page.getByRole('button', { name: 'add icon Add New Company' })).toBeVisible();
 
-  await this.page.mouse.click(5, 5);
+    await this.page.mouse.click(5, 5);
 
-  console.log('✅ All dropdowns verified successfully');
-}
+    console.log('✅ All dropdowns verified successfully');
+  }
 
 }

@@ -47,8 +47,6 @@ test.describe('Pipeline screen Tests', () => {
     await pipeLinePage.Verify_Company_Contact_Dropdown_Creation();
   })
 
-
-
   test('✅ TC-18  Verify Edit option opens Edit Loan pop-up screen and editing the name', async () => {
     console.log('➡️ Test Start: Verify Edit option opens Edit Loan pop-up screen and editing the name');
     await pipeLinePage.Edit_Loan_Update();

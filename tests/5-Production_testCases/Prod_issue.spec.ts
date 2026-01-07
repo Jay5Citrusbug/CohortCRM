@@ -24,7 +24,7 @@ test.describe('Pipeline loan Status', () => {
 
     test('🔄 Reload Loan, Company and Contact Page', async () => {
         console.log("🔹 Opening Edit Loan pop-up...");
-
+        
         await page.evaluate(() => {
             const scrollable = document.querySelector('.ant-table-body');
             if (scrollable) scrollable.scrollBy({ left: 1000, behavior: 'smooth' });

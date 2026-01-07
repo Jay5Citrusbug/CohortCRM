@@ -3,6 +3,8 @@ import { Messages } from '../messages/message';
 import { faker, fakerRO } from '@faker-js/faker';
 import { CompaniesLocator } from '../locators/Companies.locator';
 import { ContactLocator } from '../locators/contact.locator';
+import { Loan_FakerData } from '../Utility/fakerData';
+
 
 const CompanyName = faker.company.name();
 const UpdatedCompanyName = `Updated ${faker.company.name()}`;
@@ -13,6 +15,14 @@ export class CompaniesPage {
 
   constructor(page: Page) {
     this.page = page;
+  }
+
+   async safeIsVisible(locator) {
+    try {
+      return await locator.isVisible();
+    } catch {
+      return false;
+    }
   }
 
   async CompaniesCreate_Validation() {
@@ -50,7 +60,7 @@ export class CompaniesPage {
     // Open Company Details
     await this.page.getByText(CompanyName).isVisible();
     await this.page.getByText(CompanyName).click();
-  
+
   }
 
   async SearchInvalidCompany() {
@@ -72,8 +82,10 @@ export class CompaniesPage {
     await this.page.waitForTimeout(5000)
     await this.page.getByTestId(CompaniesLocator.Name.testId).clear();
     await this.page.getByTestId(CompaniesLocator.Name.testId).fill(UpdatedCompanyName);
-    await this.page.getByRole(CompaniesLocator.UpdateCompanybtn.role, { name: CompaniesLocator.UpdateCompanybtn
-      .name }).click();
+    await this.page.getByRole(CompaniesLocator.UpdateCompanybtn.role, {
+      name: CompaniesLocator.UpdateCompanybtn
+        .name
+    }).click();
     await this.page.waitForTimeout(5000)
     await this.page.getByRole(CompaniesLocator.SearchCompanyInput.role, { name: CompaniesLocator.SearchCompanyInput.name }).fill(UpdatedCompanyName);
     // Wait until the first company name matches the updated name
@@ -101,12 +113,51 @@ export class CompaniesPage {
 
   async CreateContactInCompany() {
     await this.page.getByRole(CompaniesLocator.AddCompaniesTab.role, { name: CompaniesLocator.AddCompaniesTab.name }).click();
-
     await this.page.getByRole('button', { name: 'add icon Add New Company' }).click();
     await this.page.getByTestId('name').isVisible();
     await this.page.getByTestId('name').fill(faker.company.name());
-    await this.page.getByTestId('post_code').isVisible();
-    await this.page.getByTestId('post_code').fill(faker.location.zipCode());
+    const postal = await this.page.getByTestId('post_code');
+    await postal.isVisible();
+    //await postal.fill(Loan_FakerData.randomPostalCode);
+    await postal.fill("N3 3DP");
+    console.log('✅ Postal code entered.');
+
+    // await postal.fill(Loan_FakerData.randomPostalCode);
+
+    //await this.page.waitForTimeout(3000);
+    //-------------------------
+    // Popup Handling (Optimized)
+    //-------------------------
+    const popup = this.page.getByText('Matching Postcode Warning');
+    const cancelBtn = this.page.getByRole('button', { name: 'Cancel' }).nth(1);
+
+
+    // Dynamically wait up to 5sec for popup to appear
+    let popupVisible = false;
+    try {
+      await popup.waitFor({ state: 'visible', timeout: 5000 });
+      popupVisible = true;
+    } catch {
+      popupVisible = false;
+    }
+
+    // Check popup visible 
+    if (await this.safeIsVisible(popup)) {
+
+      console.log('⚠️ Matching Postcode Warning appeared.');
+
+      // Wait for cancel button
+      await cancelBtn.waitFor({ state: 'visible', timeout: 2000 });
+
+      // Click cancel
+      await cancelBtn.click();
+
+      console.log('✅ Matching Postcode Warning handled.');
+
+    } else {
+      console.log('✅ No postcode warning popup.');
+    }
+
     const field = this.page.locator('#invite-admin_address');
 
     await field.isVisible();
@@ -118,9 +169,6 @@ export class CompaniesPage {
     await field.press('Enter');
     await this.page.getByTestId('companiesHouseNumber').isVisible();
     await this.page.getByTestId('companiesHouseNumber').fill(faker.string.numeric(4));
-   // await this.page.locator('.ant-select.ant-select-outlined.ant-select-in-form-item.text-start.css-5uvb3z.ant-select-multiple > .ant-select-selector').first().click();
-   // await this.page.locator('span').filter({ hasText: 'Enter shareholders' }).first().click();
-    //await this.page.getByText('Ocean Holland', { exact: true }).click();
     await this.page.locator('div:nth-child(7) > .select-wrapper > .ant-form-item > .ant-row > .ant-col > .ant-form-item-control-input > .ant-form-item-control-input-content > .ant-select > .ant-select-selector > .ant-select-selection-wrap > .ant-select-selection-overflow').click();
     await this.page.getByRole('button', { name: 'add icon Add New Contact' }).isVisible();
 
@@ -138,6 +186,34 @@ export class CompaniesPage {
     await this.page.getByTestId('phoneNumber').fill(faker.phone.number());
     await this.page.getByTestId('phoneNumber').press('ControlOrMeta+a');
     await this.page.getByRole('button', { name: 'Add Contact' }).click();
+
+        const ContactWarning = this.page.getByText('Matching Contact Warning');
+    const Contact_cancelBtn = this.page.getByRole('button', { name: 'Close' });
+
+
+    // Dynamically wait up to 5sec for popup to appear
+    let ContactVisible = false;
+    try {
+      await ContactWarning.waitFor({ state: 'visible', timeout: 5000 });
+      ContactVisible = true;
+    } catch {
+      ContactVisible = false;
+    }
+
+    // Check popup visible 
+    if (await this.safeIsVisible(ContactWarning)) {
+      console.log('⚠️ Matching Contact Warning appeared.');
+
+      // Wait for cancel button
+      await Contact_cancelBtn.waitFor({ state: 'visible', timeout: 2000 });
+      // Click cancel
+      await Contact_cancelBtn.click();
+
+      console.log('✅ Matching Contact Warning handled.');
+    } else {
+      console.log('✅ No contact warning popup.');
+    }
+
     await this.page.waitForTimeout(5000);
     await expect(this.page.getByTestId('contacts').getByText(firstname + ' ' + lastname)).toBeVisible();
     await this.page.getByRole(CompaniesLocator.AddCompanybtn.role, { name: CompaniesLocator.AddCompanybtn.name }).click();

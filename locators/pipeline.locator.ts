@@ -81,8 +81,12 @@ NPWFilterOption: {
     role: 'checkbox', name: 'Filter by MCQ',
   },
 
-  LoanNameExpand: {
-    locator: '//table//tr[2]/td[1]/span',
+  Open_loan_Drawer: {
+    locator:"//html/body/div[1]/div/div/div/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[1]/span",
+  },
+
+  LoanDrawer_opened: {
+    role: 'button', name: 'View Detail'
   },
 
   potentialMCQMarked: {

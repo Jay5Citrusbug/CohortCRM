@@ -17,6 +17,15 @@ export class ContactPage {
     this.page = page;
   }
 
+  async safeIsVisible(locator) {
+    try {
+      return await locator.isVisible();
+    } catch {
+      return false;
+    }
+  }
+
+
   async ContactCreate_Validation() {
 
     await this.page.getByRole(ContactLocator.AddContactsTab.role, { name: ContactLocator.AddContactsTab.name }).click();
@@ -34,6 +43,33 @@ export class ContactPage {
 
     await this.page.getByTestId(ContactLocator.FirstNameInput.testId).fill(firstName);
     await this.page.getByTestId(ContactLocator.LastNameInput.testId).fill(lastName);
+    const ContactWarning = this.page.getByText('Matching Contact Warning');
+    const Contact_cancelBtn = this.page.getByRole('button', { name: 'Close' });
+
+
+    // Dynamically wait up to 5sec for popup to appear
+    let ContactVisible = false;
+    try {
+      await ContactWarning.waitFor({ state: 'visible', timeout: 5000 });
+      ContactVisible = true;
+    } catch {
+      ContactVisible = false;
+    }
+
+    // Check popup visible 
+    if (await this.safeIsVisible(ContactWarning)) {
+      console.log('⚠️ Matching Contact Warning appeared.');
+
+      // Wait for cancel button
+      await Contact_cancelBtn.waitFor({ state: 'visible', timeout: 2000 });
+      // Click cancel
+      await Contact_cancelBtn.click();
+
+      console.log('✅ Matching Contact Warning handled.');
+    } else {
+      console.log('✅ No contact warning popup.');
+    }
+
     await this.page.getByRole(ContactLocator.AddContactbtn.role, { name: ContactLocator.AddContactbtn.name }).click();
     // await expect(this.page.getByText(Messages.Alerts.ContactAdded)).toBeVisible();
 
@@ -43,9 +79,9 @@ export class ContactPage {
 
   async Open_Contact_Details() {
     // Open Contact Details
-await this.page
-  .getByTestId(ContactLocator.FirstNameInput.testId)
-  .waitFor({ state: 'hidden' });
+    await this.page
+      .getByTestId(ContactLocator.FirstNameInput.testId)
+      .waitFor({ state: 'hidden' });
 
     await this.page.getByText(`${firstName} ${lastName}`).isVisible();
     await this.page.getByText(`${firstName} ${lastName}`).click();
@@ -56,8 +92,34 @@ await this.page
 
     await this.page.getByRole(ContactLocator.editIcon.role, { name: ContactLocator.editIcon.name }).first().click();
     await this.page.getByTestId(ContactLocator.FirstNameInput.testId).fill(firstName);
-    // await this.page.getByTestId(ContactLocator.FirstNameInput.testId).fill('Automation');
     await this.page.getByTestId(ContactLocator.LastNameInput.testId).fill(lastName);
+
+    const ContactWarning = this.page.getByText('Matching Contact Warning');
+    const Contact_cancelBtn = this.page.getByRole('button', { name: 'Close' });
+
+
+    // Dynamically wait up to 5sec for popup to appear
+    let ContactVisible = false;
+    try {
+      await ContactWarning.waitFor({ state: 'visible', timeout: 5000 });
+      ContactVisible = true;
+    } catch {
+      ContactVisible = false;
+    }
+
+    // Check popup visible 
+    if (await this.safeIsVisible(ContactWarning)) {
+      console.log('⚠️ Matching Contact Warning appeared.');
+
+      // Wait for cancel button
+      await Contact_cancelBtn.waitFor({ state: 'visible', timeout: 2000 });
+      // Click cancel
+      await Contact_cancelBtn.click();
+
+      console.log('✅ Matching Contact Warning handled.');
+    } else {
+      console.log('✅ No contact warning popup.');
+    }
 
     await this.page.getByRole(ContactLocator.UpdateContactbtn.role, { name: ContactLocator.UpdateContactbtn.name }).click();
 
