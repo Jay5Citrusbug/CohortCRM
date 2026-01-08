@@ -68,7 +68,7 @@ export class CompaniesPage {
     //Search Company
     await this.page.getByRole(CompaniesLocator.AddCompaniesTab.role, { name: CompaniesLocator.AddCompaniesTab.name }).click();
 
-    await this.page.getByRole(CompaniesLocator.SearchCompanyInput.role, { name: CompaniesLocator.SearchCompanyInput.name }).fill(faker.person.firstName());
+    await this.page.getByRole(CompaniesLocator.SearchCompanyInput.role, { name: CompaniesLocator.SearchCompanyInput.name }).fill(faker.person.fullName());
     await expect(this.page.getByText(CompaniesLocator.No_data).nth(1)).toBeVisible();
     await this.page.getByRole(CompaniesLocator.SearchCompanyInput.role, { name: CompaniesLocator.SearchCompanyInput.name }).clear();
   }
