@@ -57,24 +57,28 @@ test.describe('Pipeline screen Tests', () => {
     await pipeLinePage.Loan_details();
   });
 
-   test('Verify “Add New Company” and “Add New Contact” buttons are available in all company dropdowns during loan editting', async () => {
+  test('Verify “Add New Company” and “Add New Contact” buttons are available in all company dropdowns during loan editting', async () => {
     console.log('➡️ Test Start: Verify “Add New Company” and “Add New Contact” buttons are available in all company dropdowns during loan ediitting');
     await pipeLinePage.Verify_Company_Contact_Dropdown_Editting();
   })
 
-  test('✅ TC-20 Verify that validation messages are displayed for empty comment submission', async () => {
-    console.log('➡️ Test Start: Verify that validation messages are displayed for empty comment submission');
-    await pipeLinePage.Comment_validation();
-  });
-
-  test('✅ TC-21   Verify that clicking Cancel closes the Add Comment popup', async () => {
-    console.log('➡️ Test Start:  Verify that clicking Cancel closes the Add Comment popup');
-    await pipeLinePage.Comment_cancel();
-  });
-
-  test('✅ TC-22  Verify that user can successfully add a comment', async () => {
+   test('✅ TC-21  Verify that user can successfully add a comment', async () => {
     console.log('➡️ Test Start: Verify that user can successfully add a comment');
     await pipeLinePage.Comment_Creation();
+  });
+   test('✅ TC-22  Verify that user can successfully add a comment', async () => {
+    console.log('➡️ Test Start: Verify that user can successfully add a comment');
+    await pipeLinePage.Comment_Edit();
+  });
+
+  test('✅ TC-23 Verify that clicking delete the comment gets deleted', async () => {
+    console.log('➡️ Test Start: Verify that clicking delete the comment gets deleted');
+    await pipeLinePage.Comment_delete();
+  });
+
+  test('✅ TC-24 Verify that comment is added in the Post Completion', async () => {
+    console.log('➡️ Test Start: Verify that clicking delete the comment gets deleted');
+    await pipeLinePage.PostCompleteion_add_comment();
   });
 
   test('✅ TC-17  Verify Edit option opens Edit Loan pop-up screen and Discard', async () => {

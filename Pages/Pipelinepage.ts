@@ -486,99 +486,80 @@ export class PipeLinePage {
     console.log('✅ "Edit Loan" button is visible.');
   }
 
-  //---------------------------
-  // Comment Form
-  //---------------------------
-
-  async fillCommentForm() {
-    console.log("🔹 Opening comment form...");
-
-    const addBtn = this.page.getByRole(PipelineLocator.AddCommentButton.role, {
-      name: PipelineLocator.AddCommentButton.name
-    });
-
-    await addBtn.waitFor();
-    await addBtn.click();
-
-    await expect(
-      this.page.getByRole(PipelineLocator.CommentPopupHeading.role, {
-        name: PipelineLocator.CommentPopupHeading.name
-      })
-    ).toBeVisible();
-
-    await this.page.locator(PipelineLocator.CommentTypeDropdown.locator).click();
-    await this.page.getByText(PipelineLocator.CommentTypeOption.name).nth(1).click();
-
-    const randomComment = `comment: ${faker.lorem.sentence()}`;
-
-    const editor = this.page.locator(PipelineLocator.CommentTextEditor.locator);
-    const paragraph = this.page.locator(PipelineLocator.CommentTextFallback.locator);
-
-    if (await this.safeIsVisible(editor)) {
-      await editor.fill(randomComment);
-    } else {
-      await paragraph.fill(randomComment);
-    }
-
-    return randomComment;
-  }
-
-  //---------------------------
-  // Comment Creation
-  //---------------------------
-
+  // comment creation
   async Comment_Creation() {
-    console.log("🔹 Starting comment creation process...");
-
-    const comment = await this.fillCommentForm();
-
-    await this.page.getByTestId(PipelineLocator.SaveCommentButton.locator).click();
-
-    await expect(this.page.getByText(comment)).toBeVisible();
-
-    console.log(`✅ Comment successfully created: "${comment}"`);
-  }
-
-  //---------------------------
-  // Comment Cancel
-  //---------------------------
-
-  async Comment_cancel() {
-    console.log("🔹 Starting comment cancel process...");
-
-    const comment = await this.fillCommentForm();
-
-    await this.page.getByRole('button', { name: 'Cancel' }).click();
-
-    await expect(this.page.getByText(comment)).not.toBeVisible();
-
-    console.log('✔️ Comment was NOT saved — cancel worked.');
-  }
-
-  //---------------------------
-  // Comment Validation
-  //---------------------------
-
-  async Comment_validation() {
-    const addBtn = this.page.getByRole(PipelineLocator.AddCommentButton.role, {
-      name: PipelineLocator.AddCommentButton.name
-    });
-
-    await addBtn.waitFor();
-    await addBtn.click();
-
+    // await this.Loan_details();
+    await this.page.locator('div').filter({ hasText: /^No dataClick to add a note$/ }).nth(1).click();
+    const editor = this.page.locator('.ql-editor');
+    await editor.click();
+    await editor.fill('This is a test note added using Playwright.');
+    await this.page.getByTestId('save-btn').click();
     await expect(
-      this.page.getByRole(PipelineLocator.CommentPopupHeading.role, {
-        name: PipelineLocator.CommentPopupHeading.name
-      })
-    ).toBeVisible();
+  this.page.getByText('This is a test note added using Playwright.')
+).toBeVisible();
+    await this.page.waitForTimeout(7000);
+  }
 
-    await this.page.getByTestId(PipelineLocator.SaveCommentButton.locator).click();
+  async Comment_Edit() {
+    await this.page.getByRole('button', { name: '...' }).click();
 
-    await expect(this.page.getByText('Please select comment type')).toBeVisible();
-    await expect(this.page.getByText('Please enter comment')).toBeVisible();
 
-    await this.page.getByRole('button', { name: 'Cancel' }).click();
+    // Click on Edit
+    await this.page.locator('span').filter({ hasText: 'Edit' }).click();
+
+    // Locate the editor, clear existing text, and enter new text
+    const editor = this.page.locator('.ql-editor');
+    await editor.click();
+
+    // Clear existing content
+    await editor.fill('');
+
+    // Enter new content
+    await editor.fill('Updated content added using Playwright automation.');
+
+    // Click Save button
+    await this.page.getByTestId('save-btn').click();
+    await expect(
+  this.page.getByText('Updated content added using Playwright automation.')
+).toBeVisible();
+    await this.page.waitForTimeout(8000);
+
+  }
+
+  async Comment_delete() {
+    await this.page.getByRole('button', { name: '...' }).click();
+
+    // Click Delete button
+    await this.page.getByRole('button', { name: 'Delete' }).click();
+
+    // Click textbox and enter reason
+    const reasonInput = this.page.getByRole('textbox', { name: 'Enter reason' });
+    await reasonInput.click();
+    await reasonInput.fill('Deleting this item as it is no longer required.');
+
+    // Click Yes button to confirm
+    await this.page.getByRole('button', { name: 'Yes' }).click();
+    await this.page.waitForTimeout(10000);
+    await expect(
+  this.page.getByText('Updated content added using Playwright automation.')
+).toBeHidden();
+  }
+
+  async PostCompleteion_add_comment() {
+    //  await this.Loan_details();
+    await this.page.getByRole('heading', { name: 'Post Completion (0/9)' }).click();
+
+    await this.page.getByRole('button', { name: 'Add Comment' }).first().click();
+
+    const editor = this.page.locator('.ql-editor');
+    await editor.click();
+    await editor.fill('This is a test comment added using Playwright automation.');
+
+    await this.page.locator('.btn.auth-btn').click();
+    await expect(
+  this.page.getByText('This is a test comment added using Playwright automation.')
+).toBeVisible();
+    await this.page.waitForTimeout(10000)
   }
 
   async Verify_Company_Contact_Dropdown_Creation() {
