@@ -52,12 +52,12 @@ test.describe('Pipeline screen Tests', () => {
     await pipeLinePage.Edit_Loan_Update();
   });
 
-  test.only('✅ TC-19  Verify navigation to Loan Detail page from Loan Listing', async () => {
+  test('✅ TC-19  Verify navigation to Loan Detail page from Loan Listing', async () => {
     console.log('➡️ Test Start: Verify navigation to Loan Detail page from Loan Listing');
     await pipeLinePage.Loan_details();
   });
 
-  test.only('✅ TC-20  Verify that user can successfully add a comment', async () => {
+  test('✅ TC-20  Verify that user can successfully add a comment', async () => {
     console.log('➡️ Test Start: Verify that user can successfully add a comment');
     await pipeLinePage.Comment_Creation();
   });
