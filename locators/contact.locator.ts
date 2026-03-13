@@ -12,4 +12,5 @@ export const ContactLocator = {
    OpenAddContactModal: { role: 'button', name: 'add icon Add New Contact' },
    AddContactsTab: { role: 'link', name: 'Contacts' },
    DeleteContactYesBtn: { locator: '.ant-btn.css-5uvb3z.ant-btn-default.ant-btn-dangerous' },
+   
 } as const;

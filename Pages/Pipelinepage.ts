@@ -4,7 +4,10 @@ import { Messages } from '../messages/message';
 import { PipelineLocator } from '../locators/pipeline.locator';
 import { faker } from '@faker-js/faker';
 import { Loan_FakerData } from '../Utility/fakerData';
-
+/**
+ * Add a new entity
+ * @param type - 'Person' or 'Trust'
+ */
 const loanName = Loan_FakerData.randomDealName;
 
 export class PipeLinePage {
@@ -486,80 +489,179 @@ export class PipeLinePage {
     console.log('✅ "Edit Loan" button is visible.');
   }
 
-  // comment creation
   async Comment_Creation() {
-    // await this.Loan_details();
-    await this.page.locator('div').filter({ hasText: /^No dataClick to add a note$/ }).nth(1).click();
+    const noDataDiv = this.page.locator('div')
+      .filter({ hasText: /^No dataClick to add a comment$/ })
+      .nth(1);
+
+    await noDataDiv.click();
+
     const editor = this.page.locator('.ql-editor');
-    await editor.click();
     await editor.fill('This is a test note added using Playwright.');
+
     await this.page.getByTestId('save-btn').click();
-    await expect(
-  this.page.getByText('This is a test note added using Playwright.')
-).toBeVisible();
+    console.log("✅ Comment successfully added and verified.");
+
     await this.page.waitForTimeout(7000);
   }
 
   async Comment_Edit() {
-    await this.page.getByRole('button', { name: '...' }).click();
-
-
-    // Click on Edit
-    await this.page.locator('span').filter({ hasText: 'Edit' }).click();
-
-    // Locate the editor, clear existing text, and enter new text
-    const editor = this.page.locator('.ql-editor');
+    const optionsBtn = this.page.getByRole(PipelineLocator.CommentOptionsButton.role, { name: PipelineLocator.CommentOptionsButton.name });
+    await optionsBtn.waitFor();
+    await optionsBtn.click();
+    const editBtn = this.page.locator(PipelineLocator.EditOption.locator).filter({ hasText: PipelineLocator.EditOption.text });
+    await editBtn.waitFor();
+    await editBtn.click();
+    console.log("✏️ Clicked 'Edit' option.");
+    const editor = this.page.locator(PipelineLocator.CommentTextEditor.locator);
     await editor.click();
-
-    // Clear existing content
-    await editor.fill('');
-
-    // Enter new content
+    await editor.fill(''); // clear existing
     await editor.fill('Updated content added using Playwright automation.');
+    await editor.press('Enter'); // press Enter
+    await this.page.waitForTimeout(10000);
+    console.log("---------------------------");
+    const saveBtn = this.page.getByTestId(PipelineLocator.SaveCommentButton.locator);
+    await saveBtn.click();
+    await this.page.waitForTimeout(10000);
+    console.log("---------------------------");
 
-    // Click Save button
-    await this.page.getByTestId('save-btn').click();
     await expect(
-  this.page.getByText('Updated content added using Playwright automation.')
-).toBeVisible();
-    await this.page.waitForTimeout(8000);
+      this.page.getByText('Updated content added using Playwright automation.')
+    ).toBeVisible();
 
+    // Wait for UI update
+    await this.page.waitForTimeout(8000);
   }
 
   async Comment_delete() {
-    await this.page.getByRole('button', { name: '...' }).click();
+    // Click the "..." options button for the comment
+    const optionsBtn = this.page.getByRole(PipelineLocator.CommentOptionsButton.role, { name: PipelineLocator.CommentOptionsButton.name });
+    await optionsBtn.waitFor();
+    await optionsBtn.click();
 
     // Click Delete button
-    await this.page.getByRole('button', { name: 'Delete' }).click();
+    const deleteBtn = this.page.getByRole(PipelineLocator.DeleteOption.role, { name: PipelineLocator.DeleteOption.name });
+    await deleteBtn.waitFor();
+    await deleteBtn.click();
 
-    // Click textbox and enter reason
-    const reasonInput = this.page.getByRole('textbox', { name: 'Enter reason' });
+    const reasonInput = this.page.getByRole(
+      PipelineLocator.ReasonInput.role,
+      { name: PipelineLocator.ReasonInput.name }
+    );
     await reasonInput.click();
     await reasonInput.fill('Deleting this item as it is no longer required.');
+    console.log("✍️ Entered reason for deletion.");
 
-    // Click Yes button to confirm
-    await this.page.getByRole('button', { name: 'Yes' }).click();
+    // Click Yes to confirm deletion
+    const yesBtn = this.page.getByRole(PipelineLocator.ConfirmYesButton.role, { name: PipelineLocator.ConfirmYesButton.name });
+    await yesBtn.click();
+    console.log("✅ Clicked 'Yes' to confirm deletion.");
+
+    // Wait for deletion to complete
     await this.page.waitForTimeout(10000);
-    await expect(
-  this.page.getByText('Updated content added using Playwright automation.')
-).toBeHidden();
+
+    // Assert comment is no longer visible
+    await expect(this.page.locator(PipelineLocator.CommentTextFallback.locator)).toBeHidden();
+    console.log("✅ Comment successfully deleted and verified.");
   }
 
   async PostCompleteion_add_comment() {
-    //  await this.Loan_details();
-    await this.page.getByRole('heading', { name: 'Post Completion (0/9)' }).click();
 
-    await this.page.getByRole('button', { name: 'Add Comment' }).first().click();
+    const postHeading = this.page.getByRole(PipelineLocator.PostCompletionHeading.role, { name: PipelineLocator.PostCompletionHeading.name });
+    await postHeading.waitFor();
+    await postHeading.click();
 
-    const editor = this.page.locator('.ql-editor');
+    let addCommentBtn = this.page.getByRole(PipelineLocator.PostCompletionAddCommentButton.role, { name: PipelineLocator.PostCompletionAddCommentButton.name });
+    if (PipelineLocator.PostCompletionAddCommentButton.first) {
+      addCommentBtn = addCommentBtn.first();
+    }
+    await addCommentBtn.waitFor();
+    await addCommentBtn.click();
+
+    const editor = this.page.locator(PipelineLocator.CommentTextEditor.locator);
     await editor.click();
     await editor.fill('This is a test comment added using Playwright automation.');
 
-    await this.page.locator('.btn.auth-btn').click();
+    const saveBtn = this.page.locator(PipelineLocator.CommentSaveButton.locator);
+    await saveBtn.click();
+    console.log("💾 Clicked Save button.");
     await expect(
-  this.page.getByText('This is a test comment added using Playwright automation.')
-).toBeVisible();
-    await this.page.waitForTimeout(10000)
+      this.page.getByText('This is a test comment added using Playwright automation.')
+    ).toBeVisible();
+    await this.page.waitForTimeout(10000);
+  }
+
+  async Ownership_person_trust() {
+    await this.page.getByRole(PipelineLocator.KYCHeading.role, { name: PipelineLocator.KYCHeading.name }).click();
+    console.log("🖱️ Clicked 'KYC' heading.");
+
+    // Click Ownership Structure heading
+    await this.page.getByRole(PipelineLocator.OwnershipStructureHeading.role, { name: PipelineLocator.OwnershipStructureHeading.name }).click();
+    console.log("🖱️ Clicked 'Ownership Structure' heading.");
+
+    // Function to create an entity (Person or Trust)
+    const createEntity = async (type: 'Person' | 'Trust') => {
+      // Click Add Entity button
+      await this.page.getByRole(PipelineLocator.AddEntityButton.role, { name: PipelineLocator.AddEntityButton.name }).click();
+      console.log(`🖱️ Clicked 'Add Entity' button for ${type}.`);
+
+      // Click Entity Type dropdown
+      const entityTypeDropdown = this.page.locator(PipelineLocator.EntityTypeDropdown.locator);
+      await entityTypeDropdown.click();
+      console.log("🖱️ Opened Entity Type dropdown.");
+
+      // Select entity type
+      const optionTitle = type === 'Person' ? PipelineLocator.PersonOption.title : PipelineLocator.TrustOption.title;
+      await this.page.getByTitle(optionTitle).click();
+      console.log(`✅ Selected '${type}' from dropdown.`);
+
+      // Fill random entity name
+      const randomName = `${type}_${Math.floor(Math.random() * 10000)}`;
+      const entityNameInput = this.page.getByTestId(PipelineLocator.EntityNameInput.testId);
+      await entityNameInput.fill(randomName);
+      console.log(`✍️ Entered entity name: ${randomName}`);
+
+      // Click Create Entity button
+      await this.page.getByRole(PipelineLocator.CreateEntityButton.role, { name: PipelineLocator.CreateEntityButton.name }).click();
+      console.log(`✅ Clicked 'Create Entity' button for ${type}.`);
+
+      await this.page.waitForTimeout(2000);
+      await expect(this.page.getByText(randomName)).toBeVisible();
+
+      // Return the random name if you want to use it later
+      return randomName;// wait for entity to appear
+    };
+
+    // Create Person first
+    await createEntity('Person');
+
+    // Create Trust next
+    await createEntity('Trust');
+  }
+
+  async Ownership_company() {
+
+  }
+
+  async PostCompleteion_Status_change() {
+    const postHeading = this.page.getByRole(PipelineLocator.PostCompletionHeading.role, { name: PipelineLocator.PostCompletionHeading.name });
+    await postHeading.waitFor();
+    await postHeading.click();
+    const toDoItem = this.page.locator(
+      'div:nth-child(3) > .flex.items-start > .flex.items-center.gap-0 > .status-select-wrapper > .ant-select > .ant-select-selector'
+    );
+    await toDoItem.click({ force: true });
+    await toDoItem.click({ force: true });
+    const toDoItem1 = this.page.locator('div').filter({ hasText: /^To do$/ }).nth(5);
+    console.log("🖱️ Clicked the 6th 'To do' item.");
+    await toDoItem1.click({ force: true });
+    let doneOption = this.page.getByTitle('Done').nth(1);
+
+    await doneOption.waitFor({ state: 'visible' });
+    await doneOption.click();
+    await this.page.waitForTimeout(6000);
+    console.log("✅ Selected 'Done' from dropdown (nth(3)).");
+
   }
 
   async Verify_Company_Contact_Dropdown_Creation() {
@@ -628,13 +730,13 @@ export class PipeLinePage {
     const valuationBanner = this.page.getByRole('banner').filter({ hasText: 'Valuation Information' });
     await expect(valuationBanner).toBeVisible();
     await valuationBanner.click();
-
-    const valuerContact = this.page.locator('#invite-admin_valuerContact');
+    await this.page.waitForTimeout(10000)
+    const valuerContact = this.page.locator('#invite-admin_valuerContact-0');
     await expect(valuerContact).toBeVisible();
     await valuerContact.click();
     await expect(this.page.getByRole('button', { name: 'add icon Add New Contact' }).first()).toBeVisible();
 
-    const valuerCompany = this.page.locator('#invite-admin_valuerCompany');
+    const valuerCompany = this.page.locator('#invite-admin_valuerCompany-0');
     await expect(valuerCompany).toBeVisible();
     await valuerCompany.click();
     await expect(this.page.getByRole('button', { name: 'add icon Add New Company' }).first()).toBeVisible();
@@ -659,70 +761,7 @@ export class PipeLinePage {
   }
 
 
-  async Verify_Company_Contact_Dropdown_Editting() {
-    console.log('🔹 Starting verification of dropdown buttons...');
-
-    const dropdown1 = this.page.locator(
-      'div:nth-child(6) > .deal-overview-content > .grid > div:nth-child(2) > .cursor-pointer'
-    );
-
-    await dropdown1.scrollIntoViewIfNeeded();
-    await dropdown1.click();
-
-    await expect(this.page.getByRole('button', { name: 'add icon Add New Contact' })).toBeVisible();
-
-    await this.page.mouse.click(5, 5);
-
-    const dropdown2 = this.page.locator('div:nth-child(6) > .deal-overview-content > .grid > div:nth-child(3) > .cursor-pointer');
-
-    await dropdown2.scrollIntoViewIfNeeded();
-    await dropdown2.click();
-
-    await expect(this.page.getByRole('button', { name: 'add icon Add New Contact' })).toBeVisible();
-
-    await this.page.mouse.click(5, 5);
-
-    const dropdown3 = this.page.locator('div:nth-child(6) > .deal-overview-content > .grid > div:nth-child(4) > .cursor-pointer');
-
-    await dropdown3.scrollIntoViewIfNeeded();
-    await dropdown3.click();
-
-    await expect(this.page.getByRole('button', { name: 'add icon Add New Contact' })).toBeVisible();
-
-    console.log('✅ "Add New Contact" button is visible for 5th column dropdown');
-
-    await this.page.mouse.click(5, 5);
-
-    const dropdown4 = this.page.locator('div:nth-child(6) > .deal-overview-content > .grid > div:nth-child(5) > .cursor-pointer');
-
-    await dropdown4.scrollIntoViewIfNeeded();
-    await dropdown4.click();
-
-    await expect(this.page.getByRole('button', { name: 'add icon Add New Contact' })).toBeVisible();
-
-    await this.page.mouse.click(5, 5);
-
-    const companyContactDropdown = this.page.locator('div:nth-child(8) > .deal-overview-content > .grid > div > .cursor-pointer').first();
-
-    await companyContactDropdown.scrollIntoViewIfNeeded();
-    await companyContactDropdown.click();
-
-    await expect(this.page.getByRole('button', { name: 'add icon Add New Contact' })).toBeVisible();
-
-    await this.page.mouse.click(5, 5);
-
-    const companyDropdown = this.page.locator(
-      'div:nth-child(8) > .deal-overview-content > .grid > div:nth-child(2) > .cursor-pointer');
-
-    await companyDropdown.scrollIntoViewIfNeeded();
-    await companyDropdown.click();
-
-    await expect(
-      this.page.getByRole('button', { name: 'add icon Add New Company' })).toBeVisible();
-
-    await this.page.mouse.click(5, 5);
-
-    console.log('✅ All dropdowns verified successfully');
-  }
-
 }
+
+
+

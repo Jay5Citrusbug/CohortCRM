@@ -23,7 +23,7 @@ const securityTypes = [
 ];
 // Create reusable Faker data object
 export const Loan_FakerData = {
-  randomDealName: `Automation Loan ${faker.string.alphanumeric(6)}`,
+  randomDealName: `Automation-Loan ${faker.string.alphanumeric(6)}`,
   randomPostalCode: faker.location.zipCode({ format: '#####' }), // US ZIP
   randomValue: faker.number.int({ min: 1, max: 100 }).toString(),
   randomProperty: faker.location.city(),

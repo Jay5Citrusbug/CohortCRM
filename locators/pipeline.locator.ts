@@ -82,7 +82,7 @@ NPWFilterOption: {
   },
 
   Open_loan_Drawer: {
-    locator:"//html/body/div[1]/div/div/div/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[1]/span",
+    locator: "//html/body/div[1]/div/div/div/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[1]/span",
   },
 
   LoanDrawer_opened: {
@@ -179,12 +179,12 @@ SaveCommentButton: {
   locator: 'save-btn',
 
 },
-  LoanType:{
-    locator:'#invite-admin_loanType',
+  LoanType: {
+    locator: '#invite-admin_loanType',
   },
 
-  propertyAddress:{
-    locator:'#invite-admin_property'
+  propertyAddress: {
+    locator: '#invite-admin_property'
   },
    ChangeStatus: {
     locator: "//html/body/div/div/div/div/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[3]/div/div/span/span[2]"
@@ -222,6 +222,88 @@ SaveCommentButton: {
     NPWPopupconfirmButton: {
     role: "button",
     name: "Confirm"
+  },
+ NoDataAddComment: {
+    locator: 'div',
+    text: /^No dataClick to add a note$/,
+    index: 1,
+  },
+  CommentOptionsButton: {
+    role: 'button',
+    name: '...',
+  },
+  EditOption: {
+    locator: 'span',
+    text: 'Edit',
+  },
+  DeleteOption: {
+    role: 'button',
+    name: 'Delete',
+  },
+  ReasonInput: {
+    role: 'textbox',
+    name: 'Enter reason',
+  },
+  ConfirmYesButton: {
+    role: 'button',
+    name: 'Yes',
+  },
+   PostCompletionHeading: {
+    role: 'heading',
+    name: /Post Completion \(\d+\/\d+\)/, // dynamic regex
+  },
+
+  PostCompletionAddCommentButton: {
+    role: 'button',
+    name: 'Add Comment',
+    first: true, // to select the first button if multiple
+  },
+
+  CommentSaveButton: {
+    locator: '.btn.auth-btn',
+  },
+ ToDoItem: {
+    locator: 'div:nth-child(3) > .flex.items-start > .flex.items-center.gap-0 > .status-select-wrapper > .ant-select > .ant-select-selector',
+  },
+  DoneOption: {
+    locator: 'text=Done',
+    exact: true, // match exact text
+  },
+   KYCHeading: {
+    role: 'heading',
+    name: 'KYC',
+  },
+
+  OwnershipStructureHeading: {
+    role: 'heading',
+    name: 'Ownership Structure',
+  },
+
+  AddEntityButton: {
+    role: 'button',
+    name: 'add icon Add Entity',
+  },
+  
+  TrustOption: {
+    title: 'Trust',
+  },
+
+
+  EntityTypeDropdown: {
+    locator: '#invite-admin_entityType',
+  },
+
+  PersonOption: {
+    title: 'Person', // for getByTitle
+  },
+
+  EntityNameInput: {
+    testId: 'entityName',
+  },
+
+  CreateEntityButton: {
+    role: 'button',
+    name: 'Create Entity',
   },
 
 } as const;

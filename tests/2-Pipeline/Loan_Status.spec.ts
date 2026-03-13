@@ -59,14 +59,14 @@ test.describe('Pipeline loan Status', () => {
   test('✅ Verify Successful NPW Status Change', async () => {
     await loanStatusPage.ChangeStatusToNPW();
   })
-  test('🔍 TC-15 Verify Status filtering functionality in pipeline', async () => {
-    console.log('➡️ Test Start: Verify Status filtering functionality in pipeline');
-    await loanStatusPage.Verify_Default_Status_Filter();
-  });
+
   test('✅ TC-16Verify New Inquiry status filter functionality in pipeline', async () => {
     console.log('➡️ Test Start: Verify New Inquiry status filter functionality in pipeline');
     await loanStatusPage.Apply_Status_Filter();
   });
-
+  test('🔍 TC-15 Verify Status filtering functionality in pipeline', async () => {
+    console.log('➡️ Test Start: Verify Status filtering functionality in pipeline');
+    await loanStatusPage.Verify_Default_Status_Filter();
+  });
 
 });

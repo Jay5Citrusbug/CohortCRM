@@ -8,6 +8,8 @@ import { Loan_FakerData } from '../Utility/fakerData';
 
 const CompanyName = faker.company.name();
 const UpdatedCompanyName = `Updated ${faker.company.name()}`;
+const Email = faker.internet.email();
+const PhoneNumber = `9${faker.string.numeric(9)}`;
 
 export class CompaniesPage {
   readonly page: Page;
@@ -181,9 +183,11 @@ export class CompaniesPage {
     await this.page.getByTestId('lastName').isVisible();
     await this.page.getByTestId('lastName').fill(lastname);
     await this.page.getByTestId('email').isVisible();
-    await this.page.getByTestId('email').fill(faker.internet.email());
-    await this.page.getByTestId('phoneNumber').isVisible();
-    await this.page.getByTestId('phoneNumber').fill(faker.phone.number());
+    await this.page.getByTestId('email').fill(Email);
+    await this.page.locator('#invite-admin_phoneNumber').click();
+    await this.page.locator('#invite-admin_phoneNumber').fill(PhoneNumber);
+    await this.page.locator('#invite-admin_phoneNumber').press('Enter');
+    await this.page.waitForTimeout(10000)
     await this.page.getByTestId('phoneNumber').press('ControlOrMeta+a');
     await this.page.getByRole('button', { name: 'Add Contact' }).click();
 

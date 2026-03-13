@@ -6,8 +6,10 @@ import { faker } from '@faker-js/faker';
 import { Loan_FakerData } from '../Utility/fakerData';
 import { ContactLocator } from '../locators/contact.locator';
 
-const firstName = faker.person.firstName();
+const firstName = "automation" + faker.person.firstName();
 const lastName = faker.person.lastName();
+const Email = faker.internet.email();
+const PhoneNumber = `9${faker.string.numeric(9)}`;
 
 export class ContactPage {
   readonly page: Page;
@@ -43,6 +45,11 @@ export class ContactPage {
 
     await this.page.getByTestId(ContactLocator.FirstNameInput.testId).fill(firstName);
     await this.page.getByTestId(ContactLocator.LastNameInput.testId).fill(lastName);
+    await this.page.getByTestId('email').click();
+    await this.page.getByTestId('email').fill(Email);
+    await this.page.locator('#invite-admin_phoneNumber').click();
+    await this.page.locator('#invite-admin_phoneNumber').fill(PhoneNumber);
+    await this.page.locator('#invite-admin_phoneNumber').press('Enter');
     const ContactWarning = this.page.getByText('Matching Contact Warning');
     const Contact_cancelBtn = this.page.getByRole('button', { name: 'Close' });
 
@@ -71,10 +78,14 @@ export class ContactPage {
     }
 
     await this.page.getByRole(ContactLocator.AddContactbtn.role, { name: ContactLocator.AddContactbtn.name }).click();
+    await this.page.waitForTimeout(10000)
+
     // await expect(this.page.getByText(Messages.Alerts.ContactAdded)).toBeVisible();
 
     //Search Contact assetion pending as search feature is not working
     await this.page.getByRole('textbox', { name: 'Search Contacts' }).fill(firstName);
+        await this.page.waitForTimeout(10000)
+
   }
 
   async Open_Contact_Details() {

@@ -15,33 +15,10 @@ export class LoanStatus {
     this.page = page;
   }
 
-  async Verify_Default_Status_Filter() {
-    await this.page.getByText(PipelineLocator.PipelineTab.name).click();
 
-    console.log('🔹 Starting New Enquiry filter verification...');
-    await this.page.reload();
-    await this.page.waitForTimeout(5000);
-    console.log('✅ Page reloaded.');
-    // Step 1: Click on filter
-    await this.page.getByLabel('Status').getByRole(PipelineLocator.StatusFilter.role, { name: PipelineLocator.StatusFilter.name }).click();
-    console.log('✅ Filter dropdown opened.');
-
-    // Step 2: Verify default checked values
-    await expect(this.page.getByRole(PipelineLocator.newEnquiryStatus.role, { name: PipelineLocator.newEnquiryStatus.name }).getByLabel('', { exact: true })).toBeChecked();
-    await expect(this.page.getByRole(PipelineLocator.TermsAcceptedStatus.role, { name: PipelineLocator.TermsAcceptedStatus.name }).getByLabel('', { exact: true })).toBeChecked();
-    await expect(this.page.getByRole(PipelineLocator.UnderwritingProcessStatus.role, { name: PipelineLocator.UnderwritingProcessStatus.name }).getByLabel('', { exact: true })).toBeChecked();
-    console.log('✅ Default checked statuses verified: New Enquiry, Terms Accepted, Underwriting Process.');
-
-    // Step 3: Verify NPW not checked by default
-    await expect(this.page.getByRole(PipelineLocator.NPW_STATUS.role, { name: PipelineLocator.NPW_STATUS.name }).getByLabel('', { exact: true })).not.toBeChecked();
-    console.log('✅ NPW not checked by default.');
-    await this.page.reload();
-    console.log('✅ Page reloaded.');
-
-  }
 
   async Apply_Status_Filter() {
-
+    await this.page.goto('https://crm-admin-staging.web.app/');
     await this.page.getByLabel('Status').getByRole(PipelineLocator.StatusFilter.role, { name: PipelineLocator.StatusFilter.name }).click();
     console.log('✅ Filter dropdown opened.');
 
@@ -174,14 +151,15 @@ export class LoanStatus {
 
   async changeStatusToUnderwriting() {
     console.log(`✅ Verified created loan name: ${loanName}`);
-
+    await this.page.waitForTimeout(10000)
     // Wait for search bar visible, then type loan name
     const searchBar = this.page.getByRole(PipelineLocator.Searchbar.role, {
       name: PipelineLocator.Searchbar.name
     });
     await expect(searchBar).toBeVisible();
+    console.log("loan name", loanName)
     await searchBar.fill(loanName);
-
+    await this.page.waitForTimeout(10000)
     // ⛔ Removed static wait — replaced with dynamic wait for loan row
     await expect(
       this.page.locator('div').filter({ hasText: 'Name of loan#StatusLoan' }).nth(3)
@@ -199,7 +177,7 @@ export class LoanStatus {
     await statusDropdown.click();
 
     // Select "Underwriting Process"
-    const underwritingOption = this.page.getByText('Underwriting Process').nth(1);
+    const underwritingOption = this.page.getByTitle('Underwriting Process');
     await expect(underwritingOption).toBeVisible();
     await underwritingOption.click();
 
@@ -271,6 +249,25 @@ export class LoanStatus {
     await expect(
       this.page.getByText('Loan Live').first()
     ).toBeVisible({ timeout: 3000 });
+
+  }
+
+    async Verify_Default_Status_Filter() {
+   await this.page.goto('https://crm-admin-staging.web.app/');
+    await this.page.getByLabel('Status').getByRole(PipelineLocator.StatusFilter.role, { name: PipelineLocator.StatusFilter.name }).click();
+    console.log('✅ Filter dropdown opened.');
+
+    // Step 2: Verify default checked values
+    await expect(this.page.getByRole(PipelineLocator.newEnquiryStatus.role, { name: PipelineLocator.newEnquiryStatus.name }).getByLabel('', { exact: true })).toBeChecked();
+    await expect(this.page.getByRole(PipelineLocator.TermsAcceptedStatus.role, { name: PipelineLocator.TermsAcceptedStatus.name }).getByLabel('', { exact: true })).toBeChecked();
+    await expect(this.page.getByRole(PipelineLocator.UnderwritingProcessStatus.role, { name: PipelineLocator.UnderwritingProcessStatus.name }).getByLabel('', { exact: true })).toBeChecked();
+    console.log('✅ Default checked statuses verified: New Enquiry, Terms Accepted, Underwriting Process.');
+
+    // Step 3: Verify NPW not checked by default
+    await expect(this.page.getByRole(PipelineLocator.NPW_STATUS.role, { name: PipelineLocator.NPW_STATUS.name }).getByLabel('', { exact: true })).not.toBeChecked();
+    console.log('✅ NPW not checked by default.');
+    await this.page.reload();
+    console.log('✅ Page reloaded.');
 
   }
 }

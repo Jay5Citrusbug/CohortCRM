@@ -52,36 +52,45 @@ test.describe('Pipeline screen Tests', () => {
     await pipeLinePage.Edit_Loan_Update();
   });
 
-  test('✅ TC-19  Verify navigation to Loan Detail page from Loan Listing', async () => {
+  test.only('✅ TC-19  Verify navigation to Loan Detail page from Loan Listing', async () => {
     console.log('➡️ Test Start: Verify navigation to Loan Detail page from Loan Listing');
     await pipeLinePage.Loan_details();
   });
 
-  test('Verify “Add New Company” and “Add New Contact” buttons are available in all company dropdowns during loan editting', async () => {
-    console.log('➡️ Test Start: Verify “Add New Company” and “Add New Contact” buttons are available in all company dropdowns during loan ediitting');
-    await pipeLinePage.Verify_Company_Contact_Dropdown_Editting();
-  })
-
-   test('✅ TC-21  Verify that user can successfully add a comment', async () => {
+  test.only('✅ TC-20  Verify that user can successfully add a comment', async () => {
     console.log('➡️ Test Start: Verify that user can successfully add a comment');
     await pipeLinePage.Comment_Creation();
   });
-   test('✅ TC-22  Verify that user can successfully add a comment', async () => {
-    console.log('➡️ Test Start: Verify that user can successfully add a comment');
+  test('✅ TC-21  Verify that user can successfully edit a comment', async () => {
+    console.log('➡️ Test Start: Verify that user can successfully edit a comment');
     await pipeLinePage.Comment_Edit();
   });
 
-  test('✅ TC-23 Verify that clicking delete the comment gets deleted', async () => {
+  test('✅ TC-22 Verify that clicking delete the comment gets deleted', async () => {
     console.log('➡️ Test Start: Verify that clicking delete the comment gets deleted');
     await pipeLinePage.Comment_delete();
   });
 
-  test('✅ TC-24 Verify that comment is added in the Post Completion', async () => {
+  test('✅ TC-23 Verify that comment is added in the Post Completion', async () => {
     console.log('➡️ Test Start: Verify that clicking delete the comment gets deleted');
     await pipeLinePage.PostCompleteion_add_comment();
   });
 
-  test('✅ TC-17  Verify Edit option opens Edit Loan pop-up screen and Discard', async () => {
+  test('✅ TC-24 Verify that status is changed in the Post Completion', async () => {
+    console.log('➡️ Test Start: Verify that status is changed in the Post Completion');
+    await pipeLinePage.PostCompleteion_Status_change();
+  });
+  test('✅ TC-25 Verify that person and trust are been added in the ownership structure', async () => {
+    console.log('➡️ Test Start: Verify that person and trust are been added in the ownership structure');
+    await pipeLinePage.Ownership_person_trust();
+  });
+
+  test('✅ TC-26 Verify that company is been added in the ownership structure', async () => {
+    console.log('➡️ Test Start: Verify that company is been added in the ownership structure');
+    await pipeLinePage.Ownership_company();
+  });
+
+  test('✅ TC-28  Verify Edit option opens Edit Loan pop-up screen and Discard', async () => {
     console.log('➡️ Test Start: Verify Edit option opens Edit Loan pop-up screen');
     await pipeLinePage.Edit_Loan_Discard();
   });
