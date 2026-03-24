@@ -80,7 +80,7 @@ jobs:
           fi
           touch reports/.nojekyll
       - name: Upload report as Pages Artifact
-        uses: actions/upload-pages-artifact@v4.3.4
+        uses: actions/upload-pages-artifact@v4
         with:
           path: reports
 
@@ -105,7 +105,7 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages 
         id: deploy
-        uses: actions/deploy-pages@v4.0.5
+        uses: actions/deploy-pages@v4
 
       - name: Debug deployed page_url
         run: |
