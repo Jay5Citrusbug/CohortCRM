@@ -9,7 +9,7 @@ const transporter = nodemailer.createTransport({
   port: 587,
   secure: false,
   auth: {
-    user: 'jay5.citrusbug@gmail.com',
+    user: process.env.SMTP_USER || 'jay5.citrusbug@gmail.com',
     pass: process.env.SMTP_PASS,
   },
 });
@@ -20,7 +20,7 @@ const passedTests = Number(process.env.PASSED || '0');
 const failedTests = Number(process.env.FAILED || '0');
 const skippedTests = Number(process.env.SKIPPED || '0');
 
-const reportDate = process.env.REPORT_TIMESTAMP || new Date().toLocaleString();
+const reportDate = process.env.REPORT_DATE || process.env.REPORT_TIMESTAMP || new Date().toLocaleString();
 const repoOwner = process.env.REPO_OWNER || 'your-org';
 const repoName = process.env.REPO_NAME || 'your-repo';
 const reportUrl = process.env.REPORT_URL || 
@@ -51,7 +51,7 @@ const summaryTable = `
 
 // Email configuration
 const mailOptions = {
-  from: 'jay5.citrusbug@gmail.com',
+  from: process.env.SMTP_USER || 'jay5.citrusbug@gmail.com',
   to: 'qa.citrusbug@gmail.com',
   subject: `Playwright Test Report - ${process.env.REPORT_DATE || reportDate}`,
   text: `Hello William,

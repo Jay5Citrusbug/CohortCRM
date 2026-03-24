@@ -10,7 +10,7 @@ const passed = process.env.PASSED;
 const failed = process.env.FAILED;
 const skipped = process.env.SKIPPED;
 const userIds = ["1351863692731482136", "1351873147040694303"];
-const mentions = userIds.map(id => `<@${id}>`).join(" ");
+const mentions = userIds.length > 0 ? userIds.map(id => `<@${id}>`).join(" ") : "";
 
 if (!webhookUrl) {
     console.error("❌ DISCORD_WEBHOOK_URL is not set.");
