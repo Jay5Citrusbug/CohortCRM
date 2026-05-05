@@ -1,12 +1,10 @@
 name: Playwright Tests
 
 permissions:
-  contents: write   # ⚠️ needed to push to gh-pages
+  contents: write
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
   group: "pages"
   cancel-in-progress: false
@@ -16,16 +14,26 @@ on:
     branches: [ main ]
   schedule:
     - cron: "30 2 * * *"
+  workflow_dispatch:
 
 jobs:
   Staging-Tests:
     timeout-minutes: 60
     runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v4.2.2
+    outputs:
+      date: ${{ steps.date.outputs.date }}
+      total: ${{ steps.summary.outputs.total }}
+      passed: ${{ steps.summary.outputs.passed }}
+      failed: ${{ steps.summary.outputs.failed }}
+      skipped: ${{ steps.summary.outputs.skipped }}
 
-      - uses: actions/setup-node@v4.0.3
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: lts/*
 
@@ -71,20 +79,19 @@ jobs:
         id: date
         run: echo "date=$(date '+%Y-%m-%d')-$(shuf -i 100-999 -n 1)" >> $GITHUB_OUTPUT
 
-      # ✅ Prepare new report folder
+      # ✅ Prepare report folder safely
       - name: Prepare report folder
-  run: |
-    mkdir -p current-report/${{ steps.date.outputs.date }}
-    if [ -d "playwright-report" ]; then
-      cp -r playwright-report/* current-report/${{ steps.date.outputs.date }}/
-    else
-      echo "No playwright-report found"
-    fi
+        run: |
+          mkdir -p current-report/${{ steps.date.outputs.date }}
+
+          if [ -d "playwright-report" ]; then
+            cp -r playwright-report/* current-report/${{ steps.date.outputs.date }}/
+          else
+            echo "No playwright-report found"
+          fi
+
+          mkdir -p reports
           touch reports/.nojekyll
-      - name: Upload report as Pages Artifact
-        uses: actions/upload-pages-artifact@v4
-        with:
-          path: reports
 
       # ✅ Checkout gh-pages branch
       - name: Checkout gh-pages branch
@@ -92,11 +99,15 @@ jobs:
           git fetch origin gh-pages
           git checkout gh-pages || git checkout -b gh-pages
 
-      # ✅ Copy new report into history
+      # ✅ Merge reports safely
       - name: Merge reports
         run: |
           mkdir -p reports
-          cp -r current-report/${{ steps.date.outputs.date }} reports/
+          if [ -d "current-report/${{ steps.date.outputs.date }}" ]; then
+            cp -r current-report/${{ steps.date.outputs.date }} reports/
+          else
+            echo "No report folder found, skipping copy"
+          fi
 
       # ✅ Keep only last 30 reports
       - name: Cleanup old reports
@@ -160,7 +171,7 @@ jobs:
 
       # ✅ Discord Success
       - name: Discord Success
-        if: always() && needs.Staging-Tests.outputs.failed == 0
+        if: always() && needs.Staging-Tests.outputs.failed == '0'
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           REPORT_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/reports/${{ needs.Staging-Tests.outputs.date }}/report.html
