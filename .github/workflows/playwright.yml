@@ -73,11 +73,13 @@ jobs:
 
       # ✅ Prepare new report folder
       - name: Prepare report folder
-        run: |
-          mkdir -p reports/${{ steps.date.outputs.date }}
-          if [ -d "playwright-report" ]; then
-            cp -r playwright-report/* reports/${{ steps.date.outputs.date }}/ || true
-          fi
+  run: |
+    mkdir -p current-report/${{ steps.date.outputs.date }}
+    if [ -d "playwright-report" ]; then
+      cp -r playwright-report/* current-report/${{ steps.date.outputs.date }}/
+    else
+      echo "No playwright-report found"
+    fi
           touch reports/.nojekyll
       - name: Upload report as Pages Artifact
         uses: actions/upload-pages-artifact@v4
