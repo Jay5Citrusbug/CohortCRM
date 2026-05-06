@@ -87,8 +87,8 @@ jobs:
       # ✅ Checkout gh-pages branch
       - name: Checkout gh-pages branch
         run: |
-          git fetch origin gh-pages
-          git checkout gh-pages || git checkout -b gh-pages
+          git fetch origin gh-pages || true
+          git checkout -f gh-pages || git checkout -b gh-pages origin/gh-pages
 
       # ✅ Copy new report into history
       - name: Merge reports
@@ -99,8 +99,10 @@ jobs:
       # ✅ Keep only last 30 reports
       - name: Cleanup old reports
         run: |
-          cd reports
-          ls -1dt */ | tail -n +31 | xargs rm -rf || true
+          if [ -d "reports" ]; then
+            cd reports
+            ls -1dt */ | tail -n +31 | xargs rm -rf || true
+          fi
 
       # ✅ Ensure GitHub Pages works
       - name: Add .nojekyll
@@ -111,9 +113,9 @@ jobs:
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
-          git add .
+          git add reports/ .nojekyll
           git commit -m "Update report ${{ steps.date.outputs.date }}" || echo "No changes"
-          git push origin gh-pages
+          git push origin gh-pages --force
 
   Notifications:
     needs: Staging-Tests
