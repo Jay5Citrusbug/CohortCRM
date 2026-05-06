@@ -1,10 +1,12 @@
 name: Playwright Tests
 
 permissions:
-  contents: write   # ⚠️ needed to push to gh-pages
+  contents: read
   pages: write
   id-token: write
 
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
   group: "pages"
   cancel-in-progress: false
@@ -13,6 +15,7 @@ on:
   push:
     branches: [ main ]
   schedule:
+    # Runs every day at 8:00 AM IST (2:30 AM UTC)
     - cron: "30 2 * * *"
 
 jobs:
@@ -20,19 +23,10 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
 
-    outputs:
-      date: ${{ steps.date.outputs.date }}
-      total: ${{ steps.summary.outputs.total }}
-      passed: ${{ steps.summary.outputs.passed }}
-      failed: ${{ steps.summary.outputs.failed }}
-      skipped: ${{ steps.summary.outputs.skipped }}
-
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4.2.2
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4.0.3
         with:
           node-version: lts/*
 
@@ -40,13 +34,13 @@ jobs:
         run: npm ci
 
       - name: Install Playwright Browsers
-        run: npx playwright install
+        run: npx playwright install --with-deps
 
       - name: Clean previous test results
         run: |
+          echo "Cleaning previous Playwright report..."
           rm -rf playwright-report report.html all-reports || true
-
-      - name: Run Playwright tests
+      - name: Run Playwright tests 
         id: run-tests
         continue-on-error: true
         run: npx playwright test --workers=1
@@ -59,6 +53,7 @@ jobs:
         continue-on-error: true
         run: |
           if [ ! -f "playwright-report/report.json" ]; then
+            echo "Report file not found!"
             echo "total=0" >> $GITHUB_OUTPUT
             echo "passed=0" >> $GITHUB_OUTPUT
             echo "failed=0" >> $GITHUB_OUTPUT
@@ -73,84 +68,85 @@ jobs:
           echo "failed=${FAILED}" >> $GITHUB_OUTPUT
           echo "skipped=${SKIPPED}" >> $GITHUB_OUTPUT
           echo "total=${TOTAL}" >> $GITHUB_OUTPUT
-
-      - name: Get current date
+      - name: Get current date with random suffix
         id: date
         run: echo "date=$(date '+%Y-%m-%d')-$(shuf -i 100-999 -n 1)" >> $GITHUB_OUTPUT
 
-      # ✅ Prepare new report folder
       - name: Prepare report folder
         run: |
-          mkdir -p current-report/${{ steps.date.outputs.date }}
-          cp -r playwright-report/* current-report/${{ steps.date.outputs.date }}/ || true
+          mkdir -p reports/${{ steps.date.outputs.date }}
+          if [ -d "playwright-report" ]; then
+            cp -r playwright-report/* reports/${{ steps.date.outputs.date }}/ || true
+          fi
+          touch reports/.nojekyll
+      - name: Upload report as Pages Artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: reports
 
-      # ✅ Checkout gh-pages branch
-      - name: Checkout gh-pages branch
-        run: |
-          git fetch origin gh-pages
-          git checkout gh-pages || git checkout -b gh-pages
 
-      # ✅ Copy new report into history
-      - name: Merge reports
-        run: |
-          mkdir -p reports
-          cp -r current-report/${{ steps.date.outputs.date }} reports/
+    outputs:
+      date: ${{ steps.date.outputs.date }}
+      total: ${{ steps.summary.outputs.total }}
+      passed: ${{ steps.summary.outputs.passed }}
+      failed: ${{ steps.summary.outputs.failed }}
+      skipped: ${{ steps.summary.outputs.skipped }}
 
-      # ✅ Keep only last 30 reports
-      - name: Cleanup old reports
-        run: |
-          cd reports
-          ls -1dt */ | tail -n +31 | xargs rm -rf || true
-
-      # ✅ Ensure GitHub Pages works
-      - name: Add .nojekyll
-        run: touch reports/.nojekyll
-
-      # ✅ Commit & push
-      - name: Push reports to gh-pages
-        run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          git add .
-          git commit -m "Update report ${{ steps.date.outputs.date }}" || echo "No changes"
-          git push origin gh-pages
-
-  Notifications:
+  deploy:
     needs: Staging-Tests
     runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
 
     steps:
-      - name: Checkout repo (for scripts)
+      - name: Deploy to GitHub Pages 
+        id: deploy
+        uses: actions/deploy-pages@v4
+
+      - name: Debug deployed page_url
+        run: |
+          echo "deploy step outputs:"
+          echo "page_url = ${{ steps.deploy.outputs.page_url }}"
+        # always run this (no 'if') so we have logs to inspect
+
+      # Checkout repo before running sendreport.js so script exists
+      - name: Checkout repository (for sendreport.js)
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js (for sendreport.js and notifications)
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Install nodemailer
+      - name: Install nodemailer (only what we need for sendreport.js)
         run: npm install nodemailer
 
-      # ✅ Send Email
-      - name: Send Email Report
+      # ✅ Now that the pages are deployed, send the email
+      - name: Send Email Report via SMTP
         if: always()
         run: node .github/workflows/sendreport.js
         env:
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
           REPORT_DATE: ${{ needs.Staging-Tests.outputs.date }}
-          REPORT_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/reports/${{ needs.Staging-Tests.outputs.date }}/report.html
+          REPORT_URL: ${{ steps.deploy.outputs.page_url }}${{ needs.Staging-Tests.outputs.date }}/report.html
           TOTAL: ${{ needs.Staging-Tests.outputs.total }}
           PASSED: ${{ needs.Staging-Tests.outputs.passed }}
           FAILED: ${{ needs.Staging-Tests.outputs.failed }}
           SKIPPED: ${{ needs.Staging-Tests.outputs.skipped }}
-
-      # ✅ Discord Success
-      - name: Discord Success
+          REPO_OWNER: ${{ github.repository_owner }}
+          REPO_NAME: ${{ github.event.repository.name }}
+      
+      # ✅ Discord notification
+      - name: Send Discord Success notification
         if: always() && needs.Staging-Tests.outputs.failed == 0
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          REPORT_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/reports/${{ needs.Staging-Tests.outputs.date }}/report.html
+          REPORT_URL: ${{ steps.deploy.outputs.page_url }}${{ needs.Staging-Tests.outputs.date }}/report.html
           TOTAL: ${{ needs.Staging-Tests.outputs.total }}
           PASSED: ${{ needs.Staging-Tests.outputs.passed }}
           FAILED: ${{ needs.Staging-Tests.outputs.failed }}
@@ -161,23 +157,22 @@ jobs:
           -d "{
             \"username\": \"Playwright Bot\",
             \"embeds\": [{
-              \"title\": \"🎭 Playwright Test Results\",
+              \"title\": \"🎭 Cohort CRM - Playwright Test Results\",
               \"description\": \"**Total:** ${TOTAL}\\n✅ Passed: ${PASSED}\\n❌ Failed: ${FAILED}\\n⚪ Skipped: ${SKIPPED}\",
               \"color\": 3066993,
               \"fields\": [{
                 \"name\": \"📎 View Report\",
                 \"value\": \"${REPORT_URL}\"
-              }]
+              }],
+              \"footer\": { \"text\": \"GitHub Action - ${GITHUB_WORKFLOW}\" }
             }]
           }" \
           $DISCORD_WEBHOOK_URL
-
-      # ✅ Discord Failure
-      - name: Discord Failure
+      - name: Send Discord Failure notification (Tag User)
         if: always() && needs.Staging-Tests.outputs.failed > 0
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          REPORT_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/reports/${{ needs.Staging-Tests.outputs.date }}/report.html
+          REPORT_URL: ${{ steps.deploy.outputs.page_url }}${{ needs.Staging-Tests.outputs.date }}/report.html
           TOTAL: ${{ needs.Staging-Tests.outputs.total }}
           PASSED: ${{ needs.Staging-Tests.outputs.passed }}
           FAILED: ${{ needs.Staging-Tests.outputs.failed }}
