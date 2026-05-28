@@ -18,7 +18,7 @@ export class LoanStatus {
 
 
   async Apply_Status_Filter() {
-    await this.page.goto('https://crm-admin-staging.web.app/');
+    await this.page.goto('https://crm-admin-staging.vercel.app/');
     await this.page.getByLabel('Status').getByRole(PipelineLocator.StatusFilter.role, { name: PipelineLocator.StatusFilter.name }).click();
     console.log('✅ Filter dropdown opened.');
 
@@ -253,7 +253,7 @@ export class LoanStatus {
   }
 
     async Verify_Default_Status_Filter() {
-   await this.page.goto('https://crm-admin-staging.web.app/');
+   await this.page.goto('https://crm-admin-staging.vercel.app/');
     await this.page.getByLabel('Status').getByRole(PipelineLocator.StatusFilter.role, { name: PipelineLocator.StatusFilter.name }).click();
     console.log('✅ Filter dropdown opened.');
 

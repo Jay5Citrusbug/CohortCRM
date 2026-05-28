@@ -13,7 +13,7 @@ const __dirname = path.dirname(__filename);
 const credentialsPath = path.join(__dirname, '../Utility/credentials.json');
 
 
-const BASE_URL = 'https://crm-admin-staging.web.app/';
+const BASE_URL = 'https://crm-admin-staging.vercel.app/';
 const LOGIN_URL = `${BASE_URL}login`;
 const PROTECTED_URL = `${BASE_URL}`;
 // ✅ Correct storage path - relative to project root

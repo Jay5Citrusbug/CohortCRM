@@ -11,7 +11,7 @@ test.describe('Pipeline screen Tests', () => {
     const page = await context.newPage();
     pipeLinePage = new PipeLinePage(page);
     console.log('🌐 Opening dashboard page before all tests...');
-    await page.goto('https://crm-admin-staging.web.app/');
+    await page.goto('https://crm-admin-staging.vercel.app/');
   });
 
   test('⛔ TC-08 Validate loan creation blocked when mandatory fields are empty', async () => {

@@ -12,7 +12,7 @@ import { ContactPage } from '../../Pages/contact.page';
       context = await browser.newContext();
       page = await context.newPage();
       contactPage = new ContactPage(page);
-      await page.goto('https://crm-admin-staging.web.app/');
+      await page.goto('https://crm-admin-staging.vercel.app/');
     });
 
     test('⚠️ TC-18 Verify validation messages on Add New Contact pop-up', async () => {

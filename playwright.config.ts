@@ -25,7 +25,7 @@ export default defineConfig({
   ],
 
   use: {
-    baseURL: 'https://crm-admin-staging.web.app/',
+    baseURL: 'https://crm-admin-staging.vercel.app/',
     video: 'retain-on-failure',
     screenshot: 'only-on-failure',
   },

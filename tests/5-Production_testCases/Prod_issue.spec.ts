@@ -19,7 +19,7 @@ test.describe('Pipeline loan Status', () => {
         companiesPage = new CompaniesPage(page);
 
         console.log('🌐 Opening dashboard page...');
-        await page.goto('https://crm-admin-staging.web.app/');
+        await page.goto('https://crm-admin-staging.vercel.app/');
     });
 
     test('🔄 Reload Loan, Company and Contact Page', async () => {

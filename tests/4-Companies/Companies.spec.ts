@@ -12,7 +12,7 @@ import { CompaniesPage } from '../../Pages/Companies.page';
       context = await browser.newContext();
       page = await context.newPage();
       companiesPage = new CompaniesPage(page);
-      await page.goto('https://crm-admin-staging.web.app/');
+      await page.goto('https://crm-admin-staging.vercel.app/');
     });
 
     test('⚠️ TC-22 Verify validation messages on Add New Company pop-up', async () => {

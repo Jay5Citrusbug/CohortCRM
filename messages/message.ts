@@ -1,8 +1,8 @@
 // messages/messages.ts
 export const Messages = {
   URLs: {
-    base: 'https://crm-admin-staging.web.app/',
-    login: 'https://crm-admin-staging.web.app/login?redirect=%2F',
+    base: 'https://crm-admin-staging.vercel.app/',
+    login: 'https://crm-admin-staging.vercel.app/login?redirect=%2F',
   },
 
   Alerts: {

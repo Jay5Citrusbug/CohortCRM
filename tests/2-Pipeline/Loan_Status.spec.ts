@@ -16,7 +16,7 @@ test.describe('Pipeline loan Status', () => {
     pipeLinePage = new PipeLinePage(page);
 
     console.log('🌐 Opening dashboard page before all tests...');
-    await page.goto('https://crm-admin-staging.web.app/');
+    await page.goto('https://crm-admin-staging.vercel.app/');
   });
 
   test('🔄 TC-13 Verify cohort invest toggle updates state and refreshes screen with new tabs', async () => {
