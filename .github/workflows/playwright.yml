@@ -85,38 +85,14 @@ jobs:
           mkdir -p current-report/${{ steps.date.outputs.date }}
           cp -r playwright-report/* current-report/${{ steps.date.outputs.date }}/ || true
 
-      # ✅ Checkout gh-pages branch
-      - name: Checkout gh-pages branch
-        run: |
-          git fetch origin gh-pages || true
-          git checkout -f gh-pages || git checkout -b gh-pages origin/gh-pages
-
-      # ✅ Copy new report into history
-      - name: Merge reports
-        run: |
-          mkdir -p reports
-          cp -r current-report/${{ steps.date.outputs.date }} reports/
-
-      # ✅ Keep only last 30 reports
-      - name: Cleanup old reports
-        run: |
-          if [ -d "reports" ]; then
-            cd reports
-            ls -1dt */ | tail -n +31 | xargs rm -rf || true
-          fi
-
-      # ✅ Ensure GitHub Pages works
-      - name: Add .nojekyll
-        run: touch reports/.nojekyll
-
-      # ✅ Commit & push
-      - name: Push reports to gh-pages
-        run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          git add reports/ .nojekyll
-          git commit -m "Update report ${{ steps.date.outputs.date }}" || echo "No changes"
-          git push origin gh-pages --force
+      # ✅ Deploy to GitHub Pages (preserves history with clean: false)
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: current-report
+          target-folder: reports
+          clean: false
 
   Notifications:
     needs: Staging-Tests
