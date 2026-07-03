@@ -14,6 +14,7 @@ on:
     branches: [ main ]
   schedule:
     - cron: "30 2 * * *"
+  workflow_dispatch:
 
 jobs:
   Staging-Tests:
@@ -120,6 +121,7 @@ jobs:
   Notifications:
     needs: Staging-Tests
     runs-on: ubuntu-latest
+    if: always()
 
     steps:
       - name: Checkout repo (for scripts)
@@ -147,9 +149,9 @@ jobs:
           FAILED: ${{ needs.Staging-Tests.outputs.failed }}
           SKIPPED: ${{ needs.Staging-Tests.outputs.skipped }}
 
-      # ✅ Discord Success
-      - name: Discord Success
-        if: always() && needs.Staging-Tests.outputs.failed == 0
+      # ✅ Discord Notification
+      - name: Discord Notification
+        if: always()
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           REPORT_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/reports/${{ needs.Staging-Tests.outputs.date }}/report.html
@@ -157,32 +159,5 @@ jobs:
           PASSED: ${{ needs.Staging-Tests.outputs.passed }}
           FAILED: ${{ needs.Staging-Tests.outputs.failed }}
           SKIPPED: ${{ needs.Staging-Tests.outputs.skipped }}
-        run: |
-          curl -H "Content-Type: application/json" \
-          -X POST \
-          -d "{
-            \"username\": \"Playwright Bot\",
-            \"embeds\": [{
-              \"title\": \"🎭 Playwright Test Results\",
-              \"description\": \"**Total:** ${TOTAL}\\n✅ Passed: ${PASSED}\\n❌ Failed: ${FAILED}\\n⚪ Skipped: ${SKIPPED}\",
-              \"color\": 3066993,
-              \"fields\": [{
-                \"name\": \"📎 View Report\",
-                \"value\": \"${REPORT_URL}\"
-              }]
-            }]
-          }" \
-          $DISCORD_WEBHOOK_URL
-
-      # ✅ Discord Failure
-      - name: Discord Failure
-        if: always() && needs.Staging-Tests.outputs.failed > 0
-        env:
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          REPORT_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/reports/${{ needs.Staging-Tests.outputs.date }}/report.html
-          TOTAL: ${{ needs.Staging-Tests.outputs.total }}
-          PASSED: ${{ needs.Staging-Tests.outputs.passed }}
-          FAILED: ${{ needs.Staging-Tests.outputs.failed }}
-          SKIPPED: ${{ needs.Staging-Tests.outputs.skipped }}
-          REPORT_DATE: ${{ needs.Staging-Tests.outputs.date }}
+          STAGING_TESTS_STATUS: ${{ needs.Staging-Tests.result }}
         run: node .github/workflows/notify_discord.js
