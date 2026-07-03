@@ -87,7 +87,7 @@ export class LoginPage {
     await passwordInput.fill(faker.internet.password());
 
     // ✅ Assert fields contain expected values
-  
+
     await loginButton.click();
 
     console.log('🔹 Validating invalid login error message...');
@@ -127,9 +127,9 @@ export class LoginPage {
     await this.login(credentials.email, credentials.password);
     await expect(this.page.getByRole(LoginLocator.logoImage.role, { name: LoginLocator.logoImage.name })).toBeVisible();
     console.log('✅ Valid login successful and dashboard visible.');
-
     await this.page.getByRole(LoginLocator.pipelineLink.role, { name: LoginLocator.pipelineLink.name }).isVisible();
-  //await this.page.getByRole('link', { name: 'Pipeline' }).isVisible();
+
+    //await this.page.getByRole('link', { name: 'Pipeline' }).isVisible();
 
   }
 
@@ -148,12 +148,12 @@ export class LoginPage {
 
   async verifyPageTitleAndUrl() {
     console.log('✅ Verifying page title and URL...');
-await expect(this.page).toHaveURL(/crm-admin-staging\.web\.app/);
+    await expect(this.page).toHaveURL(/crm-admin-staging\.vercel\.app/);
     console.log('✅ Page title and URL verified successfully.');
   }
 
 
-    async verifyMainUIComponents() {
+  async verifyMainUIComponents() {
     console.log('👀 Checking main UI components...');
 
     await expect(this.page.getByRole(LoginLocator.logoImage.role, { name: LoginLocator.logoImage.name }).first()).toBeVisible();
@@ -171,14 +171,15 @@ await expect(this.page).toHaveURL(/crm-admin-staging\.web\.app/);
   async logoutAndVerifyRedirection() {
     console.log('🧹 Initiating logout flow...');
     // Open profile menu
-  await this.page.getByRole(LoginLocator.profileNavigation.role).isVisible();
+    await this.page.getByRole(LoginLocator.profileNavigation.role).isVisible();
 
-  await this.page.getByText(LoginLocator.profileName.text, { exact: true }).click();  
-  await this.page.getByRole(LoginLocator.logoutButton.role, { name: LoginLocator.logoutButton.name }).isVisible();
-  await this.page.getByRole(LoginLocator.logoutButton.role, { name: LoginLocator.logoutButton.name }).click();
+    await this.page.getByRole('navigation').getByText('TT', { exact: true }).click();
+    // await page.getByRole('button', { name: 'Logout' }).click();
+    await this.page.getByRole(LoginLocator.logoutButton.role, { name: LoginLocator.logoutButton.name }).isVisible();
+    await this.page.getByRole(LoginLocator.logoutButton.role, { name: LoginLocator.logoutButton.name }).click();
 
-  console.log('🧹 Logout successful, redirected to login page.');
-  await expect(this.page.getByRole(LoginLocator.loginButton.role, { name: LoginLocator.loginButton.name })).toBeVisible();
-  console.log('✅ Navigated to login page successfully.');
-}
+    console.log('🧹 Logout successful, redirected to login page.');
+    await expect(this.page.getByRole(LoginLocator.loginButton.role, { name: LoginLocator.loginButton.name })).toBeVisible();
+    console.log('✅ Navigated to login page successfully.');
+  }
 }

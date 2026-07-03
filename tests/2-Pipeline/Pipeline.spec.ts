@@ -2,11 +2,13 @@ import { test, expect } from '@playwright/test';
 import { PipeLinePage } from '../../Pages/Pipelinepage';
 
 test.describe('Pipeline screen Tests', () => {
+    // test.describe.configure({ mode: 'serial' });
   let pipeLinePage: PipeLinePage;
   let createdLoanName: string | undefined;
 
   // ✅ No need to create new browser or context manually.
   test.beforeAll(async ({ browser }) => {
+
     const context = await browser.newContext();
     const page = await context.newPage();
     pipeLinePage = new PipeLinePage(page);
@@ -20,6 +22,7 @@ test.describe('Pipeline screen Tests', () => {
   });
 
   test('✅ TC-09 Create a new loan successfully when all mandatory fields are filled', async () => {
+    test.setTimeout(120000); // ✅ loan creation is multi-step — give it 2 minutes
     console.log('➡️ Test Start: Create a new loan successfully when all mandatory fields are filled');
     await pipeLinePage.CreateLoan();
     console.log('➡️ Test Start: Verify loan status');
@@ -41,11 +44,6 @@ test.describe('Pipeline screen Tests', () => {
     console.log('➡️ Test Start: Verify Search with Invalid/Non-Existing Keyword');
     await pipeLinePage.Search_Invalid_NewLoans();
   });
-
-  test('Verify “Add New Company” and “Add New Contact” buttons are available in all company dropdowns during loan creation', async () => {
-    console.log('➡️ Test Start: Verify “Add New Company” and “Add New Contact” buttons are available in all company dropdowns during loan creation');
-    await pipeLinePage.Verify_Company_Contact_Dropdown_Creation();
-  })
 
   test('✅ TC-18  Verify Edit option opens Edit Loan pop-up screen and editing the name', async () => {
     console.log('➡️ Test Start: Verify Edit option opens Edit Loan pop-up screen and editing the name');

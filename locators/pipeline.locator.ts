@@ -24,6 +24,9 @@ export const PipelineLocator = {
   DealName: {
     name: 'dealName',
   },
+  LoanNumber: {
+    name: 'loanNumber',
+  },
   PostalcodeID: {
     name: 'postCode',
   },
@@ -71,7 +74,7 @@ NPWFilterOption: {
     name: 'switch',
   },
   InvvestorTab: {
-    name: 'InvestorContact UsProperties',
+    name: 'InvestorPendingDue PaymentsCreated BondsCohort CapitalCohort Reserve',
   },
   PipelineTab: {
     name: 'PipelineUnderwritingLive',

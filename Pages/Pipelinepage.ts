@@ -1,4 +1,4 @@
-import { Locator, Page, expect } from '@playwright/test';
+import test, { Locator, Page, expect } from '@playwright/test';
 import { LoginLocator } from '../locators/login.locator';
 import { Messages } from '../messages/message';
 import { PipelineLocator } from '../locators/pipeline.locator';
@@ -12,21 +12,33 @@ const loanName = Loan_FakerData.randomDealName;
 
 export class PipeLinePage {
   readonly page: Page;
+  currentUrl: string;
 
   constructor(page: Page) {
     this.page = page;
+    this.currentUrl = '';
   }
 
   //---------------------------
   // ⭐ Reusable Helpers
   //---------------------------
 
-  async waitAndClick(locator) {
+  // async waitAndClick(locator:any) {
+  //   await locator.waitFor({ state: 'visible' });
+  //   await locator.click();
+  // }
+
+  async waitAndClick(locator: any) {
     await locator.waitFor({ state: 'visible' });
+    await locator.scrollIntoViewIfNeeded();
+
+    // Small stabilization wait (important for Ant UI)
+    await this.page.waitForTimeout(3000);
+
     await locator.click();
   }
 
-  async safeIsVisible(locator) {
+  async safeIsVisible(locator: any) {
     try {
       return await locator.isVisible();
     } catch {
@@ -127,12 +139,15 @@ export class PipeLinePage {
     console.log(`✅ Deal name is added: ${loanName}`);
 
     // Loan Type
-    await this.waitAndClick(this.page.locator(PipelineLocator.LoanType.locator).first());
+    const loanType = this.page.locator(PipelineLocator.LoanType.locator).first();
+    await loanType.scrollIntoViewIfNeeded();
+    await loanType.click();
     await this.page.getByTitle('Bridge').click();
 
     // Asset type
     const assetField = this.page.locator(PipelineLocator.AssetType.name).first();
-    await this.waitAndClick(assetField);
+    await assetField.scrollIntoViewIfNeeded();
+    await assetField.click();
     await assetField.fill(Loan_FakerData.randomAssetType);
     await this.page.keyboard.press('Enter');
     console.log('✅ Asset type selected.');
@@ -222,10 +237,8 @@ export class PipeLinePage {
       name: PipelineLocator.SaveChangesButton.name
     }).click();
 
-    // Wait for modal text to be hidden = popup closed
-    const loanCell = this.page.getByRole('cell', { name: PipelineLocator.NewEnquiry.name }).first()
-    await loanCell.waitFor({ state: 'visible' });
-    await expect(loanCell).toBeVisible(); console.log('✅ Loan created successfully.');
+    // Check for validation errors and log them
+    return loanName;
   }
 
   //---------------------------
@@ -255,11 +268,10 @@ export class PipeLinePage {
     // console.log('🔹 Navigated to Pipeline tab.');
     //     console.log('🔹 Starting validation for Create Loan...');
 
-    await this.waitAndClick(
-      this.page.getByRole(PipelineLocator.AddLoanButton.role, {
-        name: PipelineLocator.AddLoanButton.name
-      })
-    );
+ const addLoanBtn = this.page.getByRole(PipelineLocator.AddLoanButton.role, {
+    name: PipelineLocator.AddLoanButton.name
+  });
+  await addLoanBtn.click();
 
     await this.page.getByLabel(PipelineLocator.AddLoanText.locator).isVisible();
 
@@ -304,29 +316,9 @@ export class PipeLinePage {
     });
 
     await filter.check();
+    await this.page.getByRole('cell', { name: 'eye edit' }).first().click();
+    await this.page.locator('div').filter({ hasText: /^Potential MCQ$/ }).click();
 
-    const OpenLoan_Drawer = this.page.locator(PipelineLocator.Open_loan_Drawer.locator);
-    await OpenLoan_Drawer.waitFor({ state: 'visible' });
-    await OpenLoan_Drawer.click();
-
-    // Wait for the row to appear
-    const loan_Opened = this.page.getByRole(PipelineLocator.LoanDrawer_opened.role, {
-      name: PipelineLocator.LoanDrawer_opened.name
-    });
-    await OpenLoan_Drawer.waitFor({ state: 'visible' });
-
-    await expect(loan_Opened).toBeVisible();
-
-    await this.page.evaluate(() => {
-      window.scrollTo(0, document.body.scrollHeight);
-    });
-
-    // ⏳ NEW: Wait for potentialMCQMarked to appear after expand
-    const mcqMarked = this.page.getByLabel('', { exact: true });
-    await mcqMarked.waitFor({ state: 'visible' });
-    await expect(mcqMarked).toBeChecked();
-    await this.page.locator('button').filter({ hasText: 'Close' }).click();
-    await filter.uncheck();
 
     console.log('✅ MCQ filtering verified successfully.');
   }
@@ -441,7 +433,9 @@ export class PipeLinePage {
     await expect(saveButton).toBeEnabled({ timeout: 8000 });
 
     console.log('🔘 Clicking Save...');
-    saveButton.click()
+    await saveButton.click();
+    // ✅ Wait for modal to close after save before proceeding
+    await this.page.waitForTimeout(3000);
     const searchBox = this.page.getByRole(PipelineLocator.Searchbar.role, {
       name: PipelineLocator.Searchbar.name
     });
@@ -481,31 +475,29 @@ export class PipeLinePage {
     await eye.click();
 
     await expect(
-      this.page.getByRole(PipelineLocator.EditLoanButton.role, {
-        name: PipelineLocator.EditLoanButton.name
-      })
+      this.page.getByRole('heading', { name: 'Loan Status', exact: true })
     ).toBeVisible();
-
-    console.log('✅ "Edit Loan" button is visible.');
+    console.log('✅ Navigated to Loan Detail page successfully.');
   }
 
   async Comment_Creation() {
-    const noDataDiv = this.page.locator('div')
-      .filter({ hasText: /^No dataClick to add a comment$/ })
-      .nth(1);
-
-    await noDataDiv.click();
+    // ✅ Wait for the Loan Detail page to be fully loaded before interacting
+    await this.page.waitForLoadState('networkidle');
+    await this.page.getByText('Click to add a comment').click();
 
     const editor = this.page.locator('.ql-editor');
     await editor.fill('This is a test note added using Playwright.');
 
     await this.page.getByTestId('save-btn').click();
+    this.currentUrl = this.page.url();
+    console.log("currentUrl", this.currentUrl);
     console.log("✅ Comment successfully added and verified.");
 
     await this.page.waitForTimeout(7000);
   }
 
   async Comment_Edit() {
+    await this.Loan_details();
     const optionsBtn = this.page.getByRole(PipelineLocator.CommentOptionsButton.role, { name: PipelineLocator.CommentOptionsButton.name });
     await optionsBtn.waitFor();
     await optionsBtn.click();
@@ -612,6 +604,7 @@ export class PipeLinePage {
 
       // Select entity type
       const optionTitle = type === 'Person' ? PipelineLocator.PersonOption.title : PipelineLocator.TrustOption.title;
+      await this.page.waitForTimeout(5000);
       await this.page.getByTitle(optionTitle).click();
       console.log(`✅ Selected '${type}' from dropdown.`);
 

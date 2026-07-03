@@ -33,18 +33,19 @@ export class LoanStatus {
     console.log('✅ NPW status checked.');
     await this.page.getByRole(PipelineLocator.OK_Button.role, { name: PipelineLocator.OK_Button.name }).click();
     console.log('✅ New Enquiry status checked and filter applied.');
-    await expect(this.page.getByTitle('NPW').first()).toBeVisible();
-    //await expect(this.page.getByText(PipelineLocator.NewEnquiryStatus_grid.name).first()).toBeVisible();
+    const npwDropdown = this.page.getByTestId('pipeline-npwDropdown').nth(1);
+
+    await expect(npwDropdown).toBeVisible();
 
   }
-  async StatusNPW_cancel() {
+  async StatusNPW_cancel(lloanName: string) {
     await this.page.getByRole('textbox', { name: 'Search New Loans' }).clear();
     console.log('🔹 Starting Status Change popup cancellation verification...');
-    await this.page.getByRole('textbox', { name: 'Search New Loans' }).fill(loanName);
-
-    const npwOption = this.page.locator(PipelineLocator.ChangeStatus.locator);
+    await this.page.getByRole('textbox', { name: 'Search New Loans' }).fill(lloanName);
+    console.log("loanName======", lloanName)
+    const npwOption = this.page.locator('tbody tr', { hasText: lloanName }).locator('.ant-select-selector');
+    console.log("npw option", npwOption)
     await npwOption.waitFor({ state: 'visible' });
-    await npwOption.isVisible();
     await npwOption.click();
     await this.page.waitForTimeout(4000);
     const npwText = this.page.locator('text=NPW', {
@@ -61,11 +62,12 @@ export class LoanStatus {
       this.page.getByRole(PipelineLocator.CancelButton.role, { name: PipelineLocator.CancelButton.name })).not.toBeVisible();
   }
 
-  async npwReasonCancel() {
+  async npwReasonCancel(lloanName: string) {
+    console.log("loanName======11111111111111", lloanName)
+
     console.log('🔹 Starting NPW reason popup cancellation verification...');
-    const npwOption = this.page.locator(PipelineLocator.ChangeStatus.locator);
+    const npwOption = this.page.locator('tbody tr', { hasText: lloanName }).locator('.ant-select-selector');
     await npwOption.waitFor({ state: 'visible' });
-    await npwOption.isVisible();
     await npwOption.click();
     await this.page.waitForTimeout(4000);
     const npwText = this.page.locator('text=NPW', {
@@ -151,34 +153,33 @@ export class LoanStatus {
 
   async changeStatusToUnderwriting() {
     console.log(`✅ Verified created loan name: ${loanName}`);
-    await this.page.waitForTimeout(10000)
+    console.log("hello")
     // Wait for search bar visible, then type loan name
     const searchBar = this.page.getByRole(PipelineLocator.Searchbar.role, {
       name: PipelineLocator.Searchbar.name
     });
-    await expect(searchBar).toBeVisible();
+    await expect(searchBar).toBeVisible({ timeout: 15000 });
     console.log("loan name", loanName)
     await searchBar.fill(loanName);
-    await this.page.waitForTimeout(10000)
-    // ⛔ Removed static wait — replaced with dynamic wait for loan row
-    await expect(
-      this.page.locator('div').filter({ hasText: 'Name of loan#StatusLoan' }).nth(3)
-    ).toBeVisible({ timeout: 10000 });
+
+    // Dynamic wait for the target loan row to be visible in the table
+    const loanRow = this.page.locator('tbody tr', { hasText: loanName });
+    await expect(loanRow).toBeVisible({ timeout: 15000 });
 
     // Wait for “New Enquiry” to be visible instead of checking .isVisible()
-    const newEnquiry = this.page.getByText('New Enquiry').first();
+    const newEnquiry = loanRow.getByText('New Enquiry').first();
     await expect(newEnquiry).toBeVisible();
 
     // Click the status dropdown
-    const statusDropdown = this.page.locator(
-      "//html/body/div/div/div/div/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[3]/div/div/span/span[2]"
-    );
+    const statusDropdown = loanRow.locator('.ant-select-selector');
     await expect(statusDropdown).toBeVisible();
     await statusDropdown.click();
-
+    await this.page.waitForTimeout(20000);
     // Select "Underwriting Process"
-    const underwritingOption = this.page.getByTitle('Underwriting Process');
-    await expect(underwritingOption).toBeVisible();
+    // const underwritingOption = this.page.locator('xpath=/html/body/div[2]/div/div/div[2]/div/div/div/div[4]/div');
+
+
+    const underwritingOption = await this.page.getByTestId('pipeline-underwritting').nth(2);
     await underwritingOption.click();
 
     // Confirm status change popup
@@ -225,11 +226,14 @@ export class LoanStatus {
   }
 
   async changeStatusToLiveLoan() {
-    await this.page.locator("//html/body/div/div/div/div/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[3]/div/div/span/span[2]").click();
-    await this.page.getByText('Loan Live').nth(1).click();
+    await this.page.goto('https://crm-admin-staging.vercel.app/underwriting');
+    await this.page.getByTestId('under-status-underwritting').nth(1).click();
+    await this.page.getByTestId('under-status-loanlive').click();
+
+    // await this.page.getByText('Loan Live').nth(1).click();
     await this.page.getByText('Confirm Status Change').click();
     await this.page.getByRole('button', { name: 'Confirm' }).click();
-
+    await this.page.waitForTimeout(10000);
     const searchBox = this.page.getByRole(PipelineLocator.Searchbar.role, {
       name: PipelineLocator.Searchbar.name
     });
@@ -252,8 +256,8 @@ export class LoanStatus {
 
   }
 
-    async Verify_Default_Status_Filter() {
-   await this.page.goto('https://crm-admin-staging.vercel.app/');
+  async Verify_Default_Status_Filter() {
+    await this.page.goto('https://crm-admin-staging.vercel.app/');
     await this.page.getByLabel('Status').getByRole(PipelineLocator.StatusFilter.role, { name: PipelineLocator.StatusFilter.name }).click();
     console.log('✅ Filter dropdown opened.');
 

@@ -1,11 +1,11 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, Page } from '@playwright/test';
 import { PipeLinePage } from '../../Pages/Pipelinepage';
 import { ContactPage } from '../../Pages/contact.page';
 import { CompaniesPage } from '../../Pages/Companies.page';
 
 
 test.describe('Pipeline loan Status', () => {
-    let page;
+    let page: Page;
     let pipeLinePage: PipeLinePage;
     let contactPage: ContactPage;
     let companiesPage: CompaniesPage;

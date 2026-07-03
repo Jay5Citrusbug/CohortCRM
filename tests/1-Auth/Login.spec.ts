@@ -3,6 +3,8 @@ import { Page, test } from '@playwright/test';
 import { LoginPage } from '../../Pages/login.page';
 
 test.describe('Login and Logout tests', () => {
+  test.describe.configure({ mode: 'serial' });
+
   let loginPage: LoginPage;
   let page: Page;
 
