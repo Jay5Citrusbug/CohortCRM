@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { PipeLinePage } from '../../Pages/Pipelinepage';
 
 test.describe('Pipeline screen Tests', () => {
-    // test.describe.configure({ mode: 'serial' });
+  test.describe.configure({ mode: 'serial' });
   let pipeLinePage: PipeLinePage;
   let createdLoanName: string | undefined;
 

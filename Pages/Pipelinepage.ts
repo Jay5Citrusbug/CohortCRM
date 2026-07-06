@@ -497,7 +497,7 @@ export class PipeLinePage {
   }
 
   async Comment_Edit() {
-    await this.Loan_details();
+    // await this.Loan_details();
     const optionsBtn = this.page.getByRole(PipelineLocator.CommentOptionsButton.role, { name: PipelineLocator.CommentOptionsButton.name });
     await optionsBtn.waitFor();
     await optionsBtn.click();
