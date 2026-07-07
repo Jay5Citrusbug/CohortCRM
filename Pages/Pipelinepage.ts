@@ -268,11 +268,10 @@ export class PipeLinePage {
     // console.log('🔹 Navigated to Pipeline tab.');
     //     console.log('🔹 Starting validation for Create Loan...');
 
- const addLoanBtn = this.page.getByRole(PipelineLocator.AddLoanButton.role, {
-    name: PipelineLocator.AddLoanButton.name
-  });
-  await addLoanBtn.click();
-
+     const addLoanBtn = this.page.getByRole(PipelineLocator.AddLoanButton.role, {
+        name: PipelineLocator.AddLoanButton.name
+      });
+      await addLoanBtn.click();
     await this.page.getByLabel(PipelineLocator.AddLoanText.locator).isVisible();
 
     await this.page.getByRole(PipelineLocator.SaveChangesButton.role, {

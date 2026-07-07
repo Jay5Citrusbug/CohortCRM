@@ -207,7 +207,7 @@ export class LoanStatus {
     // await expect(searchBox).toBeVisible();
     // await searchBox.clear();
     // await this.page.getByTestId('pipeline-newEnquiry').click();
-    await this.page.getByTestId('pipeline-newEnquiry').first().click();
+    await this.page.locator('[data-testid="pipeline-newEnquiry"]').first().click();
     await this.page.waitForTimeout(10000);
 
     await this.page.getByTestId('pipeline-underwritting').click();
@@ -234,7 +234,7 @@ export class LoanStatus {
 
   async changeStatusToLiveLoan() {
     await this.page.goto('https://crm-admin-staging.vercel.app/underwriting');
-    await this.page.getByTestId('under-status-underwritting').first().click();
+    await this.page.locator('span[data-testid="under-status-underwritting"]').click();
     await this.page.getByTestId('under-status-loanlive').click();
 
     // await this.page.getByText('Loan Live').nth(1).click();
