@@ -1,0 +1,2192 @@
+{
+  "config": {
+    "configFile": "/home/runner/work/CohortCRM/CohortCRM/playwright.config.ts",
+    "rootDir": "/home/runner/work/CohortCRM/CohortCRM/tests",
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": "/home/runner/work/CohortCRM/CohortCRM/Config/global-setup.ts",
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "ci": {
+        "commitHref": "https://github.com/Jay5Citrusbug/CohortCRM/commit/7544a0a40737b90602c3a83984eb8fb3ae829921",
+        "commitHash": "7544a0a40737b90602c3a83984eb8fb3ae829921",
+        "buildHref": "https://github.com/Jay5Citrusbug/CohortCRM/actions/runs/29720153950"
+      },
+      "gitCommit": {
+        "shortHash": "7544a0a",
+        "hash": "7544a0a40737b90602c3a83984eb8fb3ae829921",
+        "subject": "making changes in status",
+        "body": "making changes in status\n",
+        "author": {
+          "name": "SuvarnaCitrusbug",
+          "email": "suvarna.citrusbug@gmail.com",
+          "time": 1783418037000
+        },
+        "committer": {
+          "name": "SuvarnaCitrusbug",
+          "email": "suvarna.citrusbug@gmail.com",
+          "time": 1783418037000
+        },
+        "branch": "main"
+      },
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "html",
+        {
+          "outputFolder": "playwright-report",
+          "open": "never",
+          "title": "Cohort CRM - Automation Report"
+        }
+      ],
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "playwright-report/report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/CohortCRM/CohortCRM/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/Jay5Citrusbug/CohortCRM/commit/7544a0a40737b90602c3a83984eb8fb3ae829921",
+            "commitHash": "7544a0a40737b90602c3a83984eb8fb3ae829921",
+            "buildHref": "https://github.com/Jay5Citrusbug/CohortCRM/actions/runs/29720153950"
+          },
+          "gitCommit": {
+            "shortHash": "7544a0a",
+            "hash": "7544a0a40737b90602c3a83984eb8fb3ae829921",
+            "subject": "making changes in status",
+            "body": "making changes in status\n",
+            "author": {
+              "name": "SuvarnaCitrusbug",
+              "email": "suvarna.citrusbug@gmail.com",
+              "time": 1783418037000
+            },
+            "committer": {
+              "name": "SuvarnaCitrusbug",
+              "email": "suvarna.citrusbug@gmail.com",
+              "time": 1783418037000
+            },
+            "branch": "main"
+          },
+          "actualWorkers": 1
+        },
+        "id": "Login Test",
+        "name": "Login Test",
+        "testDir": "/home/runner/work/CohortCRM/CohortCRM/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*Login\\.spec\\.ts/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/home/runner/work/CohortCRM/CohortCRM/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/Jay5Citrusbug/CohortCRM/commit/7544a0a40737b90602c3a83984eb8fb3ae829921",
+            "commitHash": "7544a0a40737b90602c3a83984eb8fb3ae829921",
+            "buildHref": "https://github.com/Jay5Citrusbug/CohortCRM/actions/runs/29720153950"
+          },
+          "gitCommit": {
+            "shortHash": "7544a0a",
+            "hash": "7544a0a40737b90602c3a83984eb8fb3ae829921",
+            "subject": "making changes in status",
+            "body": "making changes in status\n",
+            "author": {
+              "name": "SuvarnaCitrusbug",
+              "email": "suvarna.citrusbug@gmail.com",
+              "time": 1783418037000
+            },
+            "committer": {
+              "name": "SuvarnaCitrusbug",
+              "email": "suvarna.citrusbug@gmail.com",
+              "time": 1783418037000
+            },
+            "branch": "main"
+          },
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/runner/work/CohortCRM/CohortCRM/tests",
+        "testIgnore": [
+          "/.*Login\\.spec\\.ts/"
+        ],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "1-Auth/Login.spec.ts",
+      "file": "1-Auth/Login.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Login and Logout tests",
+          "file": "1-Auth/Login.spec.ts",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "🔗 TC_01 - Verify Forgot Password redirection",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Login Test",
+                  "projectName": "Login Test",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 207,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "🌐 Opening login page before all tests...\n"
+                        },
+                        {
+                          "text": "🔹 Navigating to login page...\n"
+                        },
+                        {
+                          "text": "✅ Navigated to login page successfully.\n"
+                        },
+                        {
+                          "text": "➡️ Test Start: Verify Forgot Password link redirects correctly\n"
+                        },
+                        {
+                          "text": "🔹 Clicking on Forgot Password link...\n"
+                        },
+                        {
+                          "text": "✅ Redirected to Forgot Password page successfully.\n"
+                        },
+                        {
+                          "text": "✅ Test Completed: Forgot Password redirect verified and navigated back.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:53:45.816Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f426d6df5cc050a0fd01-755a94d9c42d60a260de",
+              "file": "1-Auth/Login.spec.ts",
+              "line": 19,
+              "column": 3
+            },
+            {
+              "title": "⚠️ TC_02 - Empty email or password field validation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Login Test",
+                  "projectName": "Login Test",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 183,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "➡️ Test Start: Empty email or password field validation\n"
+                        },
+                        {
+                          "text": "🔹 Validating empty field error messages...\n"
+                        },
+                        {
+                          "text": "✅ Empty field validation messages displayed correctly.\n"
+                        },
+                        {
+                          "text": "✅ Test Completed: Empty field validation successful.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:53:47.033Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f426d6df5cc050a0fd01-06b1fb1536460117b1fb",
+              "file": "1-Auth/Login.spec.ts",
+              "line": 25,
+              "column": 3
+            },
+            {
+              "title": "❌ TC_03 - Invalid login with wrong credentials",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Login Test",
+                  "projectName": "Login Test",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 949,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "➡️ Test Start: Invalid login with wrong credentials\n"
+                        },
+                        {
+                          "text": "🔹 Validating invalid login error message...\n"
+                        },
+                        {
+                          "text": "✅ Invalid credentials message displayed correctly.\n"
+                        },
+                        {
+                          "text": "✅ Test Completed: Invalid login validation successful.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:53:47.230Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f426d6df5cc050a0fd01-3ad98d9a75f42b08a403",
+              "file": "1-Auth/Login.spec.ts",
+              "line": 30,
+              "column": 3
+            },
+            {
+              "title": "✅ TC_04 - Valid login with correct credentials",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Login Test",
+                  "projectName": "Login Test",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 108,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "➡️ Test Start: Valid login with correct credentials\n"
+                        },
+                        {
+                          "text": "🔹 Performing valid login...\n"
+                        },
+                        {
+                          "text": "🔹 Attempting login with email: test16@mailinator.com\n"
+                        },
+                        {
+                          "text": "✅ Login button clicked.\n"
+                        },
+                        {
+                          "text": "✅ Valid login successful and dashboard visible.\n"
+                        },
+                        {
+                          "text": "✅ Test Completed: Valid login successful.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:53:48.189Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f426d6df5cc050a0fd01-4f5174dfcc28d31ca324",
+              "file": "1-Auth/Login.spec.ts",
+              "line": 35,
+              "column": 3
+            },
+            {
+              "title": "🧭 TC_05 - Verify page title and URL after login",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Login Test",
+                  "projectName": "Login Test",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Starting test: Verify page title and URL...\n"
+                        },
+                        {
+                          "text": "✅ Verifying page title and URL...\n"
+                        },
+                        {
+                          "text": "✅ Page title and URL verified successfully.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:53:48.306Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f426d6df5cc050a0fd01-13bf24f7dbe4650e41a9",
+              "file": "1-Auth/Login.spec.ts",
+              "line": 40,
+              "column": 3
+            },
+            {
+              "title": "👀 TC_06 - Verify main UI components load correctly",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Login Test",
+                  "projectName": "Login Test",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Starting test: Verify UI components...\n"
+                        },
+                        {
+                          "text": "👀 Checking main UI components...\n"
+                        },
+                        {
+                          "text": "🔹 PipeLine tab visible after login...\n"
+                        },
+                        {
+                          "text": "👀 All UI components verified successfully.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:53:48.316Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f426d6df5cc050a0fd01-72350d650a2a733153ce",
+              "file": "1-Auth/Login.spec.ts",
+              "line": 44,
+              "column": 3
+            },
+            {
+              "title": "🧹 TC_07 - Validate logout redirects back to login screen",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Login Test",
+                  "projectName": "Login Test",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1576,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Starting test: Verify logout flow...\n"
+                        },
+                        {
+                          "text": "🧹 Initiating logout flow...\n"
+                        },
+                        {
+                          "text": "🧹 Logout successful, redirected to login page.\n"
+                        },
+                        {
+                          "text": "✅ Navigated to login page successfully.\n"
+                        },
+                        {
+                          "text": "🧽 Closing browser context...\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:53:48.331Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f426d6df5cc050a0fd01-2201c57d3492d3b677a1",
+              "file": "1-Auth/Login.spec.ts",
+              "line": 48,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "2-Pipeline/Loan_Status.spec.ts",
+      "file": "2-Pipeline/Loan_Status.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Pipeline loan Status",
+          "file": "2-Pipeline/Loan_Status.spec.ts",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "🔄 TC-13 Verify cohort invest toggle updates state and refreshes screen with new tabs",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 418,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "🌐 Opening dashboard page before all tests...\n"
+                        },
+                        {
+                          "text": "➡️ Test Start: Verify cohort invest toggle updates state and refreshes screen with new tabs\n"
+                        },
+                        {
+                          "text": "🔹 Verifying cohort invest toggle functionality...\n"
+                        },
+                        {
+                          "text": "✅ Cohort invest toggle verified successfully.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:53:50.771Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2c4806005ca8460f62cc-ee9ee56bc9ec8bf957ee",
+              "file": "2-Pipeline/Loan_Status.spec.ts",
+              "line": 20,
+              "column": 3
+            },
+            {
+              "title": "🔍 TC-14 Verify MCQ filtering functionality in pipeline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2074,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "➡️ Test Start: Verify MCQ filtering functionality in pipeline\n"
+                        },
+                        {
+                          "text": "🔹 Verifying MCQ filtering functionality...\n"
+                        },
+                        {
+                          "text": "✅ MCQ filtering verified successfully.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:53:52.176Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2c4806005ca8460f62cc-3728e989b59b5e029378",
+              "file": "2-Pipeline/Loan_Status.spec.ts",
+              "line": 24,
+              "column": 3
+            },
+            {
+              "title": "🔄 Verify loan status can be updated from “New Inquiry” to “Underwriting Process”",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "➡️ Test Start: Verify loan status\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:53:54.260Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2c4806005ca8460f62cc-98b4a62bc8dd0af70ba5",
+              "file": "2-Pipeline/Loan_Status.spec.ts",
+              "line": 28,
+              "column": 3
+            },
+            {
+              "title": "🚀 Verify loan status can be updated from “Underwriting Process” to “Live Loan",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:53:54.273Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2c4806005ca8460f62cc-f35edd57a12cfa3c2cd7",
+              "file": "2-Pipeline/Loan_Status.spec.ts",
+              "line": 34,
+              "column": 3
+            },
+            {
+              "title": " 👁️ Verify updated loan is visible under “Live Loan” tab",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:53:54.284Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2c4806005ca8460f62cc-7e07fe93ee3f1c16346f",
+              "file": "2-Pipeline/Loan_Status.spec.ts",
+              "line": 37,
+              "column": 3
+            },
+            {
+              "title": "✅ Verify Successful NPW Status Change",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:53:54.309Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2c4806005ca8460f62cc-8211be21d512227696bf",
+              "file": "2-Pipeline/Loan_Status.spec.ts",
+              "line": 40,
+              "column": 3
+            },
+            {
+              "title": "✅ TC-16Verify New Inquiry status filter functionality in pipeline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3414,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "➡️ Test Start: Verify New Inquiry status filter functionality in pipeline\n"
+                        },
+                        {
+                          "text": "✅ Filter dropdown opened.\n"
+                        },
+                        {
+                          "text": "🔹 Starting Status filter verification...\n"
+                        },
+                        {
+                          "text": "✅ Filter reset to default.\n"
+                        },
+                        {
+                          "text": "✅ NPW status checked.\n"
+                        },
+                        {
+                          "text": "✅ New Enquiry status checked and filter applied.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:53:54.325Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2c4806005ca8460f62cc-311979c23ab9bb131175",
+              "file": "2-Pipeline/Loan_Status.spec.ts",
+              "line": 43,
+              "column": 3
+            },
+            {
+              "title": "🔍 TC-15 Verify Status filtering functionality in pipeline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2135,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "➡️ Test Start: Verify Status filtering functionality in pipeline\n"
+                        },
+                        {
+                          "text": "✅ Filter dropdown opened.\n"
+                        },
+                        {
+                          "text": "✅ Default checked statuses verified: New Enquiry, Terms Accepted, Underwriting Process.\n"
+                        },
+                        {
+                          "text": "✅ NPW not checked by default.\n"
+                        },
+                        {
+                          "text": "✅ Page reloaded.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:53:57.764Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2c4806005ca8460f62cc-1c94f94513b15eab3417",
+              "file": "2-Pipeline/Loan_Status.spec.ts",
+              "line": 47,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "2-Pipeline/Pipeline.spec.ts",
+      "file": "2-Pipeline/Pipeline.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Pipeline screen Tests",
+          "file": "2-Pipeline/Pipeline.spec.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "⛔ TC-08 Validate loan creation blocked when mandatory fields are empty",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3257,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "🌐 Opening dashboard page before all tests...\n"
+                        },
+                        {
+                          "text": "➡️ Test Start: Validate loan creation blocked when mandatory fields are empty\n"
+                        },
+                        {
+                          "text": "✅ Validation message for mandatory fields displayed.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:53:59.937Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f7d91c25918852a48467-16fd9a6f1c10e1d3bfbf",
+              "file": "2-Pipeline/Pipeline.spec.ts",
+              "line": 20,
+              "column": 3
+            },
+            {
+              "title": "✅ TC-09 Create a new loan successfully when all mandatory fields are filled",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 9273,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "➡️ Test Start: Create a new loan successfully when all mandatory fields are filled\n"
+                        },
+                        {
+                          "text": "🔹 Starting Create Loan process...\n"
+                        },
+                        {
+                          "text": "✅ Deal name is added: Automation-Loan ibYyFW\n"
+                        },
+                        {
+                          "text": "✅ Asset type selected.\n"
+                        },
+                        {
+                          "text": "✅ Postal code entered.\n"
+                        },
+                        {
+                          "text": "✅ No postcode warning popup.\n"
+                        },
+                        {
+                          "text": "✅ Property added.\n"
+                        },
+                        {
+                          "text": "✅ Property value entered.\n"
+                        },
+                        {
+                          "text": "✅ Gross loan amount filled.\n"
+                        },
+                        {
+                          "text": "✅ Security type selected.\n"
+                        },
+                        {
+                          "text": "✅ Pricing entered.\n"
+                        },
+                        {
+                          "text": "✅ Sponsor added.\n"
+                        },
+                        {
+                          "text": "✅ Contact selected.\n"
+                        },
+                        {
+                          "text": "➡️ Test Start: Verify loan status\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:54:04.214Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f7d91c25918852a48467-78dc75027b821198bf29",
+              "file": "2-Pipeline/Pipeline.spec.ts",
+              "line": 24,
+              "column": 3
+            },
+            {
+              "title": "✅ TC-10 Loan creation and status verification successful",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2153,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "🔹 Verifying loan status...\n"
+                        },
+                        {
+                          "text": "✅ Loan status verified as New Enquiry.\n"
+                        },
+                        {
+                          "text": "✅ Test Completed: Loan creation and status verification successful.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:54:13.499Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f7d91c25918852a48467-0c92834550ef88232902",
+              "file": "2-Pipeline/Pipeline.spec.ts",
+              "line": 30,
+              "column": 3
+            },
+            {
+              "title": "🔍 TC-11 Verify Search Bar Visibility and Functionality",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1060,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "➡️ Test Start: Verify Search Bar Visibility and Functionality\n"
+                        },
+                        {
+                          "text": "🔹 Navigating to Search New Loans...\n"
+                        },
+                        {
+                          "text": "Created loan: Automation-Loan ibYyFW\n"
+                        },
+                        {
+                          "text": "✅ Verified created loan name: Automation-Loan ibYyFW\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:54:15.662Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f7d91c25918852a48467-0afb2f201cee405b96ef",
+              "file": "2-Pipeline/Pipeline.spec.ts",
+              "line": 34,
+              "column": 3
+            },
+            {
+              "title": "❌ TC-12 Verify Search with Invalid/Non-Existing Keyword",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 868,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "➡️ Test Start: Verify Search with Invalid/Non-Existing Keyword\n"
+                        },
+                        {
+                          "text": "🔹 Navigating to Search New Loans...\n"
+                        },
+                        {
+                          "text": "✅ Verified created loan name: acer stillicidium acerbitas\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:54:16.741Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f7d91c25918852a48467-5db4e6df899e85bebb51",
+              "file": "2-Pipeline/Pipeline.spec.ts",
+              "line": 38,
+              "column": 3
+            },
+            {
+              "title": "✅ TC-18  Verify Edit option opens Edit Loan pop-up screen and editing the name",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7046,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "➡️ Test Start: Verify Edit option opens Edit Loan pop-up screen and editing the name\n"
+                        },
+                        {
+                          "text": "🔹 Starting Edit Loan Update test...\n"
+                        },
+                        {
+                          "text": "🔹 Opening Edit Loan pop-up...\n"
+                        },
+                        {
+                          "text": "🖱️ Clicked the first Edit button.\n"
+                        },
+                        {
+                          "text": "✅ Edit Loan pop-up is visible.\n"
+                        },
+                        {
+                          "text": "⏳ Waiting for Edit Loan popup main banner...\n"
+                        },
+                        {
+                          "text": "⏳ Waiting for Deal Name input...\n"
+                        },
+                        {
+                          "text": "⏳ Waiting for Save Changes button...\n"
+                        },
+                        {
+                          "text": "🔘 Clicking Save...\n"
+                        },
+                        {
+                          "text": "✅ Loan updated successfully.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:54:17.616Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f7d91c25918852a48467-925f56bf0f76002b51ae",
+              "file": "2-Pipeline/Pipeline.spec.ts",
+              "line": 42,
+              "column": 3
+            },
+            {
+              "title": "✅ TC-19  Verify navigation to Loan Detail page from Loan Listing",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2918,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "➡️ Test Start: Verify navigation to Loan Detail page from Loan Listing\n"
+                        },
+                        {
+                          "text": "🔹 Navigating to Loan Detail page...\n"
+                        },
+                        {
+                          "text": "✅ Navigated to Loan Detail page successfully.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:54:24.670Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f7d91c25918852a48467-d04778889ad1b363bfb0",
+              "file": "2-Pipeline/Pipeline.spec.ts",
+              "line": 46,
+              "column": 3
+            },
+            {
+              "title": "✅ TC-20  Verify that user can successfully add a comment",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7472,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "➡️ Test Start: Verify that user can successfully add a comment\n"
+                        },
+                        {
+                          "text": "currentUrl https://crm-admin-staging.vercel.app/loan-detail/9db8b8b3-3a7b-4a8c-80cb-bf9d849dd2fc\n"
+                        },
+                        {
+                          "text": "✅ Comment successfully added and verified.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:54:27.596Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f7d91c25918852a48467-082ae032dcd156a3da32",
+              "file": "2-Pipeline/Pipeline.spec.ts",
+              "line": 50,
+              "column": 3
+            },
+            {
+              "title": "✅ TC-21  Verify that user can successfully edit a comment",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 28607,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "➡️ Test Start: Verify that user can successfully edit a comment\n"
+                        },
+                        {
+                          "text": "✏️ Clicked 'Edit' option.\n"
+                        },
+                        {
+                          "text": "---------------------------\n"
+                        },
+                        {
+                          "text": "---------------------------\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:54:35.076Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f7d91c25918852a48467-332b5696caaeca87ca33",
+              "file": "2-Pipeline/Pipeline.spec.ts",
+              "line": 54,
+              "column": 3
+            },
+            {
+              "title": "✅ TC-22 Verify that clicking delete the comment gets deleted",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 10888,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "➡️ Test Start: Verify that clicking delete the comment gets deleted\n"
+                        },
+                        {
+                          "text": "✍️ Entered reason for deletion.\n"
+                        },
+                        {
+                          "text": "✅ Clicked 'Yes' to confirm deletion.\n"
+                        },
+                        {
+                          "text": "✅ Comment successfully deleted and verified.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:55:03.690Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f7d91c25918852a48467-71618b1bf34e5e762306",
+              "file": "2-Pipeline/Pipeline.spec.ts",
+              "line": 58,
+              "column": 3
+            },
+            {
+              "title": "✅ TC-23 Verify that comment is added in the Post Completion",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 10901,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "➡️ Test Start: Verify that clicking delete the comment gets deleted\n"
+                        },
+                        {
+                          "text": "💾 Clicked Save button.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:55:14.585Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f7d91c25918852a48467-79abca6d4645c090d8dd",
+              "file": "2-Pipeline/Pipeline.spec.ts",
+              "line": 62,
+              "column": 3
+            },
+            {
+              "title": "✅ TC-24 Verify that status is changed in the Post Completion",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6452,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "➡️ Test Start: Verify that status is changed in the Post Completion\n"
+                        },
+                        {
+                          "text": "🖱️ Clicked the 6th 'To do' item.\n"
+                        },
+                        {
+                          "text": "✅ Selected 'Done' from dropdown (nth(3)).\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:55:25.494Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f7d91c25918852a48467-255cb707863d1f936a09",
+              "file": "2-Pipeline/Pipeline.spec.ts",
+              "line": 66,
+              "column": 3
+            },
+            {
+              "title": "✅ TC-25 Verify that person and trust are been added in the ownership structure",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 15402,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "➡️ Test Start: Verify that person and trust are been added in the ownership structure\n"
+                        },
+                        {
+                          "text": "🖱️ Clicked 'KYC' heading.\n"
+                        },
+                        {
+                          "text": "🖱️ Clicked 'Ownership Structure' heading.\n"
+                        },
+                        {
+                          "text": "🖱️ Clicked 'Add Entity' button for Person.\n"
+                        },
+                        {
+                          "text": "🖱️ Opened Entity Type dropdown.\n"
+                        },
+                        {
+                          "text": "✅ Selected 'Person' from dropdown.\n"
+                        },
+                        {
+                          "text": "✍️ Entered entity name: Person_4988\n"
+                        },
+                        {
+                          "text": "✅ Clicked 'Create Entity' button for Person.\n"
+                        },
+                        {
+                          "text": "🖱️ Clicked 'Add Entity' button for Trust.\n"
+                        },
+                        {
+                          "text": "🖱️ Opened Entity Type dropdown.\n"
+                        },
+                        {
+                          "text": "✅ Selected 'Trust' from dropdown.\n"
+                        },
+                        {
+                          "text": "✍️ Entered entity name: Trust_2130\n"
+                        },
+                        {
+                          "text": "✅ Clicked 'Create Entity' button for Trust.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:55:31.956Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f7d91c25918852a48467-f8396b8569c464e8f9e1",
+              "file": "2-Pipeline/Pipeline.spec.ts",
+              "line": 70,
+              "column": 3
+            },
+            {
+              "title": "✅ TC-26 Verify that company is been added in the ownership structure",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "➡️ Test Start: Verify that company is been added in the ownership structure\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:55:47.366Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f7d91c25918852a48467-0cfbf51742c5ea088e35",
+              "file": "2-Pipeline/Pipeline.spec.ts",
+              "line": 74,
+              "column": 3
+            },
+            {
+              "title": "✅ TC-28  Verify Edit option opens Edit Loan pop-up screen and Discard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 985,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "➡️ Test Start: Verify Edit option opens Edit Loan pop-up screen\n"
+                        },
+                        {
+                          "text": "🔹 Starting Edit Loan Discard test...\n"
+                        },
+                        {
+                          "text": "🔹 Opening Edit Loan pop-up...\n"
+                        },
+                        {
+                          "text": "🖱️ Clicked the first Edit button.\n"
+                        }
+                      ],
+                      "stderr": [
+                        {
+                          "text": "❌ Edit Loan pop-up NOT found.\n"
+                        }
+                      ],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:55:47.375Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f7d91c25918852a48467-653a1d123ead76c94c56",
+              "file": "2-Pipeline/Pipeline.spec.ts",
+              "line": 78,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "3-Contact/Contact.spec.ts",
+      "file": "3-Contact/Contact.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Contact Screen Tests",
+          "file": "3-Contact/Contact.spec.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "⚠️ TC-18 Verify validation messages on Add New Contact pop-up",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1306,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "🌐 Launching single browser context and page...\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:55:48.376Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "96c61b59ff4fa08a19df-7348d478552df5be87d1",
+              "file": "3-Contact/Contact.spec.ts",
+              "line": 16,
+              "column": 3
+            },
+            {
+              "title": "➕ TC-19 Verify user can successfully create a new contact",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 25309,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "✅ No contact warning popup.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:55:50.541Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "96c61b59ff4fa08a19df-2f3254a0e1897a1daa0e",
+              "file": "3-Contact/Contact.spec.ts",
+              "line": 21,
+              "column": 3
+            },
+            {
+              "title": "✏️ TC-20 Verify user can successfully edit an existing contact",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5206,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "✅ No contact warning popup.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:56:15.862Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "96c61b59ff4fa08a19df-f1d707b0987bcbccf4a7",
+              "file": "3-Contact/Contact.spec.ts",
+              "line": 25,
+              "column": 3
+            },
+            {
+              "title": "🗑️ TC-21 Verify user can successfully delete a contact",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 760,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "🧹 Closing browser context...\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:56:21.079Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "96c61b59ff4fa08a19df-a03d9d8abfbd47443665",
+              "file": "3-Contact/Contact.spec.ts",
+              "line": 29,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "4-Companies/Companies.spec.ts",
+      "file": "4-Companies/Companies.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Companies Screen Tests",
+          "file": "4-Companies/Companies.spec.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "⚠️ TC-22 Verify validation messages on Add New Company pop-up",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 776,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "🌐 Launching single browser context and page...\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:56:21.928Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3e1a3e964af84d2a059f-12ef5abb4168fb5e98bd",
+              "file": "4-Companies/Companies.spec.ts",
+              "line": 16,
+              "column": 3
+            },
+            {
+              "title": "➕ TC-23 Verify user can successfully create a new company",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 447,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:56:23.462Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3e1a3e964af84d2a059f-8c1606fb1603258127d4",
+              "file": "4-Companies/Companies.spec.ts",
+              "line": 21,
+              "column": 3
+            },
+            {
+              "title": "🔍 TC-24 Verify user can search for a company",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1895,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:56:23.919Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3e1a3e964af84d2a059f-2d8295cf30b34c37c216",
+              "file": "4-Companies/Companies.spec.ts",
+              "line": 25,
+              "column": 3
+            },
+            {
+              "title": "🔍 TC-24 Verify user can search invalid for a company",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 923,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:56:25.822Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3e1a3e964af84d2a059f-84ca477003d65cbfbc2c",
+              "file": "4-Companies/Companies.spec.ts",
+              "line": 28,
+              "column": 3
+            },
+            {
+              "title": "✏️ TC-25 Verify user can successfully edit an existing company",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 11069,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:56:26.753Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3e1a3e964af84d2a059f-c80b0fdadcfbf9a86ee8",
+              "file": "4-Companies/Companies.spec.ts",
+              "line": 31,
+              "column": 3
+            },
+            {
+              "title": "🗑️ TC-26 Verify user can successfully delete a company",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 8254,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:56:37.832Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3e1a3e964af84d2a059f-dae97a51982b89df88b3",
+              "file": "4-Companies/Companies.spec.ts",
+              "line": 35,
+              "column": 3
+            },
+            {
+              "title": "➕ TC-27 Verify user can successfully create a new contact within a company",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 31278,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "✅ Postal code entered.\n"
+                        },
+                        {
+                          "text": "✅ No postcode warning popup.\n"
+                        },
+                        {
+                          "text": "✅ No contact warning popup.\n"
+                        },
+                        {
+                          "text": "🧹 Closing browser context...\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:56:46.094Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3e1a3e964af84d2a059f-59859021cd7ee25884fa",
+              "file": "4-Companies/Companies.spec.ts",
+              "line": 39,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "5-Production_testCases/Prod_issue.spec.ts",
+      "file": "5-Production_testCases/Prod_issue.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Pipeline loan Status",
+          "file": "5-Production_testCases/Prod_issue.spec.ts",
+          "line": 5,
+          "column": 6,
+          "specs": [
+            {
+              "title": "🔄 Reload Loan, Company and Contact Page",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 28123,
+                      "error": {
+                        "message": "Error: locator.isVisible: Error: strict mode violation: getByText('automationAshlynn Wiza') resolved to 2 elements:\n    1) <span class=\"debt-date\">automationAshlynn Wiza</span> aka getByText('automationAshlynn Wiza').first()\n    2) <span class=\"debt-date\">automationAshlynn Wiza</span> aka getByText('automationAshlynn Wiza').nth(1)\n\nCall log:\n\u001b[2m    - checking visibility of getByText('automationAshlynn Wiza')\u001b[22m\n",
+                        "stack": "Error: locator.isVisible: Error: strict mode violation: getByText('automationAshlynn Wiza') resolved to 2 elements:\n    1) <span class=\"debt-date\">automationAshlynn Wiza</span> aka getByText('automationAshlynn Wiza').first()\n    2) <span class=\"debt-date\">automationAshlynn Wiza</span> aka getByText('automationAshlynn Wiza').nth(1)\n\nCall log:\n\u001b[2m    - checking visibility of getByText('automationAshlynn Wiza')\u001b[22m\n\n    at ContactPage.Open_Contact_Details (/home/runner/work/CohortCRM/CohortCRM/Pages/contact.page.ts:97:59)\n    at /home/runner/work/CohortCRM/CohortCRM/tests/5-Production_testCases/Prod_issue.spec.ts:44:9",
+                        "location": {
+                          "file": "/home/runner/work/CohortCRM/CohortCRM/Pages/contact.page.ts",
+                          "column": 59,
+                          "line": 97
+                        },
+                        "snippet": "   at ../Pages/contact.page.ts:97\n\n\u001b[0m \u001b[90m  95 |\u001b[39m       \u001b[33m.\u001b[39mwaitFor({ state\u001b[33m:\u001b[39m \u001b[32m'hidden'\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m  96 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m  97 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mgetByText(\u001b[32m`${firstName} ${lastName}`\u001b[39m)\u001b[33m.\u001b[39misVisible()\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                           \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m  98 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mgetByText(\u001b[32m`${firstName} ${lastName}`\u001b[39m)\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\n \u001b[90m  99 |\u001b[39m   }\n \u001b[90m 100 |\u001b[39m   \u001b[36masync\u001b[39m \u001b[33mEdit_Contact\u001b[39m() {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/CohortCRM/CohortCRM/Pages/contact.page.ts",
+                            "column": 59,
+                            "line": 97
+                          },
+                          "message": "Error: locator.isVisible: Error: strict mode violation: getByText('automationAshlynn Wiza') resolved to 2 elements:\n    1) <span class=\"debt-date\">automationAshlynn Wiza</span> aka getByText('automationAshlynn Wiza').first()\n    2) <span class=\"debt-date\">automationAshlynn Wiza</span> aka getByText('automationAshlynn Wiza').nth(1)\n\nCall log:\n\u001b[2m    - checking visibility of getByText('automationAshlynn Wiza')\u001b[22m\n\n\n   at ../Pages/contact.page.ts:97\n\n   95 |       .waitFor({ state: 'hidden' });\n   96 |\n>  97 |     await this.page.getByText(`${firstName} ${lastName}`).isVisible();\n      |                                                           ^\n   98 |     await this.page.getByText(`${firstName} ${lastName}`).click();\n   99 |   }\n  100 |   async Edit_Contact() {\n    at ContactPage.Open_Contact_Details (/home/runner/work/CohortCRM/CohortCRM/Pages/contact.page.ts:97:59)\n    at /home/runner/work/CohortCRM/CohortCRM/tests/5-Production_testCases/Prod_issue.spec.ts:44:9"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "🌐 Opening dashboard page...\n"
+                        },
+                        {
+                          "text": "🔹 Opening Edit Loan pop-up...\n"
+                        },
+                        {
+                          "text": "⚠️ Matching Contact Warning appeared.\n"
+                        },
+                        {
+                          "text": "✅ Matching Contact Warning handled.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-20T05:57:17.460Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/CohortCRM/CohortCRM/test-results/5-Production_testCases-Pro-82af5-an-Company-and-Contact-Page/test-failed-3.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/CohortCRM/CohortCRM/test-results/5-Production_testCases-Pro-82af5-an-Company-and-Contact-Page/test-failed-1.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/CohortCRM/CohortCRM/test-results/5-Production_testCases-Pro-82af5-an-Company-and-Contact-Page/test-failed-2.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/runner/work/CohortCRM/CohortCRM/test-results/5-Production_testCases-Pro-82af5-an-Company-and-Contact-Page/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/CohortCRM/CohortCRM/Pages/contact.page.ts",
+                        "column": 59,
+                        "line": 97
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "1ed192f490c11324163b-7a2bdcd66a8f33eec818",
+              "file": "5-Production_testCases/Prod_issue.spec.ts",
+              "line": 22,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-07-20T05:53:39.252Z",
+    "duration": 247454.836,
+    "expected": 41,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}
