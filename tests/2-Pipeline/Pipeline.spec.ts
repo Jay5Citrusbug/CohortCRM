@@ -69,6 +69,29 @@ test.describe('Pipeline screen Tests', () => {
     await pipeLinePage.Comment_delete();
   });
 
+  test('✅ TC-20  Verify that user can successfully add a DDQ comment', async () => {
+    console.log('➡️ Test Start: Verify that user can successfully add a DDQ comment');
+    await pipeLinePage.Comment_DDQCreation();
+  });
+  test('✅ TC-21  Verify that user can successfully edit a DDQ comment', async () => {
+    console.log('➡️ Test Start: Verify that user can successfully edit a comment');
+    await pipeLinePage.Comment_DDQEdit();
+  });
+
+  test('✅ TC-22 Verify that clicking delete the DDQ comment gets deleted', async () => {
+    console.log('➡️ Test Start: Verify that clicking delete the comment gets deleted');
+    await pipeLinePage.Comment_DDQdelete();
+  });
+  test.skip('✅ TC-27 Verify user can create simple debt without Interest Retention value', async () => {
+    console.log('➡️ Test Start: Verify user can create simple debt without Interest Retention value');
+    await pipeLinePage.Create_Simple_Debt_Without_InterestRetention();
+  });
+
+  test.skip('✅ TC-29 Complete Debt Model Validation (Interest + Retention)', async () => {
+    console.log('➡️ Test Start: Complete Debt Model Validation (Interest + Retention)');
+    await pipeLinePage.Create_Debt_With_InterestRetention();
+  });
+
   test('✅ TC-23 Verify that comment is added in the Post Completion', async () => {
     console.log('➡️ Test Start: Verify that clicking delete the comment gets deleted');
     await pipeLinePage.PostCompleteion_add_comment();
@@ -78,6 +101,7 @@ test.describe('Pipeline screen Tests', () => {
     console.log('➡️ Test Start: Verify that status is changed in the Post Completion');
     await pipeLinePage.PostCompleteion_Status_change();
   });
+  
   test('✅ TC-25 Verify that person and trust are been added in the ownership structure', async () => {
     console.log('➡️ Test Start: Verify that person and trust are been added in the ownership structure');
     await pipeLinePage.Ownership_person_trust();
@@ -92,7 +116,6 @@ test.describe('Pipeline screen Tests', () => {
     console.log('➡️ Test Start: Verify Edit option opens Edit Loan pop-up screen');
     await pipeLinePage.Edit_Loan_Discard();
   });
-
 
 });
 

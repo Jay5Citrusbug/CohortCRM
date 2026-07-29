@@ -161,52 +161,6 @@ export class LoanStatus {
     await expect(searchBar).toBeVisible({ timeout: 15000 });
     console.log("loan name", loanName)
     await searchBar.fill(loanName);
-
-    // Dynamic wait for the target loan row to be visible in the table
-    // const loanRow = this.page.locator('tbody tr', { hasText: loanName });
-    // await expect(loanRow).toBeVisible({ timeout: 15000 });
-
-    // // Wait for “New Enquiry” to be visible instead of checking .isVisible()
-    // const newEnquiry = loanRow.getByText('New Enquiry').first();
-    // await expect(newEnquiry).toBeVisible();
-
-    // // Click the status dropdown
-    // const statusDropdown = loanRow.locator('.ant-select-selector');
-    // await expect(statusDropdown).toBeVisible();
-    // await statusDropdown.click();
-    // await this.page.waitForTimeout(20000);
-    // // Select "Underwriting Process"
-    // // const underwritingOption = this.page.locator('xpath=/html/body/div[2]/div/div/div[2]/div/div/div/div[4]/div');
-
-
-    // const underwritingOption = await this.page.getByTestId('pipeline-underwritting').nth(2);
-    // await underwritingOption.click();
-
-    // // Confirm status change popup
-    // const confirmStatusChange = this.page.getByText('Confirm Status Change');
-    // await expect(confirmStatusChange).toBeVisible();
-    // await confirmStatusChange.click();
-
-    // const confirmButton = this.page.getByRole('button', { name: 'Confirm' });
-    // await expect(confirmButton).toBeVisible();
-    // await confirmButton.click();
-
-    // // Run pipeline search for new loans
-    // pipeLinePage = new PipeLinePage(this.page);
-    // await pipeLinePage.Search_Valid_NewLoans();
-
-    // const searchBox = this.page.getByRole(PipelineLocator.Searchbar.role, {
-    // //   name: PipelineLocator.Searchbar.name
-    // });
-
-    // // Verify status changed to "Underwriting Process"
-    // const uwCell = this.page.getByRole('cell', { name: 'Underwriting Process' }).first();
-    // await expect(uwCell).toBeVisible({ timeout: 10000 });
-
-    // // Clear search
-    // await expect(searchBox).toBeVisible();
-    // await searchBox.clear();
-    // await this.page.getByTestId('pipeline-newEnquiry').click();
     await this.page.locator('[data-testid="pipeline-newEnquiry"]').first().click();
     await this.page.waitForTimeout(10000);
 

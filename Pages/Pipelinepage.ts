@@ -268,10 +268,10 @@ export class PipeLinePage {
     // console.log('🔹 Navigated to Pipeline tab.');
     //     console.log('🔹 Starting validation for Create Loan...');
 
-     const addLoanBtn = this.page.getByRole(PipelineLocator.AddLoanButton.role, {
-        name: PipelineLocator.AddLoanButton.name
-      });
-      await addLoanBtn.click();
+    const addLoanBtn = this.page.getByRole(PipelineLocator.AddLoanButton.role, {
+      name: PipelineLocator.AddLoanButton.name
+    });
+    await addLoanBtn.click();
     await this.page.getByLabel(PipelineLocator.AddLoanText.locator).isVisible();
 
     await this.page.getByRole(PipelineLocator.SaveChangesButton.role, {
@@ -466,13 +466,14 @@ export class PipeLinePage {
       if (scrollable) scrollable.scrollBy({ left: 1000, behavior: 'smooth' });
     });
 
-    const eye = this.page.getByRole(PipelineLocator.EyeIconButton.role, {
-      name: PipelineLocator.EyeIconButton.name
-    }).first();
+    // const eye = this.page.getByRole(PipelineLocator.EyeIconButton.role, {
+    //   name: PipelineLocator.EyeIconButton.name
+    // }).first();
 
-    await eye.waitFor();
-    await eye.click();
-
+    // await eye.waitFor();
+    // await eye.click();
+    await this.page.getByRole('cell', { name: 'eye edit' }).first().click();
+    await this.page.getByRole('button', { name: 'View Detail' }).click();
     await expect(
       this.page.getByRole('heading', { name: 'Loan Status', exact: true })
     ).toBeVisible();
@@ -751,8 +752,307 @@ export class PipeLinePage {
     console.log('🔹 Verification completed successfully.');
     await this.page.locator('[data-test-id="discard-btn"]').click();
   }
+  async Comment_DDQCreation() {
+    await this.page.getByRole('heading', { name: 'DDQ' }).click();
+    await this.page.getByText('Click to add a DDQ').click();
+    await this.page.locator('.ql-editor').click();
+    await this.page.locator('.ql-editor').fill('DDQ comment added using Playwright automation.');
+    await this.page.getByRole('button', { name: 'Save' }).click();
+    console.log("✅ Comment successfully added and verified.");
+
+    await this.page.waitForTimeout(7000);
+    await expect(
+      this.page.getByText('DDQ comment added using Playwright automation.')
+    ).toBeVisible();
+    console.log("✅ DDQ comment successfully added and verified.");
+    await this.page.waitForTimeout(7000);
+  }
+  async Comment_DDQEdit() {
+    await this.page.getByRole('heading', { name: 'DDQ' }).click();
+    const optionsBtn = this.page.getByRole(PipelineLocator.CommentOptionsButton.role, { name: PipelineLocator.CommentOptionsButton.name });
+    await optionsBtn.waitFor();
+    await optionsBtn.click();
+    const editBtn = this.page.locator(PipelineLocator.EditOption.locator).filter({ hasText: PipelineLocator.EditOption.text });
+    await editBtn.waitFor();
+    await editBtn.click();
+    console.log("✏️ Clicked 'Edit' option.");
+    const editor = this.page.locator(PipelineLocator.CommentTextEditor.locator);
+    await editor.click();
+    await editor.fill(''); // clear existing
+    await editor.fill('Updated content added using Playwright automation by DDQ.');
+    await editor.press('Enter'); // press Enter
+    await this.page.waitForTimeout(9000);
+    const saveBtn = this.page.getByTestId(PipelineLocator.SaveCommentButton.locator);
+    await saveBtn.click();
+    await this.page.waitForTimeout(8000);
+    await expect(
+      this.page.getByText('Updated content added using Playwright automation by DDQ.')
+    ).toBeVisible();
+
+    // Wait for UI update
+    await this.page.waitForTimeout(8000);
+  }
+
+  async Comment_DDQdelete() {
+    await this.page.getByRole('heading', { name: 'DDQ' }).click();
+    const optionsBtn = this.page.getByRole(PipelineLocator.CommentOptionsButton.role, { name: PipelineLocator.CommentOptionsButton.name });
+    await optionsBtn.waitFor();
+    await optionsBtn.click();
+
+    // Click Delete button
+    const deleteBtn = this.page.getByRole(PipelineLocator.DeleteOption.role, { name: PipelineLocator.DeleteOption.name });
+    await deleteBtn.waitFor();
+    await deleteBtn.click();
+
+    const reasonInput = this.page.getByRole(
+      PipelineLocator.ReasonInput.role,
+      { name: PipelineLocator.ReasonInput.name }
+    );
+    await reasonInput.click();
+    await reasonInput.fill('Deleting this item as it is no longer required.');
+    console.log("✍️ Entered reason for deletion.");
+
+    // Click Yes to confirm deletion
+    const yesBtn = this.page.getByRole(PipelineLocator.ConfirmYesButton.role, { name: PipelineLocator.ConfirmYesButton.name });
+    await yesBtn.click();
+    console.log("✅ Clicked 'Yes' to confirm deletion.");
+
+    // Wait for deletion to complete
+    await this.page.waitForTimeout(10000);
+
+    // Assert comment is no longer visible
+    await expect(this.page.locator(PipelineLocator.CommentTextFallback.locator)).toBeHidden();
+    console.log("✅ Comment successfully deleted and verified.");
+  }
+ async Create_Simple_Debt_Without_InterestRetention() {
+
+    console.log("➡️ Validating Preview Calculation");
+
+    // await this.Loan_details();
+    await this.page.getByRole('button', { name: 'add icon New Debt Model' }).click();
+    // 🔹 Get values
+    const rawValue = await this.page.locator('#netLoan').inputValue();
+    console.log("Raw Net Loan:", rawValue);
+    const interestRate = parseFloat(await this.page.locator('#pricingValue').inputValue());
+    const interestType = 'pm';
+    const netLoan = parseFloat(rawValue!.replace(/[£,]/g, '').trim());
+    console.log("netloan", netLoan, "interestRate", interestRate, "interest type", interestType)
+
+    // 🔹 Calculate daily interest
+    const annualRate =
+      interestType === 'pm' ? interestRate * 12 : interestRate;
+
+    const expectedDailyRaw =
+      (netLoan * annualRate) / 100 / 360;
+
+    // Round to 4 decimal places
+    const expectedDaily =
+      Math.round(expectedDailyRaw * 10000) / 10000;
+
+    // 🔹 Calculate days left in month
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+    endOfMonth.setHours(0, 0, 0, 0);
+
+    const daysLeft =
+      Math.floor((endOfMonth.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+    // 🔹 Expected preview value
+    const expectedPreview = expectedDaily * daysLeft;
+
+    console.log(`Days Left: ${daysLeft}`);
+    console.log(`Expected Daily: ${expectedDaily}`);
+    console.log(`Expected Preview: ${expectedPreview}`);
+
+    // 🔹 Go to Preview
+    await this.page.getByRole('button', { name: 'Preview' }).click();
+    // const expectedDailyFormatted = parseFloat(expectedDaily.toFixed(4)).toString();
+    const expectedDailyFormatted = expectedDaily.toFixed(2);
+    const expectedText = `${daysLeft} * ${expectedDailyFormatted}`;
+
+    let uiText = (await this.page
+      .getByTestId('debt calculation1')
+      .textContent())!;
+
+    // 🔹 Normalize UI
+    uiText = uiText
+      .replace('×', '*')      // replace multiplication symbol
+      .replace('£', '')       // remove currency
+      .replace(/\s+/g, ' ')   // normalize spaces
+      .trim();
+
+    expect(uiText).toBe(expectedText);
+    // 🔹 Step 13: Save
+    await this.page.getByRole('button', { name: 'Save' }).click();
+
+    console.log("✅ Debt Model Created Successfully");
+  } 
 
 
+
+  async Create_Debt_With_InterestRetention() {
+    // this.Loan_details();
+    console.log('➡️ Test Start: Debt Model Full Validation');
+
+    await this.page.getByRole('button', { name: 'add icon New Debt Model' }).click();
+    // 🔹 Get values
+    const rawValue = await this.page.locator('#netLoan').inputValue();
+    console.log("Raw Net Loan:", rawValue);
+    const interestRate = parseFloat(await this.page.locator('#pricingValue').inputValue());
+    const interestType = 'pm';
+    const netLoan = parseFloat(rawValue!.replace(/[£,]/g, '').trim());
+    console.log("netloan", netLoan, "interestRate", interestRate, "interest type", interestType)
+
+    const annualRate =
+      interestType === 'pm' ? interestRate * 12 : interestRate;
+
+    // ================================
+    // 🔹 Step 4: Daily Interest (4dp)
+    // ================================
+    const dailyRaw =
+      (netLoan * annualRate) / 100 / 360;
+
+    const daily =
+      Math.round(dailyRaw * 10000) / 10000;
+
+    console.log(`Daily Interest: ${daily}`);
+
+    // ================================
+    // 🔹 Step 5: Calculate Total Interest (Own Logic)
+    // ================================
+    const startDate = new Date();
+    startDate.setHours(0, 0, 0, 0);
+
+    const endDate = new Date(startDate);
+    endDate.setFullYear(startDate.getFullYear() + 1);
+
+    let totalInterest = 0;
+    let current = new Date(startDate);
+
+    while (current <= endDate) {
+
+      const endOfMonth = new Date(
+        current.getFullYear(),
+        current.getMonth() + 1,
+        0
+      );
+
+      const periodEnd = endOfMonth < endDate ? endOfMonth : endDate;
+
+      const start = new Date(current);
+      const end = new Date(periodEnd);
+
+      start.setHours(0, 0, 0, 0);
+      end.setHours(0, 0, 0, 0);
+
+      const days =
+        Math.floor((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+
+      const interest =
+        Math.round((daily * days) * 100) / 100;
+
+      console.log(`Month: ${start.getMonth() + 1}, Days: ${days}, Interest: ${interest}`);
+
+      totalInterest += interest;
+
+      current = new Date(periodEnd);
+      current.setDate(current.getDate() + 1);
+    }
+
+    totalInterest = Math.round(totalInterest * 100) / 100;
+
+    console.log(`Calculated Total Interest: ${totalInterest}`);
+
+    // ================================
+    // 🔹 Step 6: Select Retention Type
+    // ================================
+    await this.page.getByTestId('interestRetentionConfig')
+      .getByText('No Interest Retention').click();
+
+    //await this.page.getByText('Exact Value').nth(2).click();
+    await this.page.getByTitle('Exact Value').click();
+
+    // ================================
+    // 🔹 Step 7: VALID RETENTION
+    // ================================
+    const validRetention = Math.round(totalInterest / 2);
+    await this.page.locator('#interestRetentionAmount')
+      .fill(validRetention.toString());
+
+    console.log(`Retention Used: ${validRetention}`);
+    // ================================
+    // 🔹 Step 9: Preview
+    // ================================
+    await this.page.getByRole('button', { name: 'Preview' }).click();
+    let remaining = validRetention;
+    let partRetainedIndex = -1;
+
+    for (let i = 1; i <= 12; i++) {
+
+      const locator = this.page.getByTestId(`debt calculation${i}`);
+
+      if (!(await locator.isVisible())) break;
+
+      const text = await locator.textContent();
+      if (!text) continue;
+
+      // Example: "18 * 0.75"
+      const cleanText = text
+        .replace(/£/g, '')
+        .replace(/×/g, '*')   // handle multiplication symbol
+        .replace(/\s+/g, ' ') // normalize spaces
+        .trim();
+
+      const parts = cleanText.split('*');
+
+      if (parts.length < 2) {
+        throw new Error(`Invalid calculation format: ${text}`);
+      }
+
+      const days = parseFloat(parts[0].trim());
+      const dailyValue = parseFloat(parts[1].trim());
+
+      const interest = Math.round(days * dailyValue * 100) / 100;
+
+      console.log(`Row ${i}: Days=${days}, Daily=${dailyValue}, Interest=${interest}, Remaining=${remaining}`);
+
+      remaining = Math.round(remaining * 100) / 100;
+      if (remaining < 0.005) remaining = 0;
+
+      if (remaining > 0 && interest > 0) {
+
+        if (remaining >= interest) {
+          remaining -= interest;
+        } else {
+          partRetainedIndex = i;
+          break;
+        }
+      }
+    }
+
+    console.log(`Part Retained Row Index: ${partRetainedIndex}`);
+
+    expect(partRetainedIndex).toBeGreaterThan(0);
+
+    // ================================
+    // 🔹 Step 8: Validate UI Label
+    // ================================
+    const partRow = this.page.getByTestId(`debt calculation${partRetainedIndex}`);
+
+    await expect(
+      partRow.locator('xpath=ancestor::tr').getByText('Part retained')
+    ).toBeVisible();
+
+    console.log('✅ Part retained row validated');
+    await this.page.waitForTimeout(5000);
+    // ================================
+    // 🔹 Step 9: Save
+    // ================================
+    await this.page.getByRole('button', { name: 'Save' }).click();
+
+    console.log('✅ Test Completed');
+  }
 }
 
 
